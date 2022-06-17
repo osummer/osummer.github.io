@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>学海无涯</title>
+    <link>https://osummer.github.io/</link>
+    <description>Recent content on 学海无涯</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 17 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://osummer.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About</title>
+      <link>https://osummer.github.io/about/</link>
+      <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://osummer.github.io/about/</guid>
+      <description>我 我是一只小小鸟！
+Hugo Hugo is the world’s fastest framework for building websites. It is written in Go.
+It makes use of a variety of open source projects including:
+https://github.com/russross/blackfriday https://github.com/alecthomas/chroma https://github.com/muesli/smartcrop https://github.com/spf13/cobra https://github.com/spf13/viper Learn more and contribute on GitHub.
+licensed by [CC 3.0]</description>
+    </item>
+    
+    <item>
+      <title>ggplot2中的theme函数</title>
+      <link>https://osummer.github.io/post/ggplot2%E4%B8%AD%E7%9A%84theme%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://osummer.github.io/post/ggplot2%E4%B8%AD%E7%9A%84theme%E5%87%BD%E6%95%B0/</guid>
+      <description>ggplot2-theme函数 1 theme函数定义内容 plot区域 panel区域 axis坐标轴 legend图例 strip分面栏 2 theme中使用的元素 rect line text FAQ 3 坐标轴 3.1 坐标轴线格式 axis.line=element_line(color,size,linetype) 3.2 坐标刻度线格式 axis.ticks=element_line() 3.3 坐标刻度线方向 负数向内，正数向外
+axis.ticks.length=unit(2,&amp;#34;mm&amp;#34;) 3.4 刻度线标签文本 axis.text=element_text(color,size,face,family,margin,vjust,hjust,angle) 3.5 坐标轴标题文本 axis.title=element_text(color,size,face,family,margin,vjust,hjust,angle) 4 图例legend 4.1 图例位置 #pannel外legend.postion=&amp;#34;right&amp;#34; #left, top, bottom#pannel内，如右上角legend.position = c(0.9,0.9)legend.justification = c(0.9,0.9) 4.2 图列内元素方向分布 legend.direction = &amp;#34;vertical&amp;#34;, #legend内方向legend.spacing.x = unit(1,&amp;#34;cm&amp;#34;),legend.spacing.y = unit(1,&amp;#34;cm&amp;#34;), 4.3 多组图例方向分布 legend.box=&amp;#34;horizontal&amp;#34;, #legend间排列legend.box.just=&amp;#34;bottom&amp;#34;, legend.box.spacing = unit(1,&amp;#34;cm&amp;#34;), 4.4 图例中文本格式 #标题文本legend.</description>
+    </item>
+    
+    <item>
+      <title>ggplot2颜色scale</title>
+      <link>https://osummer.github.io/post/ggplot2%E9%A2%9C%E8%89%B2scale/</link>
+      <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://osummer.github.io/post/ggplot2%E9%A2%9C%E8%89%B2scale/</guid>
+      <description>ggplot2中的颜色标量scale定义 摘要 推荐使用colorspace包，或者ggsci包中的色板进行配色。
+scale_(fill/color)(continous/discrete/binned)(sequential/diverging/qualitative/divergingx)
+前言 ggplot图形绘制中经常用到颜色映射aes，常见的有aes(color=var)或者aes(fill=var)进行边框或者填充色的绘制。比如： ^cb109c
+library(tidyverse) iris %&amp;gt;% ggplot()+ geom_point(aes(Sepal.Length,Sepal.Width,color=Species),size=3) 上图用到了color边框线的映射，有时候也会用到fill填充色映射，比如：
+p=iris %&amp;gt;% ggplot(aes(x=Species,y=Sepal.Length))+ geom_boxplot(aes(fill=Species)) p 但是此处的颜色类型均为系统默认，没有自定义形式，而ggplot图形系统中，则可以利用scale_fill_xxx形式对颜色梯度进行自定义。下文中color与fill实际是一致的。
+离散变量 默认定义scale_fill_discrete() 如果希望改变次序，则要调用scale_x_discrete中的limits参数。
+# 柱子数量不变，排序不变，legend不变 p+scale_x_discrete(breaks=c(&amp;#34;virginica&amp;#34;,&amp;#34;setosa&amp;#34;)) # 柱子数量改变，排序改变，legend改变 p+scale_x_discrete(limits=c(&amp;#34;virginica&amp;#34;,&amp;#34;setosa&amp;#34;)) ## Warning: Removed 50 rows containing missing values (stat_boxplot). #图形不变，legend处排序变化，颜色不变 p+scale_fill_discrete(breaks=c(&amp;#34;virginica&amp;#34;,&amp;#34;setosa&amp;#34;)) #图形不变，legend处排序变化，颜色发生变化 p+scale_fill_discrete(limits=c(&amp;#34;virginica&amp;#34;,&amp;#34;setosa&amp;#34;)) 色环系统 scale_fill_hue() 默认情况下，离散比例的颜色围绕HSL色环均匀分布。例如，如果有两种颜色，那么它们将从圆圈上的相对点中选择;如果有三种颜色，它们在色环上将相隔 120° 等等。
+默认颜色选择使用 scale_fill_hue() 和 scale_colour_hue()，hue颜色系统有修改：
+h 色相，实际是色环角度0-360 c 饱和度，0-100 l 亮度，0-100 例如： p+scale_fill_hue(h=c(120,360)) p+scale_fill_hue(l=80)#设置亮度（l默认45） p+scale_fill_hue(l=30)#设置亮度（l默认45） p+scale_fill_hue(c=50)#设置饱和度（c默认100） p+scale_fill_hue(c=100)#设置饱和度（c默认100） 灰度系统scale_fill_grey() p+scale_fill_grey(start=0.2,end=0.8) 调色板scale_fill_brewer() RColorBrewer包中有多个色板可供选择：
+RColorBrewer::display.brewer.all() RColorBrewer中有3套色板，type参数，分别为：
+Sequential（seq）: 用于表示数值梯度，用于呈现有序的数值信息，数值越高颜色越深，越低颜色越浅。 qualitative(qual)：用于呈现分类信息，颜色之间一般对比鲜明。 diverging(div): 分歧，用于呈现有序/连续的数值信息，这些数值围绕着一个中心值，比中心值越大的方向用一种渐变色，比中心值越小用另一种渐变色。 对于离散变量映射，则有：</description>
+    </item>
+    
+  </channel>
+</rss>

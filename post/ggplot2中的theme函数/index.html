@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <meta name="generator" content="Hugo 0.101.0" />
+
+  
+  <meta name="description" content="Some description">
+  
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="https://osummer.github.io/apple-touch-icon.png">
+
+  
+  <link rel="icon" type="image/png" sizes="32x32" href="https://osummer.github.io/favicon-32x32.png">
+
+  
+  <link rel="icon" type="image/png" sizes="16x16" href="https://osummer.github.io/favicon-16x16.png">
+
+  
+  <link rel="manifest" href="https://osummer.github.io/site.webmanifest">
+
+  
+  <link rel="mask-icon" href="https://osummer.github.io/safari-pinned-tab.svg" color="#5bbad5">
+
+  <meta name="msapplication-TileColor" content="#da532c">
+
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <link rel="stylesheet" href="https://osummer.github.io/css/bootstrap.min.css" />
+
+  
+  <title>ggplot2中的theme函数 | 学海无涯</title>
+  
+
+  <style>
+body {
+  min-width: 300px;
+}
+
+.custom-navbar {
+  margin-bottom: 1em;
+  height: 60px;
+}
+
+.custom-navbar a {
+  display: inline-block; 
+  padding: 18px 0;
+  margin-right: 1em; 
+  font-weight: bold; 
+}
+
+.custom-navbar a:hover,
+.custom-navbar a:focus {
+  text-decoration: none; 
+}
+
+@media print {
+  .custom-navbar {
+    display: none;
+  }
+}
+
+article {
+  padding-bottom: 1em;
+}
+
+img {
+  max-width: 100%;
+}
+
+
+body {
+  background-color: #fff;
+}
+
+
+
+body {
+  color: #212529;
+}
+
+
+
+a {
+  color: #007bff;
+}
+
+
+
+a:hover,
+a:focus {
+  color: #0056b3;
+}
+
+
+
+.custom-navbar {
+  background-color: #1E90FF;
+}
+
+
+
+.custom-navbar a {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+
+
+.custom-navbar a:hover,
+.custom-navbar a:focus {
+  color: rgba(255, 255, 255, 1);
+}
+
+
+
+.container {
+  max-width: 800px;
+}
+
+
+
+pre {
+  display: block;
+  padding: 9.5px;
+  word-break: break-all;
+  word-wrap: break-word;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+pre code {
+  padding: 0;
+  font-size: inherit;
+  color: inherit; 
+  white-space: pre-wrap;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+}
+
+code {
+  padding: 2px 4px;
+  color: inherit; 
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: .9em;
+}
+
+
+
+blockquote,
+.blockquote {
+  padding: 10px 20px;
+  margin: 0 0 20px;
+  font-size: 1em;
+  border-left: 5px solid #6c757d;
+}
+
+</style>
+</head>
+
+<body>
+  <nav class="custom-navbar">
+  <div class="container">
+    
+    <a href="/post/">Posts</a>
+    
+    <a href="/tags/">Tags</a>
+    
+    <a href="/about/">About</a>
+    
+    <a href="/index.xml">RSS</a>
+    
+  </div>
+</nav>
+  
+  <div class="container">
+    <article>
+      <h1>ggplot2中的theme函数</h1>
+<p>
+  <small class="text-secondary">
+  
+  
+  Jun 17, 2022
+  </small>
+  
+
+<small><code><a href="https://osummer.github.io/tags/ggplot2">ggplot2</a></code></small>
+
+
+<small><code><a href="https://osummer.github.io/tags/%E5%8F%AF%E8%A7%86%E5%8C%96">可视化</a></code></small>
+
+  
+
+</p>
+<h1 id="ggplot2-theme函数">ggplot2-theme函数</h1>
+<hr>
+<h2 id="1-theme函数定义内容">1 theme函数定义内容</h2>
+<ul>
+<li>plot区域</li>
+<li>panel区域</li>
+<li>axis坐标轴</li>
+<li>legend图例</li>
+<li>strip分面栏</li>
+</ul>
+<h2 id="2-theme中使用的元素">2 theme中使用的元素</h2>
+<ul>
+<li>rect</li>
+<li>line</li>
+<li>text</li>
+</ul>
+<h1 id="faq">FAQ</h1>
+<h2 id="3-坐标轴">3 坐标轴</h2>
+<h3 id="31-坐标轴线格式">3.1 坐标轴线格式</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>axis.line<span style="color:#f92672">=</span><span style="color:#a6e22e">element_line</span>(color,size,linetype)
+</span></span></code></pre></div><h3 id="32-坐标刻度线格式">3.2 坐标刻度线格式</h3>
+<pre tabindex="0"><code>axis.ticks=element_line()
+</code></pre><h3 id="33-坐标刻度线方向">3.3 坐标刻度线方向</h3>
+<p>负数向内，正数向外</p>
+<pre tabindex="0"><code>axis.ticks.length=unit(2,&#34;mm&#34;)
+</code></pre><h3 id="34-刻度线标签文本">3.4 刻度线标签文本</h3>
+<pre tabindex="0"><code>axis.text=element_text(color,size,face,family,margin,vjust,hjust,angle)
+</code></pre><h3 id="35-坐标轴标题文本">3.5 坐标轴标题文本</h3>
+<pre tabindex="0"><code>axis.title=element_text(color,size,face,family,margin,vjust,hjust,angle)
+</code></pre><h2 id="4-图例legend">4 图例legend</h2>
+<h3 id="41-图例位置">4.1 图例位置</h3>
+<pre tabindex="0"><code>#pannel外
+legend.postion=&#34;right&#34; #left, top, bottom
+
+#pannel内，如右上角
+legend.position = c(0.9,0.9)
+legend.justification = c(0.9,0.9)
+</code></pre><h3 id="42-图列内元素方向分布">4.2 图列内元素方向分布</h3>
+<pre tabindex="0"><code>legend.direction = &#34;vertical&#34;, #legend内方向
+    legend.spacing.x = unit(1,&#34;cm&#34;),
+    legend.spacing.y = unit(1,&#34;cm&#34;),
+</code></pre><h3 id="43-多组图例方向分布">4.3 多组图例方向分布</h3>
+<pre tabindex="0"><code>legend.box=&#34;horizontal&#34;, #legend间排列
+    legend.box.just=&#34;bottom&#34;, 
+    legend.box.spacing = unit(1,&#34;cm&#34;),
+</code></pre><h3 id="44-图例中文本格式">4.4 图例中文本格式</h3>
+<pre tabindex="0"><code>#标题文本
+legend.title = element_text(color=&#34;red&#34;,size=20),
+    legend.title.align = 0,
+
+#标签文本
+legend.text=element_text(color=&#34;blue&#34;,size=12,face=&#34;bold&#34;),
+    legend.text.align=0,
+</code></pre><h3 id="45-图例中标签格式">4.5 图例中标签格式</h3>
+<pre tabindex="0"><code>legend.key=element_rect(color=&#34;red&#34;,fill=&#34;green&#34;),
+legend.key.size = unit(5,&#34;mm&#34;),
+</code></pre><h2 id="5-面板区panel">5 面板区panel</h2>
+<h3 id="51-网格线">5.1 网格线</h3>
+<pre tabindex="0"><code>    panel.grid=element_line(color=&#34;gray&#34;),
+    panel.grid.minor = element_blank(),
+</code></pre><h3 id="52-边框">5.2 边框</h3>
+<pre tabindex="0"><code>panel.border = element_rect(color=&#34;black&#34;,fill=NA,size=2)
+panel.background = element_rect(color=&#34;blue&#34;,fill=&#34;yellow&#34;)
+</code></pre><h3 id="53-面板间距">5.3 面板间距</h3>
+<pre tabindex="0"><code>    panel.spacing.x = unit(4,&#34;cm&#34;),
+    panel.spacing.y = unit(2,&#34;cm&#34;),
+</code></pre><h2 id="6-plot区">6 plot区</h2>
+<h3 id="61-格式定义">6.1 格式定义</h3>
+<pre tabindex="0"><code>plot.background = element_rect(fill=&#34;gray&#34;)
+ plot.margin=margin(1,1,1,1,&#34;cm&#34;)
+</code></pre><h3 id="62-标题文本格式及位置">6.2 标题文本格式及位置</h3>
+<p>hjust=0.5居中</p>
+<pre tabindex="0"><code>    plot.title = element_text(size=15,face=&#34;bold&#34;,hjust=0.5),
+    plot.title.position = &#34;panel&#34;
+</code></pre><h2 id="7-strip面板标签">7 strip面板标签</h2>
+<pre tabindex="0"><code>    strip.background = element_rect(fill=&#34;blue&#34;),
+    strip.placement = &#34;outside&#34;,
+    strip.text = element_text(color=&#34;yellow&#34;),
+    strip.switch.pad.grid = unit(1,&#34;cm&#34;), #outside起效
+</code></pre><h1 id="实例">实例</h1>
+<p><img src="https://img-blog.csdnimg.cn/20210131160942722.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L25pa2FuZzMxNDg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<pre tabindex="0"><code>library(tidyverse)
+
+
+p1=mtcars%&gt;%ggplot(aes(wt,qsec))+
+  geom_point(aes(color=as.factor(gear),shape=as.factor(am)))+
+  labs(x=&#34;Length&#34;,y=&#34;Width&#34;,title=&#34;qsec~wt&#34;,color=&#34;Gear&#34;,shape=&#34;A/M&#34;)+
+  facet_grid(cyl~vs)
+
+p1
+
+p1+theme(
+  #高宽比
+   # aspect.ratio = 0.8,
+  # 坐标轴标题 axis.title.?(x,y,x.top,bottom,y.left,right)
+    axis.title.x=element_text(face=&#34;bold&#34;,size=15,margin=margin(0.2,0,0,0,&#34;cm&#34;)),
+    axis.title.y=element_text(face=&#34;bold&#34;,size=15,margin=margin(0,0.2,0,0,&#34;cm&#34;)),
+  # 坐标轴刻度标签 axis.text
+    axis.text.x= element_text(face=&#34;bold&#34;,size=12,margin=margin(0.3,0,0,0,&#34;cm&#34;)),
+    axis.text.y= element_text(face=&#34;bold&#34;,size=12,margin=margin(0,0.3,0,0,&#34;cm&#34;)),
+  
+  #  坐标轴刻度线 axis.ticks
+    axis.ticks=element_line(size=1),
+    axis.ticks.length = unit(-2,&#34;mm&#34;),
+  # 坐标轴线
+   # axis.line=element_line(color=&#34;black&#34;,size=1),
+  # 图例legend
+    legend.background = element_rect(color=&#34;blue&#34;,fill=&#34;yellow&#34;,size=2),
+    legend.margin = margin(0.5,0.5,0.5,0.5,&#34;cm&#34;),
+    legend.spacing.x = unit(1,&#34;cm&#34;),
+    legend.spacing.y = unit(1,&#34;cm&#34;),
+    legend.key=element_rect(color=&#34;red&#34;,fill=&#34;green&#34;),
+    legend.key.size = unit(15,&#34;mm&#34;),
+    legend.text=element_text(color=&#34;blue&#34;,size=12,face=&#34;bold&#34;),
+    legend.text.align=0,
+    legend.title = element_text(color=&#34;red&#34;,size=20),
+    legend.title.align = 0,
+    legend.position = &#34;left&#34;,#bottom,left,top,right
+    legend.justification = c(0.9,0.9),
+    legend.direction = &#34;vertical&#34;, #legend内方向
+    legend.box=&#34;horizontal&#34;, #legend间方向
+    legend.box.background = element_rect(fill=&#34;red&#34;),
+    legend.box.margin = margin(1,1,1,1,&#34;cm&#34;),
+    legend.box.just=&#34;bottom&#34;, 
+    legend.box.spacing = unit(1,&#34;cm&#34;),
+  
+  #pannel
+    panel.border = element_rect(color=&#34;black&#34;,fill=NA,size=2),#最外层
+    panel.background = element_rect(color=&#34;blue&#34;,fill=&#34;yellow&#34;),
+    panel.spacing.x = unit(4,&#34;cm&#34;),
+    panel.spacing.y = unit(2,&#34;cm&#34;),
+    panel.grid=element_line(color=&#34;gray&#34;),
+    panel.grid.minor = element_blank(),
+  
+  # plot区域
+    plot.background = element_rect(fill=&#34;gray&#34;),
+    plot.title = element_text(size=15,face=&#34;bold&#34;,hjust=0.5),
+    plot.title.position = &#34;panel&#34;,
+    plot.margin=margin(1,1,1,1,&#34;cm&#34;),
+  
+  # strip
+    strip.background = element_rect(fill=&#34;blue&#34;),
+    strip.placement = &#34;outside&#34;,
+    strip.text = element_text(color=&#34;yellow&#34;),
+    strip.switch.pad.grid = unit(1,&#34;cm&#34;), #outside起效
+  
+  
+  
+)
+
+
+ 
+ 
+</code></pre>
+    </article>
+  </div>
+
+  
+  
+  
+  <script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-123456789-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+<script>
+window.addEventListener("load", function(){
+window.cookieconsent.initialise({
+  "palette": {
+    "popup": {
+      "background": "#216942",
+      "text": "#b2d192"
+    },
+    "button": {
+      "background": "#afed71"
+    }
+  }
+})});
+</script>
+
+</body>
+
+</html>

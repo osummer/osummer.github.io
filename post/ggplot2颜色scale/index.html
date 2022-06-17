@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <meta name="generator" content="Hugo 0.101.0" />
+
+  
+  <meta name="description" content="Some description">
+  
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="https://osummer.github.io/apple-touch-icon.png">
+
+  
+  <link rel="icon" type="image/png" sizes="32x32" href="https://osummer.github.io/favicon-32x32.png">
+
+  
+  <link rel="icon" type="image/png" sizes="16x16" href="https://osummer.github.io/favicon-16x16.png">
+
+  
+  <link rel="manifest" href="https://osummer.github.io/site.webmanifest">
+
+  
+  <link rel="mask-icon" href="https://osummer.github.io/safari-pinned-tab.svg" color="#5bbad5">
+
+  <meta name="msapplication-TileColor" content="#da532c">
+
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <link rel="stylesheet" href="https://osummer.github.io/css/bootstrap.min.css" />
+
+  
+  <title>ggplot2颜色scale | 学海无涯</title>
+  
+
+  <style>
+body {
+  min-width: 300px;
+}
+
+.custom-navbar {
+  margin-bottom: 1em;
+  height: 60px;
+}
+
+.custom-navbar a {
+  display: inline-block; 
+  padding: 18px 0;
+  margin-right: 1em; 
+  font-weight: bold; 
+}
+
+.custom-navbar a:hover,
+.custom-navbar a:focus {
+  text-decoration: none; 
+}
+
+@media print {
+  .custom-navbar {
+    display: none;
+  }
+}
+
+article {
+  padding-bottom: 1em;
+}
+
+img {
+  max-width: 100%;
+}
+
+
+body {
+  background-color: #fff;
+}
+
+
+
+body {
+  color: #212529;
+}
+
+
+
+a {
+  color: #007bff;
+}
+
+
+
+a:hover,
+a:focus {
+  color: #0056b3;
+}
+
+
+
+.custom-navbar {
+  background-color: #1E90FF;
+}
+
+
+
+.custom-navbar a {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+
+
+.custom-navbar a:hover,
+.custom-navbar a:focus {
+  color: rgba(255, 255, 255, 1);
+}
+
+
+
+.container {
+  max-width: 800px;
+}
+
+
+
+pre {
+  display: block;
+  padding: 9.5px;
+  word-break: break-all;
+  word-wrap: break-word;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+pre code {
+  padding: 0;
+  font-size: inherit;
+  color: inherit; 
+  white-space: pre-wrap;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+}
+
+code {
+  padding: 2px 4px;
+  color: inherit; 
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: .9em;
+}
+
+
+
+blockquote,
+.blockquote {
+  padding: 10px 20px;
+  margin: 0 0 20px;
+  font-size: 1em;
+  border-left: 5px solid #6c757d;
+}
+
+</style>
+</head>
+
+<body>
+  <nav class="custom-navbar">
+  <div class="container">
+    
+    <a href="/post/">Posts</a>
+    
+    <a href="/tags/">Tags</a>
+    
+    <a href="/about/">About</a>
+    
+    <a href="/index.xml">RSS</a>
+    
+  </div>
+</nav>
+  
+  <div class="container">
+    <article>
+      <h1>ggplot2颜色scale</h1>
+<p>
+  <small class="text-secondary">
+  
+  
+  Jun 17, 2022
+  </small>
+  
+
+<small><code><a href="https://osummer.github.io/tags/ggplot2">ggplot2</a></code></small>
+
+
+<small><code><a href="https://osummer.github.io/tags/%E5%8F%AF%E8%A7%86%E5%8C%96">可视化</a></code></small>
+
+  
+
+</p>
+<h1 id="ggplot2中的颜色标量scale定义">ggplot2中的颜色标量scale定义</h1>
+<hr>
+<h2 id="摘要">摘要</h2>
+<p>推荐使用<code>colorspace</code>包，或者<code>ggsci</code>包中的色板进行配色。</p>
+<p>scale_(fill/color)<em>(continous/discrete/binned)</em>(sequential/diverging/qualitative/divergingx)</p>
+<h2 id="前言">前言</h2>
+<p>ggplot图形绘制中经常用到颜色映射<code>aes</code>，常见的有<code>aes(color=var)</code>或者<code>aes(fill=var)</code>进行边框或者填充色的绘制。比如： ^cb109c</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(tidyverse)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>iris <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">ggplot</span>()<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_point</span>(<span style="color:#a6e22e">aes</span>(Sepal.Length,Sepal.Width,color<span style="color:#f92672">=</span>Species),size<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>)
+</span></span></code></pre></div><p>上图用到了<code>color</code>边框线的映射，有时候也会用到<code>fill</code>填充色映射，比如：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p<span style="color:#f92672">=</span>iris <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(x<span style="color:#f92672">=</span>Species,y<span style="color:#f92672">=</span>Sepal.Length))<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_boxplot</span>(<span style="color:#a6e22e">aes</span>(fill<span style="color:#f92672">=</span>Species))
+</span></span><span style="display:flex;"><span>p
+</span></span></code></pre></div><p>但是此处的颜色类型均为系统默认，没有自定义形式，而ggplot图形系统中，则可以利用<code>scale_fill_xxx</code>形式对颜色梯度进行自定义。下文中<code>color</code>与<code>fill</code>实际是一致的。</p>
+<h2 id="离散变量">离散变量</h2>
+<h3 id="默认定义scale_fill_discrete">默认定义scale_fill_discrete()</h3>
+<p>如果希望改变次序，则要调用<code>scale_x_discrete</code>中的<code>limits</code>参数。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># 柱子数量不变，排序不变，legend不变</span>
+</span></span><span style="display:flex;"><span>p<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_x_discrete</span>(breaks<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;virginica&#34;</span>,<span style="color:#e6db74">&#34;setosa&#34;</span>))
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># 柱子数量改变，排序改变，legend改变</span>
+</span></span><span style="display:flex;"><span>p<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_x_discrete</span>(limits<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;virginica&#34;</span>,<span style="color:#e6db74">&#34;setosa&#34;</span>))
+</span></span></code></pre></div><pre tabindex="0"><code>## Warning: Removed 50 rows containing missing values (stat_boxplot).
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e">#图形不变，legend处排序变化，颜色不变</span>
+</span></span><span style="display:flex;"><span>p<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_fill_discrete</span>(breaks<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;virginica&#34;</span>,<span style="color:#e6db74">&#34;setosa&#34;</span>))
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e">#图形不变，legend处排序变化，颜色发生变化</span>
+</span></span><span style="display:flex;"><span>p<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_fill_discrete</span>(limits<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;virginica&#34;</span>,<span style="color:#e6db74">&#34;setosa&#34;</span>))
+</span></span></code></pre></div><h3 id="色环系统-scale_fill_hue">色环系统 scale_fill_hue()</h3>
+<p>默认情况下，离散比例的颜色围绕<code>HSL色环</code>均匀分布。例如，如果有两种颜色，那么它们将从圆圈上的相对点中选择;如果有三种颜色，它们在色环上将相隔 120° 等等。</p>
+<p>默认颜色选择使用 scale_fill_hue() 和 scale_colour_hue()，<code>hue</code>颜色系统有修改：</p>
+<ul>
+<li>h 色相，实际是色环角度0-360</li>
+<li>c 饱和度，0-100</li>
+<li>l 亮度，0-100
+例如：</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_fill_hue</span>(h<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">120</span>,<span style="color:#ae81ff">360</span>))
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_fill_hue</span>(l<span style="color:#f92672">=</span><span style="color:#ae81ff">80</span>)<span style="color:#75715e">#设置亮度（l默认45）</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_fill_hue</span>(l<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>)<span style="color:#75715e">#设置亮度（l默认45）</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_fill_hue</span>(c<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>)<span style="color:#75715e">#设置饱和度（c默认100）</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_fill_hue</span>(c<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>)<span style="color:#75715e">#设置饱和度（c默认100）</span>
+</span></span></code></pre></div><h3 id="灰度系统scale_fill_grey">灰度系统scale_fill_grey()</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_fill_grey</span>(start<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>,end<span style="color:#f92672">=</span><span style="color:#ae81ff">0.8</span>)
+</span></span></code></pre></div><h3 id="调色板scale_fill_brewer">调色板scale_fill_brewer()</h3>
+<p><code>RColorBrewer</code>包中有多个色板可供选择：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>RColorBrewer<span style="color:#f92672">::</span><span style="color:#a6e22e">display.brewer.all</span>()
+</span></span></code></pre></div><p><code>RColorBrewer</code>中有3套色板，<code>type</code>参数，分别为：</p>
+<ul>
+<li>Sequential（seq）: 用于表示数值梯度，用于呈现有序的数值信息，数值越高颜色越深，越低颜色越浅。</li>
+<li>qualitative(qual)：用于呈现分类信息，颜色之间一般对比鲜明。</li>
+<li>diverging(div): 分歧，用于呈现有序/连续的数值信息，这些数值围绕着一个中心值，比中心值越大的方向用一种渐变色，比中心值越小用另一种渐变色。</li>
+</ul>
+<p>对于离散变量映射，则有：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_fill_brewer</span>(type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;seq&#34;</span>,palette <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_fill_brewer</span>(type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;qual&#34;</span>,palette <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_fill_brewer</span>(type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;div&#34;</span>,palette <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><p>或者直接指定色板名称<code>palette=??</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_fill_brewer</span>(palette<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Spectral&#34;</span>)
+</span></span></code></pre></div><p>上述颜色也可以在<code>colorspace</code>包中获取。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(colorspace)
+</span></span></code></pre></div><pre tabindex="0"><code>## Warning: package &#39;colorspace&#39; was built under R version 4.1.1
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">hcl_palettes</span>(plot <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">hcl_palettes</span>(<span style="color:#e6db74">&#34;qualitative&#34;</span>, plot <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">hcl_palettes</span>(<span style="color:#e6db74">&#34;sequential (single-hue)&#34;</span>, n <span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span>, plot <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">hcl_palettes</span>(<span style="color:#e6db74">&#34;sequential (multi-hue)&#34;</span>, n <span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span>, plot <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">hcl_palettes</span>(<span style="color:#e6db74">&#34;diverging&#34;</span>, n <span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span>, plot <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">divergingx_palettes</span>(plot <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
+</span></span></code></pre></div><p>如果需要具体颜色值，则通过：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e">#colorspace::diverging_hcl(n = 7, &#34;Dark 2&#34;)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#colorspace::qualitative_hcl(4, palette = &#34;myset&#34;)</span>
+</span></span><span style="display:flex;"><span>colorspace<span style="color:#f92672">::</span><span style="color:#a6e22e">sequential_hcl</span>(n <span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span>, palette <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Peach&#34;</span>)
+</span></span></code></pre></div><pre tabindex="0"><code>## [1] &#34;#EA4C3B&#34; &#34;#EF6D48&#34; &#34;#F3885B&#34; &#34;#F6A173&#34; &#34;#F8B78E&#34; &#34;#F9CCA9&#34; &#34;#FADDC3&#34;
+</code></pre><p>在<code>ggplot2</code>图形系统，则可以直接调用<code>colorspace</code>中的色板：</p>
+<ul>
+<li>scale_color_discrete_qualitative()</li>
+<li>scale_fill_continuous_sequential()</li>
+<li>scale_colour_continous_divergingx()
+例如：</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_fill_discrete_qualitative</span>(palette<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Set2&#34;</span>,nmax<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>,rev<span style="color:#f92672">=</span>T,order<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span><span style="color:#f92672">:</span><span style="color:#ae81ff">6</span>)
+</span></span></code></pre></div><h2 id="连续变量">连续变量</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p1<span style="color:#f92672">=</span>iris <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(x<span style="color:#f92672">=</span>Sepal.Length,y<span style="color:#f92672">=</span>Sepal.Width))<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_point</span>(<span style="color:#a6e22e">aes</span>(color<span style="color:#f92672">=</span>Sepal.Length),size<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>p1
+</span></span></code></pre></div><h3 id="默认scale_fill_continous">默认scale_fill_continous</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p1<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_color_continuous</span>(type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;gradient&#34;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p1<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_color_continuous</span>(type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;viridis&#34;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p1<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_color_continuous</span>(breaks<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">2.5</span>,<span style="color:#ae81ff">5.2</span>,<span style="color:#ae81ff">6.8</span>),limits<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">7</span>))
+</span></span></code></pre></div><p>上图中limits规定了映射范围，breaks参数规定了断点值。 ^daa9ac</p>
+<h3 id="梯度scale_fill_gradient">梯度scale_fill_gradient</h3>
+<ul>
+<li>scale_fill_gradient</li>
+<li>scale_fill_gradient2</li>
+<li>scale_fill_gradientn</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p1<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_color_gradient</span>(low<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;red&#34;</span>,high<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;blue&#34;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p1<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_color_gradient2</span>(low<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;red&#34;</span>,mid<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;white&#34;</span>,high<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;blue&#34;</span>,midpoint <span style="color:#f92672">=</span> <span style="color:#ae81ff">6</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p1<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_color_gradientn</span>(colors<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;yellow&#34;</span>,<span style="color:#e6db74">&#34;green&#34;</span>,<span style="color:#e6db74">&#34;red&#34;</span>,<span style="color:#e6db74">&#34;black&#34;</span>))
+</span></span></code></pre></div><h3 id="色板scale_fill_distillerfermenter">色板scale_fill_distiller/fermenter</h3>
+<ul>
+<li>scale_fill_distiller() 色块连续过度</li>
+<li>scale_fill_steps/scale_fill_binned()/scale_fill_fermenter() 色块离散过度</li>
+</ul>
+<p>其中distiller把<code>brewer</code>离散色板中均匀插值7个色块形成过渡色，而fermenter则是把<code>brewer</code>色板的颜色离散化。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p1<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_color_distiller</span>(palette <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Spectral&#34;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p1<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_color_fermenter</span>(palette <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Spectral&#34;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p1<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_color_steps</span>(low<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;red&#34;</span>,high<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;blue&#34;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p1<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_color_binned</span>()
+</span></span></code></pre></div><p>对<code>steps</code>还有：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p1<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_fill_steps</span>(low <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;#002B43&#34;</span>, high <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;#99B1F7&#34;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p1<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_fill_steps2</span>(low <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;red&#34;</span>, mid <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;white&#34;</span>,high <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p1<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_fill_stepsn</span>(colors<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(ggsci<span style="color:#f92672">::</span><span style="color:#a6e22e">pal_aaas</span>()(<span style="color:#ae81ff">5</span>)))
+</span></span></code></pre></div><p>对应<code>colorspace</code>包，则有scale_fill_continous_???:</p>
+<ul>
+<li>scale_colour_continuous_sequential</li>
+<li>scale_colour_continuous_qualitative</li>
+<li>scale_colour_continuous_diverging</li>
+<li>scale_colour_continuous_divergingx</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p1<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_color_continuous_diverging</span>(palette <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Cork&#34;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p1<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_color_continuous_divergingx</span>(palette <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Geyser&#34;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p1<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_color_continuous_qualitative</span>(palette <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Warm&#34;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p1<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_color_continuous_sequential</span>(palette <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Heat&#34;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p1<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_color_binned_qualitative</span>(palette <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Warm&#34;</span>)
+</span></span></code></pre></div><h2 id="其它">其它</h2>
+<h3 id="色盲色板">色盲色板</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p1<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_color_viridis_c</span>()
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_fill_viridis_d</span>()
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>p1<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_color_viridis_b</span>()
+</span></span></code></pre></div><h3 id="完全自定义">完全自定义</h3>
+<p>自定义主要对应离散映射：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>aa<span style="color:#f92672">=</span><span style="color:#a6e22e">unique</span>(iris<span style="color:#f92672">$</span>Species)
+</span></span><span style="display:flex;"><span>p<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_fill_manual</span>(breaks <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(aa[2],aa[1],aa[3]), 
+</span></span><span style="display:flex;"><span>     values <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;darkorange&#34;</span>, <span style="color:#e6db74">&#34;purple&#34;</span>, <span style="color:#e6db74">&#34;cyan4&#34;</span>))
+</span></span></code></pre></div>
+    </article>
+  </div>
+
+  
+  
+  
+  <script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-123456789-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+<script>
+window.addEventListener("load", function(){
+window.cookieconsent.initialise({
+  "palette": {
+    "popup": {
+      "background": "#216942",
+      "text": "#b2d192"
+    },
+    "button": {
+      "background": "#afed71"
+    }
+  }
+})});
+</script>
+
+</body>
+
+</html>
