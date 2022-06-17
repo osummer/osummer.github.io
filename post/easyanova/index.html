@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <meta name="generator" content="Hugo 0.101.0" />
+
+  
+  <meta name="description" content="Some description">
+  
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="https://osummer.github.io/apple-touch-icon.png">
+
+  
+  <link rel="icon" type="image/png" sizes="32x32" href="https://osummer.github.io/favicon-32x32.png">
+
+  
+  <link rel="icon" type="image/png" sizes="16x16" href="https://osummer.github.io/favicon-16x16.png">
+
+  
+  <link rel="manifest" href="https://osummer.github.io/site.webmanifest">
+
+  
+  <link rel="mask-icon" href="https://osummer.github.io/safari-pinned-tab.svg" color="#5bbad5">
+
+  <meta name="msapplication-TileColor" content="#da532c">
+
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <link rel="stylesheet" href="https://osummer.github.io/css/bootstrap.min.css" />
+
+  
+  <title>easyANOVA | 学海无涯</title>
+  
+
+  <style>
+body {
+  min-width: 300px;
+}
+
+.custom-navbar {
+  margin-bottom: 1em;
+  height: 60px;
+}
+
+.custom-navbar a {
+  display: inline-block; 
+  padding: 18px 0;
+  margin-right: 1em; 
+  font-weight: bold; 
+}
+
+.custom-navbar a:hover,
+.custom-navbar a:focus {
+  text-decoration: none; 
+}
+
+@media print {
+  .custom-navbar {
+    display: none;
+  }
+}
+
+article {
+  padding-bottom: 1em;
+}
+
+img {
+  max-width: 100%;
+}
+
+
+body {
+  background-color: #fff;
+}
+
+
+
+body {
+  color: #212529;
+}
+
+
+
+a {
+  color: #007bff;
+}
+
+
+
+a:hover,
+a:focus {
+  color: #0056b3;
+}
+
+
+
+.custom-navbar {
+  background-color: #1E90FF;
+}
+
+
+
+.custom-navbar a {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+
+
+.custom-navbar a:hover,
+.custom-navbar a:focus {
+  color: rgba(255, 255, 255, 1);
+}
+
+
+
+.container {
+  max-width: 800px;
+}
+
+
+
+pre {
+  display: block;
+  padding: 9.5px;
+  word-break: break-all;
+  word-wrap: break-word;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+pre code {
+  padding: 0;
+  font-size: inherit;
+  color: inherit; 
+  white-space: pre-wrap;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+}
+
+code {
+  padding: 2px 4px;
+  color: inherit; 
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: .9em;
+}
+
+
+
+blockquote,
+.blockquote {
+  padding: 10px 20px;
+  margin: 0 0 20px;
+  font-size: 1em;
+  border-left: 5px solid #6c757d;
+}
+
+</style>
+</head>
+
+<body>
+  <nav class="custom-navbar">
+  <div class="container">
+    
+    <a href="/post/">Posts</a>
+    
+    <a href="/tags/">Tags</a>
+    
+    <a href="/about/">About</a>
+    
+    <a href="/index.xml">RSS</a>
+    
+  </div>
+</nav>
+  
+  <div class="container">
+    <article>
+      <h1>easyANOVA</h1>
+<p>
+  <small class="text-secondary">
+  
+  
+  Jun 17, 2022
+  </small>
+  
+
+<small><code><a href="https://osummer.github.io/tags/r">R</a></code></small>
+
+
+<small><code><a href="https://osummer.github.io/tags/tidyverse">tidyverse</a></code></small>
+
+  
+
+</p>
+<hr>
+<h1 id="多重比较">多重比较</h1>
+<h2 id="duncan_test">Duncan_Test</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> Duncan_Test
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @param data dataset
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @param xx x-variable
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @param yy y-variable
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @return data frame
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @export
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @import dplyr
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @import tibble
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @import ggplot2
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @import tidyr
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @import patchwork
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @examples
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> Duncan_Test(iris,Species,Sepal.Length)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Duncan_Test&lt;-function(data,xx,yy){
+</span></span><span style="display:flex;"><span>  trt&lt;- <span style="color:#66d9ef">as</span>.character(substitute(xx))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  aov1&lt;-aov(formula(substitute(yy~xx)),data)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  res &lt;- aov1 %&gt;% agricolae::duncan.test(trt=trt)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  res_mean &lt;- res<span style="color:#960050;background-color:#1e0010">$</span>means %&gt;% as_tibble(rownames=trt) %&gt;% <span style="color:#66d9ef">select</span>(<span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">4</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  res_group &lt;- res<span style="color:#960050;background-color:#1e0010">$</span>groups %&gt;% as_tibble(rownames=trt)%&gt;% <span style="color:#66d9ef">select</span>(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  multicom_result &lt;- res_mean %&gt;% left_join(res_group,<span style="color:#66d9ef">by</span>=trt)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  result&lt;-list(anova_test=summary(aov1), multi_test=multicom_result)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span>(result)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="lsd_test">LSD_Test</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> LSD_Test
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @param data dataset
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @param xx x-variable
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @param yy y-variable
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @return data frame
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @export
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @examples
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> LSD_Test(iris,Species,Sepal.Length)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>LSD_Test&lt;-function(data,xx,yy){
+</span></span><span style="display:flex;"><span>  trt&lt;- <span style="color:#66d9ef">as</span>.character(substitute(xx))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  aov1&lt;-aov(formula(substitute(yy~xx)),data)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  res &lt;- aov1 %&gt;% agricolae::LSD.test(trt=trt,p.adj = <span style="color:#e6db74">&#34;none&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  res_mean &lt;- res<span style="color:#960050;background-color:#1e0010">$</span>means %&gt;% as_tibble(rownames=trt) %&gt;% <span style="color:#66d9ef">select</span>(<span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">4</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  res_group &lt;- res<span style="color:#960050;background-color:#1e0010">$</span>groups %&gt;% as_tibble(rownames=trt)%&gt;% <span style="color:#66d9ef">select</span>(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  multicom_result &lt;- res_mean %&gt;% left_join(res_group,<span style="color:#66d9ef">by</span>=trt)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  lsd=res<span style="color:#960050;background-color:#1e0010">$</span>statistics<span style="color:#960050;background-color:#1e0010">$</span>LSD
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  result&lt;-list(anova_test=summary(aov1),multi_test=multicom_result,LSD=lsd)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span>(result)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  }
+</span></span></code></pre></div><h2 id="hsd_test">HSD_Test</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> HSD_Test
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @param data dataset
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @param xx x-variable
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @param yy y-variable
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @return data frame
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @export
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @examples
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> HSD_Test(iris,Species,Sepal.Length)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>HSD_Test&lt;-function(data,xx,yy){
+</span></span><span style="display:flex;"><span>  trt&lt;- <span style="color:#66d9ef">as</span>.character(substitute(xx))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  aov1&lt;-aov(formula(substitute(yy~xx)),data)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  res &lt;- aov1 %&gt;% agricolae::HSD.test(trt=trt)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  res_mean &lt;- res<span style="color:#960050;background-color:#1e0010">$</span>means %&gt;% as_tibble(rownames=trt) %&gt;% <span style="color:#66d9ef">select</span>(<span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">4</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  res_group &lt;- res<span style="color:#960050;background-color:#1e0010">$</span>groups %&gt;% as_tibble(rownames=trt)%&gt;% <span style="color:#66d9ef">select</span>(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  multicom_result &lt;- res_mean %&gt;% left_join(res_group,<span style="color:#66d9ef">by</span>=trt)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  msd&lt;-res<span style="color:#960050;background-color:#1e0010">$</span>statistics<span style="color:#960050;background-color:#1e0010">$</span>MSD
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  result&lt;-list(anova_test=summary(aov1),multi_test=multicom_result,MSD=msd)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span>(result)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  }
+</span></span></code></pre></div><h1 id="多变量多重比较">多变量多重比较</h1>
+<h2 id="长表输出sss_longer">长表输出sss_longer</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> sss_longer
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @param data dataset
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @param xx xx-variable
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @param yy1 starts y-variable
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @param yy2 ends y-variable
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @return data frame
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @export
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @examples
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> iris %&gt;% sss_longer(Species,Sepal.Length,Petal.Width)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sss_longer &lt;- function(p,xx,yy1,yy2){
+</span></span><span style="display:flex;"><span> res &lt;- p %&gt;%
+</span></span><span style="display:flex;"><span>    pivot_longer(cols={{yy1}}:{{yy2}},names_to = <span style="color:#e6db74">&#34;para&#34;</span>,values_to=<span style="color:#e6db74">&#34;values&#34;</span>) %&gt;%
+</span></span><span style="display:flex;"><span>    rename(Factor={{xx}}) %&gt;%
+</span></span><span style="display:flex;"><span>    group_by(para) %&gt;%
+</span></span><span style="display:flex;"><span>    group_modify(~ LSD_Test(data=.x, xx=Factor,yy= values)[[<span style="color:#ae81ff">2</span>]]) %&gt;%
+</span></span><span style="display:flex;"><span>    mutate(SE=std/sqrt(r),CV=std/values)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">return</span>(res)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> }
+</span></span></code></pre></div><h2 id="宽表输出sss_wider">宽表输出sss_wider</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> sss_wider
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @param p dataset
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @return data frame
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @export
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @examples
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> iris %&gt;%
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> sss_longer(Species,Sepal.Length,Petal.Width) %&gt;%
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> sss_wider()
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sss_wider&lt;-function(p){
+</span></span><span style="display:flex;"><span>  p %&gt;%
+</span></span><span style="display:flex;"><span>    mutate(ss=stringr::str_c(round(values,<span style="color:#ae81ff">2</span>),<span style="color:#e6db74">&#34;±&#34;</span>,round(SE,<span style="color:#ae81ff">2</span>),groups)) %&gt;%
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">select</span>(para,Factor,ss) %&gt;%
+</span></span><span style="display:flex;"><span>    pivot_wider(names_from = para,values_from =ss )
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="多变量柱状图">多变量柱状图</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> bar_plot
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @param ppp dataset
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @return list
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @export
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @import patchwork
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @examples
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> iris %&gt;%
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> sss_longer(Species,Sepal.Length,Petal.Width) %&gt;%
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> bar_plot(ppp)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bar_plot&lt;-function(ppp){
+</span></span><span style="display:flex;"><span> gp&lt;- ppp %&gt;% ungroup()%&gt;%
+</span></span><span style="display:flex;"><span>   group_nest(para,keep=T) %&gt;%
+</span></span><span style="display:flex;"><span>   mutate(gp=purrr::map(data,~ggplot(.x,aes(x=Factor,y=values))+
+</span></span><span style="display:flex;"><span>                   geom_col(aes(fill=Factor),width=<span style="color:#ae81ff">0.5</span>)+
+</span></span><span style="display:flex;"><span>                   geom_errorbar(aes(ymin=values-SE,ymax=values+SE),width=<span style="color:#ae81ff">0.25</span>)+
+</span></span><span style="display:flex;"><span>                   geom_text(aes(y=values+SE,label=groups),
+</span></span><span style="display:flex;"><span>                             nudge_y = <span style="color:#ae81ff">0.05</span>*(max(.x<span style="color:#960050;background-color:#1e0010">$</span>values))
+</span></span><span style="display:flex;"><span>                             )+
+</span></span><span style="display:flex;"><span>                   labs(x=<span style="color:#e6db74">&#34;&#34;</span>,y=unique(.x<span style="color:#960050;background-color:#1e0010">$</span>para))+
+</span></span><span style="display:flex;"><span>                   scale_y_continuous(expand=expansion(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>),
+</span></span><span style="display:flex;"><span>                                      limits=c(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1.1</span>*max(.x<span style="color:#960050;background-color:#1e0010">$</span>values+.x<span style="color:#960050;background-color:#1e0010">$</span>SE)))+
+</span></span><span style="display:flex;"><span>                   theme(axis.ticks.length.x.bottom = unit(<span style="color:#ae81ff">0</span>,<span style="color:#e6db74">&#34;cm&#34;</span>))
+</span></span><span style="display:flex;"><span>                   ))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> p1=wrap_plots(gp<span style="color:#960050;background-color:#1e0010">$</span>gp)+plot_layout(guides=<span style="color:#e6db74">&#34;collect&#34;</span>)
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">if</span>(length(gp<span style="color:#960050;background-color:#1e0010">$</span>gp)&gt;<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>   p1+plot_annotation(tag_prefix = <span style="color:#e6db74">&#34;(&#34;</span>,tag_suffix = <span style="color:#e6db74">&#34;)&#34;</span>,tag_levels=<span style="color:#e6db74">&#34;A&#34;</span>)
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>   p1
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h1 id="多参数p-valueeffect-size-bf综合输出">多参数（p value、effect size BF）综合输出</h1>
+<h2 id="方差模型分析全输出aov1">方差模型分析全输出aov1</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> aov1
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @param data data_table
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @param var_x group_var
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @param var_y Response_var
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @return list
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @export
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @import rlang
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @examples
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> iris %&gt;% aov1(Species,Sepal.Width)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>aov1 &lt;- function(data,var_x,var_y,type=<span style="color:#ae81ff">3</span>){
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  data &lt;- tibble::as_tibble(data)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  trt&lt;- <span style="color:#66d9ef">as</span>.character(substitute(var_x))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  aov1&lt;-aov(formula(substitute(var_y~var_x)),data) %&gt;%
+</span></span><span style="display:flex;"><span>    car::Anova(type=type)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  p_value=aov1 %&gt;% broom::tidy() %&gt;% filter(term==trt) %&gt;%
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">select</span>(term,p.<span style="color:#66d9ef">value</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  aovBF &lt;- data %&gt;% statsExpressions::oneway_anova({{var_x}},{{var_y}},type=<span style="color:#e6db74">&#34;bayes&#34;</span>)  %&gt;%
+</span></span><span style="display:flex;"><span>    distinct(log_e_bf10,r2) %&gt;% rename(r2_bayes=r2)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  eta2=aov1 %&gt;% effectsize::eta_squared(<span style="color:#66d9ef">partial</span>=F) %&gt;%tibble()
+</span></span><span style="display:flex;"><span>  omega2=aov1 %&gt;% effectsize::omega_squared(<span style="color:#66d9ef">partial</span>=F) %&gt;% tibble()
+</span></span><span style="display:flex;"><span>  epsilon2=aov1 %&gt;% effectsize::epsilon_squared(<span style="color:#66d9ef">partial</span>=F) %&gt;% tibble()
+</span></span><span style="display:flex;"><span>  cohens_f=aov1 %&gt;% effectsize::cohens_f(<span style="color:#66d9ef">partial</span>=F)  %&gt;%   tibble()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  aov_effsize &lt;-bind_cols(p_value,aovBF[<span style="color:#ae81ff">1</span>],eta2[,<span style="color:#ae81ff">2</span>] ,omega2[<span style="color:#ae81ff">2</span>],epsilon2[<span style="color:#ae81ff">2</span>],cohens_f[<span style="color:#ae81ff">2</span>],aovBF[<span style="color:#ae81ff">2</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span>(aov_effsize)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="多重比较全输出pairwise_diff">多重比较全输出pairwise_diff</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> pairwise_diff
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @param data data_table
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @param var_x group_var
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @param var_y Response_var
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @return list
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @export
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @import rlang
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @examples
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> iris %&gt;% pairwise_diff(Species,Sepal.Length)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>pairwise_diff &lt;- function(data,var_x,var_y){
+</span></span><span style="display:flex;"><span>  data &lt;- tibble::as_tibble(data)
+</span></span><span style="display:flex;"><span>  trt&lt;- <span style="color:#66d9ef">as</span>.character(substitute(var_x))
+</span></span><span style="display:flex;"><span>  aov1&lt;-aov(formula(substitute(var_y~var_x)),data)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  pairwise_aov1 &lt;- aov1 %&gt;% emmeans::emmeans(specs=trt) %&gt;%
+</span></span><span style="display:flex;"><span>    pairs(adjust=<span style="color:#e6db74">&#34;none&#34;</span>) %&gt;%
+</span></span><span style="display:flex;"><span>    broom::tidy() %&gt;%
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">select</span>(contrast,estimate,p.<span style="color:#66d9ef">value</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  effsize_aov1 &lt;- aov1 %&gt;% emmeans::emmeans(specs=trt) %&gt;%
+</span></span><span style="display:flex;"><span>    emmeans::eff_size(sigma=sigma(aov1),edf=df.residual(aov1)) %&gt;%
+</span></span><span style="display:flex;"><span>    broom::tidy() %&gt;%
+</span></span><span style="display:flex;"><span>    mutate(explain=effectsize::interpret_cohens_d(estimate, rules = <span style="color:#e6db74">&#34;cohen1988&#34;</span>)) %&gt;%
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">select</span>(contrast,estimate,explain)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  diff_comb &lt;- pairwise_aov1 %&gt;%
+</span></span><span style="display:flex;"><span>    left_join(effsize_aov1,<span style="color:#66d9ef">by</span>=c(<span style="color:#e6db74">&#34;contrast&#34;</span>)) %&gt;%
+</span></span><span style="display:flex;"><span>    rename(diff=estimate.x,p=p.<span style="color:#66d9ef">value</span>,cohen_d=estimate.y) %&gt;%
+</span></span><span style="display:flex;"><span>    tidyr::separate(contrast,<span style="color:#66d9ef">into</span>=c(<span style="color:#e6db74">&#34;group1&#34;</span>,<span style="color:#e6db74">&#34;group2&#34;</span>),sep=<span style="color:#e6db74">&#34; - &#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  diff_bayes &lt;- data %&gt;%
+</span></span><span style="display:flex;"><span>    ggstatsplot::pairwise_comparisons(
+</span></span><span style="display:flex;"><span>      x ={{var_x}}, y = {{var_y}},
+</span></span><span style="display:flex;"><span>      type = <span style="color:#e6db74">&#34;bayes&#34;</span>, bf.prior = <span style="color:#ae81ff">0.77</span> ) %&gt;%
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">select</span>(group1,group2,log_e_bf10,pd)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  res &lt;- diff_comb %&gt;% left_join(diff_bayes,<span style="color:#66d9ef">by</span>=c(<span style="color:#e6db74">&#34;group1&#34;</span>,<span style="color:#e6db74">&#34;group2&#34;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span>(res)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="多变量批量输出">多变量批量输出</h2>
+<h3 id="方差模型mmm_aov">方差模型mmm_aov</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> mmm_aov used <span style="color:#66d9ef">for</span> more response variables
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @param data dataset
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @param xx xx-variable
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @param yy1 starts y-variable
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @param yy2 ends y-variable
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @return data frame
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @export
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @examples
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> iris %&gt;% mmm_aov(Species,Sepal.Length,Petal.Width)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>mmm_aov &lt;- function(p,xx,yy1,yy2){
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  res &lt;- p %&gt;%
+</span></span><span style="display:flex;"><span>    pivot_longer(cols={{yy1}}:{{yy2}},names_to = <span style="color:#e6db74">&#34;para&#34;</span>,values_to=<span style="color:#e6db74">&#34;values&#34;</span>) %&gt;%
+</span></span><span style="display:flex;"><span>    rename(Factor={{xx}}) %&gt;%
+</span></span><span style="display:flex;"><span>    group_by(para) %&gt;%
+</span></span><span style="display:flex;"><span>    group_modify(~ aov1(data=.x,Factor,values))
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span>(res)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="多重比较结果mmm_comparison">多重比较结果mmm_comparison</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> mmm_comparison used <span style="color:#66d9ef">for</span> more response variables of pairwise comparison
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @param data dataset
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @param xx xx-variable
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @param yy1 starts y-variable
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @param yy2 ends y-variable
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @return data frame
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @export
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @examples
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> iris %&gt;% mmm_comparison(Species,Sepal.Length,Petal.Width)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>mmm_comparison &lt;- function(p,xx,yy1,yy2){
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  res &lt;- p %&gt;%
+</span></span><span style="display:flex;"><span>    pivot_longer(cols={{yy1}}:{{yy2}},names_to = <span style="color:#e6db74">&#34;para&#34;</span>,values_to=<span style="color:#e6db74">&#34;values&#34;</span>) %&gt;%
+</span></span><span style="display:flex;"><span>    rename(Factor={{xx}}) %&gt;%
+</span></span><span style="display:flex;"><span>    group_by(para) %&gt;%
+</span></span><span style="display:flex;"><span>    group_modify(~ pairwise_diff(data=.x,Factor,values))
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span>(res)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h1 id="sci-绘图主题">SCI 绘图主题</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> theme_sci
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @param <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @return list
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @export
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> @examples
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span> iris %&gt;% ggplot(aes(x=Sepal.Length,y=Sepal.Width))+
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span>  geom_point(aes(color=Species))+
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#&#39;</span>  theme_sci()
+</span></span><span style="display:flex;"><span>theme_sci&lt;-function(){
+</span></span><span style="display:flex;"><span>  theme(
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#960050;background-color:#1e0010">作图区底色</span>
+</span></span><span style="display:flex;"><span>    plot.background = element_rect(fill=<span style="color:#e6db74">&#34;NA&#34;</span>,color=<span style="color:#e6db74">&#34;NA&#34;</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#960050;background-color:#1e0010">图形内颜色</span>
+</span></span><span style="display:flex;"><span>    panel.background = element_rect(fill=<span style="color:#e6db74">&#34;white&#34;</span>,colour = <span style="color:#e6db74">&#34;black&#34;</span>,size = <span style="color:#ae81ff">1.1</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#960050;background-color:#1e0010">去除网格线</span>
+</span></span><span style="display:flex;"><span>    panel.grid = element_blank(),
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#960050;background-color:#1e0010">刻度线</span>
+</span></span><span style="display:flex;"><span>    axis.ticks.length = unit(-<span style="color:#ae81ff">0.2</span>,<span style="color:#e6db74">&#34;cm&#34;</span>), <span style="color:#960050;background-color:#1e0010">#刻度线粗细</span>
+</span></span><span style="display:flex;"><span>    axis.ticks=element_line(size=<span style="color:#ae81ff">1</span>), <span style="color:#960050;background-color:#1e0010">#刻度线长度</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#960050;background-color:#1e0010">刻度线标签</span>
+</span></span><span style="display:flex;"><span>    axis.text=element_text(size=<span style="color:#ae81ff">12</span>,color=<span style="color:#e6db74">&#34;black&#34;</span>), <span style="color:#960050;background-color:#1e0010">#刻度文本大小</span>
+</span></span><span style="display:flex;"><span>    axis.text.x = element_text(margin = unit(c(<span style="color:#ae81ff">0.4</span>, <span style="color:#ae81ff">0.5</span>, <span style="color:#ae81ff">0.2</span>, <span style="color:#ae81ff">0.5</span>), <span style="color:#960050;background-color:#1e0010">&#39;</span>cm<span style="color:#960050;background-color:#1e0010">&#39;</span>)),
+</span></span><span style="display:flex;"><span>    axis.text.y = element_text(margin = unit(c(<span style="color:#ae81ff">0.5</span>, <span style="color:#ae81ff">0.4</span>, <span style="color:#ae81ff">0.5</span>, <span style="color:#ae81ff">0.3</span>), <span style="color:#960050;background-color:#1e0010">&#39;</span>cm<span style="color:#960050;background-color:#1e0010">&#39;</span>)),
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#960050;background-color:#1e0010">坐标轴线</span>
+</span></span><span style="display:flex;"><span>    axis.line=element_line(color=NA),
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#960050;background-color:#1e0010">坐标轴标签</span>
+</span></span><span style="display:flex;"><span>    axis.title = element_text(size=<span style="color:#ae81ff">14</span>),
+</span></span><span style="display:flex;"><span>    axis.title.x =element_text(margin = unit(c(<span style="color:#ae81ff">0.2</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0.5</span>, <span style="color:#ae81ff">0</span>), <span style="color:#960050;background-color:#1e0010">&#39;</span>cm<span style="color:#960050;background-color:#1e0010">&#39;</span>)),
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#960050;background-color:#1e0010">图例</span>
+</span></span><span style="display:flex;"><span>    legend.key = element_rect(fill=NA,colour = NA),
+</span></span><span style="display:flex;"><span>    legend.text=element_text(size=<span style="color:#ae81ff">12</span>),
+</span></span><span style="display:flex;"><span>    legend.title=element_text(size=<span style="color:#ae81ff">13</span>),
+</span></span><span style="display:flex;"><span>    legend.position = c(<span style="color:#ae81ff">0.99</span>,<span style="color:#ae81ff">0.99</span>),
+</span></span><span style="display:flex;"><span>    legend.justification = c(<span style="color:#ae81ff">0.99</span>,<span style="color:#ae81ff">0.99</span>),
+</span></span><span style="display:flex;"><span>    strip.text=element_text(size=<span style="color:#ae81ff">20</span>))
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+    </article>
+  </div>
+
+  
+  
+  
+  <script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-123456789-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+<script>
+window.addEventListener("load", function(){
+window.cookieconsent.initialise({
+  "palette": {
+    "popup": {
+      "background": "#216942",
+      "text": "#b2d192"
+    },
+    "button": {
+      "background": "#afed71"
+    }
+  }
+})});
+</script>
+
+</body>
+
+</html>

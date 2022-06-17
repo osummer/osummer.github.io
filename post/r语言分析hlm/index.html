@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <meta name="generator" content="Hugo 0.101.0" />
+
+  
+  <meta name="description" content="Some description">
+  
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="https://osummer.github.io/apple-touch-icon.png">
+
+  
+  <link rel="icon" type="image/png" sizes="32x32" href="https://osummer.github.io/favicon-32x32.png">
+
+  
+  <link rel="icon" type="image/png" sizes="16x16" href="https://osummer.github.io/favicon-16x16.png">
+
+  
+  <link rel="manifest" href="https://osummer.github.io/site.webmanifest">
+
+  
+  <link rel="mask-icon" href="https://osummer.github.io/safari-pinned-tab.svg" color="#5bbad5">
+
+  <meta name="msapplication-TileColor" content="#da532c">
+
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <link rel="stylesheet" href="https://osummer.github.io/css/bootstrap.min.css" />
+
+  
+  <title>R语言分析HLM | 学海无涯</title>
+  
+
+  <style>
+body {
+  min-width: 300px;
+}
+
+.custom-navbar {
+  margin-bottom: 1em;
+  height: 60px;
+}
+
+.custom-navbar a {
+  display: inline-block; 
+  padding: 18px 0;
+  margin-right: 1em; 
+  font-weight: bold; 
+}
+
+.custom-navbar a:hover,
+.custom-navbar a:focus {
+  text-decoration: none; 
+}
+
+@media print {
+  .custom-navbar {
+    display: none;
+  }
+}
+
+article {
+  padding-bottom: 1em;
+}
+
+img {
+  max-width: 100%;
+}
+
+
+body {
+  background-color: #fff;
+}
+
+
+
+body {
+  color: #212529;
+}
+
+
+
+a {
+  color: #007bff;
+}
+
+
+
+a:hover,
+a:focus {
+  color: #0056b3;
+}
+
+
+
+.custom-navbar {
+  background-color: #1E90FF;
+}
+
+
+
+.custom-navbar a {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+
+
+.custom-navbar a:hover,
+.custom-navbar a:focus {
+  color: rgba(255, 255, 255, 1);
+}
+
+
+
+.container {
+  max-width: 800px;
+}
+
+
+
+pre {
+  display: block;
+  padding: 9.5px;
+  word-break: break-all;
+  word-wrap: break-word;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+pre code {
+  padding: 0;
+  font-size: inherit;
+  color: inherit; 
+  white-space: pre-wrap;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+}
+
+code {
+  padding: 2px 4px;
+  color: inherit; 
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: .9em;
+}
+
+
+
+blockquote,
+.blockquote {
+  padding: 10px 20px;
+  margin: 0 0 20px;
+  font-size: 1em;
+  border-left: 5px solid #6c757d;
+}
+
+</style>
+</head>
+
+<body>
+  <nav class="custom-navbar">
+  <div class="container">
+    
+    <a href="/post/">Posts</a>
+    
+    <a href="/tags/">Tags</a>
+    
+    <a href="/about/">About</a>
+    
+    <a href="/index.xml">RSS</a>
+    
+  </div>
+</nav>
+  
+  <div class="container">
+    <article>
+      <h1>R语言分析HLM</h1>
+<p>
+  <small class="text-secondary">
+  
+  
+  Jun 17, 2022
+  </small>
+  
+
+<small><code><a href="https://osummer.github.io/tags/r">R</a></code></small>
+
+
+<small><code><a href="https://osummer.github.io/tags/%E7%BB%9F%E8%AE%A1">统计</a></code></small>
+
+  
+
+</p>
+<h1 id="r语言分析多层线性模型">R语言分析多层线性模型</h1>
+<h2 id="数据说明">数据说明</h2>
+<p><strong>ham</strong>数据集描述的是不同信息给消费者对火腿的喜好的影响。其中两种火腿来自西班牙，两种来自挪威，每一种来源都代表着不同的含盐量和不同的存放时间。
+关于起源的信息是这样给出的，即真实的信息，也有虚假的信息。本质上是一个有4个样本和2个信息等级的4x2设计。共有81名消费者参与了这项研究。数据集中有如下变量：</p>
+<ul>
+<li>Consumer:factor with 81 levels: numbering identifying consumers.</li>
+<li>Product:factor with four levels.</li>
+<li>Informed.liking:numeric: hedonic liking for the products.</li>
+<li>Information:factor with two levels.</li>
+<li>Gender:factor with two levels.</li>
+<li>Age:numeric: age of Consumer.</li>
+</ul>
+<h2 id="模型结构">模型结构</h2>
+<ul>
+<li><strong>固定截距（fixed intercept）</strong>：固定截距其实并不存在于HLM的模型中，而是“降级”到了一般的最小二乘法回归（OLS），也就是我们最常用的GLM回归分析。<br>
+→ lm(Y ~ <strong>1</strong></li>
+</ul>
+<h2 id="r语言代码">R语言代码</h2>
+<p>R语言的回归方程表达式中，~的前后分别为结果变量Y和预测变量X，例如Y ~ 1 + X1 + X2，其中表示截距的“1”可以省略。需要注意的是，**因变量Y只能是Level 1变量，**不能是Level 2变量。</p>
+<ul>
+<li>模型拟合</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>fm <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lmer</span>(Informed.liking <span style="color:#f92672">~</span> Product<span style="color:#f92672">*</span>Information<span style="color:#f92672">*</span>Gender<span style="color:#f92672">*</span>Age <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>             <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span><span style="color:#f92672">|</span>Consumer) <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span><span style="color:#f92672">|</span>Consumer<span style="color:#f92672">:</span>Product) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>             (<span style="color:#ae81ff">1</span><span style="color:#f92672">|</span>Consumer<span style="color:#f92672">:</span>Information),
+</span></span><span style="display:flex;"><span>           data<span style="color:#f92672">=</span>ham)
+</span></span></code></pre></div><ul>
+<li>逐步回归</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>step_fm <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">step</span>(fm)
+</span></span><span style="display:flex;"><span>step_fm <span style="color:#75715e"># Display elimination results</span>
+</span></span><span style="display:flex;"><span>final_fm <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">get_model</span>(step_fm)
+</span></span></code></pre></div><ul>
+<li>结果分析</li>
+</ul>
+<h3 id="拟合结果">拟合结果</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">summary</span>(final_fm)
+</span></span><span style="display:flex;"><span>Linear mixed model fit by REML. t<span style="color:#f92672">-</span>tests use Satterthwaite<span style="color:#e6db74">&#39;s method [&#39;</span>lmerModLmerTest<span style="color:#e6db74">&#39;</span><span style="color:#960050;background-color:#1e0010">]</span>
+</span></span><span style="display:flex;"><span>Formula<span style="color:#f92672">:</span> Informed.liking <span style="color:#f92672">~</span> Product <span style="color:#f92672">+</span> Information <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> Consumer) <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span>  
+</span></span><span style="display:flex;"><span>    Consumer<span style="color:#f92672">:</span>Product)
+</span></span><span style="display:flex;"><span>   Data<span style="color:#f92672">:</span> ham
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>REML criterion at convergence<span style="color:#f92672">:</span> <span style="color:#ae81ff">2709.1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Scaled residuals<span style="color:#f92672">:</span> 
+</span></span><span style="display:flex;"><span>    Min      <span style="color:#ae81ff">1</span>Q  Median      <span style="color:#ae81ff">3</span>Q     Max 
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">-3.0669</span> <span style="color:#ae81ff">-0.4859</span>  <span style="color:#ae81ff">0.0186</span>  <span style="color:#ae81ff">0.4790</span>  <span style="color:#ae81ff">3.2523</span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Random effects<span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span> Groups           Name        Variance Std.Dev.
+</span></span><span style="display:flex;"><span> Consumer<span style="color:#f92672">:</span><span style="color:#a6e22e">Product </span>(Intercept) <span style="color:#ae81ff">3.1539</span>   <span style="color:#ae81ff">1.7759</span>  
+</span></span><span style="display:flex;"><span> <span style="color:#a6e22e">Consumer         </span>(Intercept) <span style="color:#ae81ff">0.3736</span>   <span style="color:#ae81ff">0.6112</span>  
+</span></span><span style="display:flex;"><span> Residual                     <span style="color:#ae81ff">1.6841</span>   <span style="color:#ae81ff">1.2977</span>  
+</span></span><span style="display:flex;"><span>Number of obs<span style="color:#f92672">:</span> <span style="color:#ae81ff">648</span>, groups<span style="color:#f92672">:</span>  Consumer<span style="color:#f92672">:</span>Product, <span style="color:#ae81ff">324</span>; Consumer, <span style="color:#ae81ff">81</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Fixed effects<span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>             Estimate Std. Error       df t value <span style="color:#a6e22e">Pr</span>(<span style="color:#f92672">&gt;|</span>t<span style="color:#f92672">|</span>)    
+</span></span><span style="display:flex;"><span>(Intercept)    <span style="color:#ae81ff">5.7083</span>     <span style="color:#ae81ff">0.2378</span> <span style="color:#ae81ff">343.2609</span>  <span style="color:#ae81ff">24.006</span>   <span style="color:#f92672">&lt;</span><span style="color:#ae81ff">2e-16</span> <span style="color:#f92672">***</span>
+</span></span><span style="display:flex;"><span>Product2      <span style="color:#ae81ff">-0.7037</span>     <span style="color:#ae81ff">0.3141</span> <span style="color:#ae81ff">240.0000</span>  <span style="color:#ae81ff">-2.240</span>    <span style="color:#ae81ff">0.026</span> <span style="color:#f92672">*</span>  
+</span></span><span style="display:flex;"><span>Product3       <span style="color:#ae81ff">0.2840</span>     <span style="color:#ae81ff">0.3141</span> <span style="color:#ae81ff">240.0000</span>   <span style="color:#ae81ff">0.904</span>    <span style="color:#ae81ff">0.367</span>    
+</span></span><span style="display:flex;"><span>Product4       <span style="color:#ae81ff">0.1173</span>     <span style="color:#ae81ff">0.3141</span> <span style="color:#ae81ff">240.0000</span>   <span style="color:#ae81ff">0.373</span>    <span style="color:#ae81ff">0.709</span>    
+</span></span><span style="display:flex;"><span>Information2   <span style="color:#ae81ff">0.2006</span>     <span style="color:#ae81ff">0.1020</span> <span style="color:#ae81ff">323.0000</span>   <span style="color:#ae81ff">1.968</span>    <span style="color:#ae81ff">0.050</span> <span style="color:#f92672">*</span>  
+</span></span><span style="display:flex;"><span><span style="color:#f92672">---</span>
+</span></span><span style="display:flex;"><span>Signif. codes<span style="color:#f92672">:</span>  <span style="color:#ae81ff">0</span> ‘<span style="color:#f92672">***</span>’ <span style="color:#ae81ff">0.001</span> ‘<span style="color:#f92672">**</span>’ <span style="color:#ae81ff">0.01</span> ‘<span style="color:#f92672">*</span>’ <span style="color:#ae81ff">0.05</span> ‘.’ <span style="color:#ae81ff">0.1</span> ‘ ’ <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Correlation of Fixed Effects<span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>            (Intr) Prdct2 Prdct3 Prdct4
+</span></span><span style="display:flex;"><span>Product2    <span style="color:#ae81ff">-0.660</span>                     
+</span></span><span style="display:flex;"><span>Product3    <span style="color:#ae81ff">-0.660</span>  <span style="color:#ae81ff">0.500</span>              
+</span></span><span style="display:flex;"><span>Product4    <span style="color:#ae81ff">-0.660</span>  <span style="color:#ae81ff">0.500</span>  <span style="color:#ae81ff">0.500</span>       
+</span></span><span style="display:flex;"><span>Informatin2 <span style="color:#ae81ff">-0.214</span>  <span style="color:#ae81ff">0.000</span>  <span style="color:#ae81ff">0.000</span>  <span style="color:#ae81ff">0.000</span>
+</span></span></code></pre></div><p>好的显示效果：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">HLM_summary</span>(final_fm)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Hierarchical Linear <span style="color:#a6e22e">Model </span>(HLM)
+</span></span><span style="display:flex;"><span>(also known as) Linear Mixed <span style="color:#a6e22e">Model </span>(LMM)
+</span></span><span style="display:flex;"><span>(also known as) Multilevel Linear <span style="color:#a6e22e">Model </span>(MLM)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Model Information<span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>Formula<span style="color:#f92672">:</span> Informed.liking <span style="color:#f92672">~</span> Product <span style="color:#f92672">+</span> Information <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> Consumer) <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> Consumer<span style="color:#f92672">:</span>Product)
+</span></span><span style="display:flex;"><span>Level<span style="color:#ae81ff">-1</span> Observations<span style="color:#f92672">:</span> N <span style="color:#f92672">=</span> <span style="color:#ae81ff">648</span>
+</span></span><span style="display:flex;"><span>Level<span style="color:#ae81ff">-2</span> Groups<span style="color:#f92672">/</span>Clusters<span style="color:#f92672">:</span> Consumer<span style="color:#f92672">:</span>Product, <span style="color:#ae81ff">324</span>; Consumer, <span style="color:#ae81ff">81</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Model Fit<span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>AIC <span style="color:#f92672">=</span> <span style="color:#ae81ff">2725.074</span>
+</span></span><span style="display:flex;"><span>BIC <span style="color:#f92672">=</span> <span style="color:#ae81ff">2760.865</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">R_</span>(m)² <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.02833</span>  (Marginal R²<span style="color:#f92672">:</span> fixed effects)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">R_</span>(c)² <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.68600</span>  (Conditional R²<span style="color:#f92672">:</span> fixed <span style="color:#f92672">+</span> random effects)
+</span></span><span style="display:flex;"><span>Omega² <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.81103</span>  (<span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> proportion of unexplained variance)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ANOVA Table<span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>───────────────────────────────────────────────────────────────
+</span></span><span style="display:flex;"><span>               Sum Sq  Mean Sq  NumDF   DenDF     F      p     
+</span></span><span style="display:flex;"><span>───────────────────────────────────────────────────────────────
+</span></span><span style="display:flex;"><span>Product         <span style="color:#ae81ff">19.35</span>     <span style="color:#ae81ff">6.45</span>   <span style="color:#ae81ff">3.00</span>  <span style="color:#ae81ff">240.00</span>  <span style="color:#ae81ff">3.83</span>   <span style="color:#ae81ff">.010</span>  <span style="color:#f92672">*</span>  
+</span></span><span style="display:flex;"><span>Information      <span style="color:#ae81ff">6.52</span>     <span style="color:#ae81ff">6.52</span>   <span style="color:#ae81ff">1.00</span>  <span style="color:#ae81ff">323.00</span>  <span style="color:#ae81ff">3.87</span>   <span style="color:#ae81ff">.050</span>  <span style="color:#f92672">*</span>  
+</span></span><span style="display:flex;"><span>───────────────────────────────────────────────────────────────
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Fixed Effects<span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>Unstandardized <span style="color:#a6e22e">Coefficients </span>(b or γ)<span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>Outcome Variable<span style="color:#f92672">:</span> Informed.liking
+</span></span><span style="display:flex;"><span>───────────────────────────────────────────────────────────────────────────
+</span></span><span style="display:flex;"><span>                   b<span style="color:#f92672">/</span>γ     S.E.      t     df      p        [95<span style="color:#f92672">% CI of b/γ]
+</span></span></span><span style="display:flex;"><span><span style="color:#f92672">───────────────────────────────────────────────────────────────────────────
+</span></span></span><span style="display:flex;"><span><span style="color:#f92672">(Intercept)      5.708  (0.238)  24.01  343.3  &lt;.001  ***  [ 5.241,  6.176]
+</span></span></span><span style="display:flex;"><span><span style="color:#f92672">Product2        -0.704  (0.314)  -2.24  240.0   .026  *    [-1.322, -0.085]
+</span></span></span><span style="display:flex;"><span><span style="color:#f92672">Product3         0.284  (0.314)   0.90  240.0   .367       [-0.335,  0.903]
+</span></span></span><span style="display:flex;"><span><span style="color:#f92672">Product4         0.117  (0.314)   0.37  240.0   .709       [-0.501,  0.736]
+</span></span></span><span style="display:flex;"><span><span style="color:#f92672">Information2     0.201  (0.102)   1.97  323.0   .050  *    [ 0.000,  0.401]
+</span></span></span><span style="display:flex;"><span><span style="color:#f92672">───────────────────────────────────────────────────────────────────────────
+</span></span></span><span style="display:flex;"><span><span style="color:#f92672">&#39;df&#39; is estimated by Satterthwaite approximation.
+</span></span></span><span style="display:flex;"><span><span style="color:#f92672">
+</span></span></span><span style="display:flex;"><span><span style="color:#f92672">Standardized Coefficients (β):
+</span></span></span><span style="display:flex;"><span><span style="color:#f92672">Outcome Variable: Informed.liking
+</span></span></span><span style="display:flex;"><span><span style="color:#f92672">───────────────────────────────────────────────────────────────────────────
+</span></span></span><span style="display:flex;"><span><span style="color:#f92672">                     β     S.E.      t     df      p          [95%</span> CI of β]
+</span></span><span style="display:flex;"><span>───────────────────────────────────────────────────────────────────────────
+</span></span><span style="display:flex;"><span>Product2        <span style="color:#ae81ff">-0.132</span>  (<span style="color:#ae81ff">0.059</span>)  <span style="color:#ae81ff">-2.24</span>  <span style="color:#ae81ff">240.0</span>   <span style="color:#ae81ff">.026</span>  <span style="color:#f92672">*</span>    [<span style="color:#ae81ff">-0.249</span>, <span style="color:#ae81ff">-0.016</span>]
+</span></span><span style="display:flex;"><span>Product3         <span style="color:#ae81ff">0.053</span>  (<span style="color:#ae81ff">0.059</span>)   <span style="color:#ae81ff">0.90</span>  <span style="color:#ae81ff">240.0</span>   <span style="color:#ae81ff">.367</span>       [<span style="color:#ae81ff">-0.063</span>,  <span style="color:#ae81ff">0.170</span>]
+</span></span><span style="display:flex;"><span>Product4         <span style="color:#ae81ff">0.022</span>  (<span style="color:#ae81ff">0.059</span>)   <span style="color:#ae81ff">0.37</span>  <span style="color:#ae81ff">240.0</span>   <span style="color:#ae81ff">.709</span>       [<span style="color:#ae81ff">-0.094</span>,  <span style="color:#ae81ff">0.138</span>]
+</span></span><span style="display:flex;"><span>Information2     <span style="color:#ae81ff">0.044</span>  (<span style="color:#ae81ff">0.022</span>)   <span style="color:#ae81ff">1.97</span>  <span style="color:#ae81ff">323.0</span>   <span style="color:#ae81ff">.050</span>  <span style="color:#f92672">*</span>    [ <span style="color:#ae81ff">0.000</span>,  <span style="color:#ae81ff">0.087</span>]
+</span></span><span style="display:flex;"><span>───────────────────────────────────────────────────────────────────────────
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Random Effects<span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>───────────────────────────────────────────────────────
+</span></span><span style="display:flex;"><span>  Cluster           K    Parameter    Variance      ICC
+</span></span><span style="display:flex;"><span>───────────────────────────────────────────────────────
+</span></span><span style="display:flex;"><span>  Consumer<span style="color:#f92672">:</span>Product  <span style="color:#ae81ff">324</span>  (Intercept)   <span style="color:#ae81ff">3.15390</span>  <span style="color:#ae81ff">0.60517</span>
+</span></span><span style="display:flex;"><span>  Consumer           <span style="color:#ae81ff">81</span>  (Intercept)   <span style="color:#ae81ff">0.37357</span>  <span style="color:#ae81ff">0.07168</span>
+</span></span><span style="display:flex;"><span>  Residual                             <span style="color:#ae81ff">1.68415</span>         
+</span></span><span style="display:flex;"><span>───────────────────────────────────────────────────────
+</span></span></code></pre></div><h3 id="方差分析">方差分析</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">anova</span>(final_fm)
+</span></span><span style="display:flex;"><span>Type III Analysis of Variance Table with Satterthwaite<span style="color:#e6db74">&#39;</span><span style="color:#960050;background-color:#1e0010">s method</span>
+</span></span><span style="display:flex;"><span>             Sum Sq Mean Sq NumDF DenDF F value  <span style="color:#a6e22e">Pr</span>(<span style="color:#f92672">&gt;</span>F)  
+</span></span><span style="display:flex;"><span>Product     <span style="color:#ae81ff">19.3466</span>  <span style="color:#ae81ff">6.4489</span>     <span style="color:#ae81ff">3</span>   <span style="color:#ae81ff">240</span>  <span style="color:#ae81ff">3.8291</span> <span style="color:#ae81ff">0.01048</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span>Information  <span style="color:#ae81ff">6.5201</span>  <span style="color:#ae81ff">6.5201</span>     <span style="color:#ae81ff">1</span>   <span style="color:#ae81ff">323</span>  <span style="color:#ae81ff">3.8714</span> <span style="color:#ae81ff">0.04997</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">---</span>
+</span></span><span style="display:flex;"><span>Signif. codes<span style="color:#f92672">:</span>  <span style="color:#ae81ff">0</span> ‘<span style="color:#f92672">***</span>’ <span style="color:#ae81ff">0.001</span> ‘<span style="color:#f92672">**</span>’ <span style="color:#ae81ff">0.01</span> ‘<span style="color:#f92672">*</span>’ <span style="color:#ae81ff">0.05</span> ‘.’ <span style="color:#ae81ff">0.1</span> ‘ ’ <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">ranova</span>(final_fm)
+</span></span><span style="display:flex;"><span>ANOVA<span style="color:#f92672">-</span>like table for random<span style="color:#f92672">-</span>effects<span style="color:#f92672">:</span> Single term deletions
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Model<span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>Informed.liking <span style="color:#f92672">~</span> Product <span style="color:#f92672">+</span> Information <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> Consumer) <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> Consumer<span style="color:#f92672">:</span>Product)
+</span></span><span style="display:flex;"><span>                       npar  logLik    AIC     LRT Df <span style="color:#a6e22e">Pr</span>(<span style="color:#f92672">&gt;</span>Chisq)    
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span>none<span style="color:#f92672">&gt;</span>                    <span style="color:#ae81ff">8</span> <span style="color:#ae81ff">-1354.5</span> <span style="color:#ae81ff">2725.1</span>                          
+</span></span><span style="display:flex;"><span>(<span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> Consumer)            <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">-1356.1</span> <span style="color:#ae81ff">2726.3</span>   <span style="color:#ae81ff">3.184</span>  <span style="color:#ae81ff">1</span>    <span style="color:#ae81ff">0.07437</span> <span style="color:#a6e22e">.  
+</span></span></span><span style="display:flex;"><span><span style="color:#a6e22e"></span>(<span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> Consumer<span style="color:#f92672">:</span>Product)    <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">-1436.3</span> <span style="color:#ae81ff">2886.6</span> <span style="color:#ae81ff">163.498</span>  <span style="color:#ae81ff">1</span>    <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2e-16</span> <span style="color:#f92672">***</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">---</span>
+</span></span><span style="display:flex;"><span>Signif. codes<span style="color:#f92672">:</span>  <span style="color:#ae81ff">0</span> ‘<span style="color:#f92672">***</span>’ <span style="color:#ae81ff">0.001</span> ‘<span style="color:#f92672">**</span>’ <span style="color:#ae81ff">0.01</span> ‘<span style="color:#f92672">*</span>’ <span style="color:#ae81ff">0.05</span> ‘.’ <span style="color:#ae81ff">0.1</span> ‘ ’ <span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><h3 id="均值比较">均值比较</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">ls_means</span>(final_fm)
+</span></span><span style="display:flex;"><span>Least Squares Means table<span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>             Estimate Std. Error    df t value   lower   upper  <span style="color:#a6e22e">Pr</span>(<span style="color:#f92672">&gt;|</span>t<span style="color:#f92672">|</span>)    
+</span></span><span style="display:flex;"><span>Product1      <span style="color:#ae81ff">5.80864</span>    <span style="color:#ae81ff">0.23226</span> <span style="color:#ae81ff">313.1</span>  <span style="color:#ae81ff">25.009</span> <span style="color:#ae81ff">5.35165</span> <span style="color:#ae81ff">6.26563</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2.2e-16</span> <span style="color:#f92672">***</span>
+</span></span><span style="display:flex;"><span>Product2      <span style="color:#ae81ff">5.10494</span>    <span style="color:#ae81ff">0.23226</span> <span style="color:#ae81ff">313.1</span>  <span style="color:#ae81ff">21.979</span> <span style="color:#ae81ff">4.64795</span> <span style="color:#ae81ff">5.56193</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2.2e-16</span> <span style="color:#f92672">***</span>
+</span></span><span style="display:flex;"><span>Product3      <span style="color:#ae81ff">6.09259</span>    <span style="color:#ae81ff">0.23226</span> <span style="color:#ae81ff">313.1</span>  <span style="color:#ae81ff">26.232</span> <span style="color:#ae81ff">5.63560</span> <span style="color:#ae81ff">6.54958</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2.2e-16</span> <span style="color:#f92672">***</span>
+</span></span><span style="display:flex;"><span>Product4      <span style="color:#ae81ff">5.92593</span>    <span style="color:#ae81ff">0.23226</span> <span style="color:#ae81ff">313.1</span>  <span style="color:#ae81ff">25.514</span> <span style="color:#ae81ff">5.46894</span> <span style="color:#ae81ff">6.38291</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2.2e-16</span> <span style="color:#f92672">***</span>
+</span></span><span style="display:flex;"><span>Information1  <span style="color:#ae81ff">5.63272</span>    <span style="color:#ae81ff">0.13980</span> <span style="color:#ae81ff">105.8</span>  <span style="color:#ae81ff">40.291</span> <span style="color:#ae81ff">5.35554</span> <span style="color:#ae81ff">5.90989</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2.2e-16</span> <span style="color:#f92672">***</span>
+</span></span><span style="display:flex;"><span>Information2  <span style="color:#ae81ff">5.83333</span>    <span style="color:#ae81ff">0.13980</span> <span style="color:#ae81ff">105.8</span>  <span style="color:#ae81ff">41.726</span> <span style="color:#ae81ff">5.55616</span> <span style="color:#ae81ff">6.11051</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2.2e-16</span> <span style="color:#f92672">***</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">---</span>
+</span></span><span style="display:flex;"><span>Signif. codes<span style="color:#f92672">:</span>  <span style="color:#ae81ff">0</span> ‘<span style="color:#f92672">***</span>’ <span style="color:#ae81ff">0.001</span> ‘<span style="color:#f92672">**</span>’ <span style="color:#ae81ff">0.01</span> ‘<span style="color:#f92672">*</span>’ <span style="color:#ae81ff">0.05</span> ‘.’ <span style="color:#ae81ff">0.1</span> ‘ ’ <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  Confidence level<span style="color:#f92672">:</span> <span style="color:#ae81ff">95</span><span style="color:#f92672">%
+</span></span></span><span style="display:flex;"><span><span style="color:#f92672">  Degrees of freedom method: Satterthwaite 
+</span></span></span><span style="display:flex;"><span><span style="color:#f92672">
+</span></span></span><span style="display:flex;"><span><span style="color:#f92672">
+</span></span></span><span style="display:flex;"><span><span style="color:#f92672">&gt; ls_means(final_fm, which = &#34;Product&#34;, pairwise = TRUE)
+</span></span></span><span style="display:flex;"><span><span style="color:#f92672">Least Squares Means table:
+</span></span></span><span style="display:flex;"><span><span style="color:#f92672">
+</span></span></span><span style="display:flex;"><span><span style="color:#f92672">                     Estimate Std. Error  df t value     lower     upper Pr(&gt;|t|)   
+</span></span></span><span style="display:flex;"><span><span style="color:#f92672">Product1 - Product2  0.703704   0.314112 240  2.2403  0.084936  1.322471 0.025987 * 
+</span></span></span><span style="display:flex;"><span><span style="color:#f92672">Product1 - Product3 -0.283951   0.314112 240 -0.9040 -0.902718  0.334817 0.366912   
+</span></span></span><span style="display:flex;"><span><span style="color:#f92672">Product1 - Product4 -0.117284   0.314112 240 -0.3734 -0.736051  0.501484 0.709193   
+</span></span></span><span style="display:flex;"><span><span style="color:#f92672">Product2 - Product3 -0.987654   0.314112 240 -3.1443 -1.606422 -0.368887 0.001875 **
+</span></span></span><span style="display:flex;"><span><span style="color:#f92672">Product2 - Product4 -0.820988   0.314112 240 -2.6137 -1.439755 -0.202220 0.009523 **
+</span></span></span><span style="display:flex;"><span><span style="color:#f92672">Product3 - Product4  0.166667   0.314112 240  0.5306 -0.452101  0.785434 0.596189   
+</span></span></span><span style="display:flex;"><span><span style="color:#f92672">---
+</span></span></span><span style="display:flex;"><span><span style="color:#f92672">Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+</span></span></span><span style="display:flex;"><span><span style="color:#f92672">
+</span></span></span><span style="display:flex;"><span><span style="color:#f92672">  Confidence level: 95%</span>
+</span></span><span style="display:flex;"><span>  Degrees of freedom method<span style="color:#f92672">:</span> Satterthwaite 
+</span></span></code></pre></div><h3 id="结果解读">结果解读</h3>
+<p>固定部分结果与ANOVA类似，主要是随机部分：</p>
+<ul>
+<li>variance:</li>
+<li>sd: variance的开方（sqrt(variance)）</li>
+<li>ICC:</li>
+</ul>
+
+    </article>
+  </div>
+
+  
+  
+  
+  <script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-123456789-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+<script>
+window.addEventListener("load", function(){
+window.cookieconsent.initialise({
+  "palette": {
+    "popup": {
+      "background": "#216942",
+      "text": "#b2d192"
+    },
+    "button": {
+      "background": "#afed71"
+    }
+  }
+})});
+</script>
+
+</body>
+
+</html>

@@ -8,13 +8,34 @@
     <language>en-us</language>
     <lastBuildDate>Fri, 17 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://osummer.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>easyANOVA</title>
+      <link>https://osummer.github.io/post/easyanova/</link>
+      <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://osummer.github.io/post/easyanova/</guid>
+      <description>多重比较 Duncan_Test #&amp;#39; Duncan_Test #&amp;#39; @param data dataset #&amp;#39; @param xx x-variable #&amp;#39; @param yy y-variable #&amp;#39; #&amp;#39; @return data frame #&amp;#39; @export #&amp;#39; #&amp;#39; @import dplyr #&amp;#39; @import tibble #&amp;#39; @import ggplot2 #&amp;#39; @import tidyr #&amp;#39; @import patchwork #&amp;#39; @examples #&amp;#39; Duncan_Test(iris,Species,Sepal.Length) Duncan_Test&amp;lt;-function(data,xx,yy){ trt&amp;lt;- as.character(substitute(xx)) aov1&amp;lt;-aov(formula(substitute(yy~xx)),data) res &amp;lt;- aov1 %&amp;gt;% agricolae::duncan.test(trt=trt) res_mean &amp;lt;- res$means %&amp;gt;% as_tibble(rownames=trt) %&amp;gt;% select(1:4) res_group &amp;lt;- res$groups %&amp;gt;% as_tibble(rownames=trt)%&amp;gt;% select(1,3) multicom_result &amp;lt;- res_mean %&amp;gt;% left_join(res_group,by=trt) result&amp;lt;-list(anova_test=summary(aov1), multi_test=multicom_result) return(result) } LSD_Test #&amp;#39; LSD_Test #&amp;#39; @param data dataset #&amp;#39; @param xx x-variable #&amp;#39; @param yy y-variable #&amp;#39; #&amp;#39; @return data frame #&amp;#39; @export #&amp;#39; #&amp;#39; @examples #&amp;#39; LSD_Test(iris,Species,Sepal.</description>
+    </item>
+    
+    <item>
+      <title>easystats</title>
+      <link>https://osummer.github.io/post/easystats/</link>
+      <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://osummer.github.io/post/easystats/</guid>
+      <description>参数估计 parameters 介绍 用户获取模型的相关参数，对参数进行估计、降维、筛选 等。
+Obtain a table containing all information about the parameters of your models. Beyond computing p-values , CIs , Bayesian indices and other measures for a wide variety of models, this package implements features like bootstrapping of parameters and models, feature reduction (feature extraction and variable selection), or tools for data reduction like functions to perform cluster, factor or principal component analysis.
+主要功能有：
+Summary of Model Parameters Standardized Model Parameters Robust Estimation of Standard Errors, Confidence Intervals and p-values Model Parameters and Missing Data Feature reduction (PCA, cMDS, ICA…) Structural models (EFA, CFA, SEM…) Parameters selection A Practical Guide for Panel Data Analysis</description>
+    </item>
+    
+    <item>
       <title>ggplot2中的theme函数</title>
       <link>https://osummer.github.io/post/ggplot2%E4%B8%AD%E7%9A%84theme%E5%87%BD%E6%95%B0/</link>
       <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
       
       <guid>https://osummer.github.io/post/ggplot2%E4%B8%AD%E7%9A%84theme%E5%87%BD%E6%95%B0/</guid>
       <description>ggplot2-theme函数 1 theme函数定义内容 plot区域 panel区域 axis坐标轴 legend图例 strip分面栏 2 theme中使用的元素 rect line text FAQ 3 坐标轴 3.1 坐标轴线格式 axis.line=element_line(color,size,linetype) 3.2 坐标刻度线格式 axis.ticks=element_line() 3.3 坐标刻度线方向 负数向内，正数向外
-axis.ticks.length=unit(2,&amp;#34;mm&amp;#34;) 3.4 刻度线标签文本 axis.text=element_text(color,size,face,family,margin,vjust,hjust,angle) 3.5 坐标轴标题文本 axis.title=element_text(color,size,face,family,margin,vjust,hjust,angle) 4 图例legend 4.1 图例位置 #pannel外legend.postion=&amp;#34;right&amp;#34; #left, top, bottom#pannel内，如右上角legend.position = c(0.9,0.9)legend.justification = c(0.9,0.9) 4.2 图列内元素方向分布 legend.direction = &amp;#34;vertical&amp;#34;, #legend内方向legend.spacing.x = unit(1,&amp;#34;cm&amp;#34;),legend.spacing.y = unit(1,&amp;#34;cm&amp;#34;), 4.3 多组图例方向分布 legend.box=&amp;#34;horizontal&amp;#34;, #legend间排列legend.box.just=&amp;#34;bottom&amp;#34;, legend.box.spacing = unit(1,&amp;#34;cm&amp;#34;), 4.4 图例中文本格式 #标题文本legend.</description>
+axis.ticks.length=unit(2,&amp;#34;mm&amp;#34;) 3.4 刻度线标签文本 axis.text=element_text(color,size,face,family,margin,vjust,hjust,angle) 3.5 坐标轴标题文本 axis.title=element_text(color,size,face,family,margin,vjust,hjust,angle) 4 图例legend 4.1 图例位置 #pannel外 legend.postion=&amp;#34;right&amp;#34; #left, top, bottom #pannel内，如右上角 legend.position = c(0.9,0.9) legend.justification = c(0.9,0.9) 4.2 图列内元素方向分布 legend.direction = &amp;#34;vertical&amp;#34;, #legend内方向 legend.spacing.x = unit(1,&amp;#34;cm&amp;#34;), legend.spacing.y = unit(1,&amp;#34;cm&amp;#34;), 4.3 多组图例方向分布 legend.box=&amp;#34;horizontal&amp;#34;, #legend间排列 legend.box.just=&amp;#34;bottom&amp;#34;, legend.box.spacing = unit(1,&amp;#34;cm&amp;#34;), 4.4 图例中文本格式 #标题文本 legend.</description>
     </item>
     
     <item>
@@ -34,6 +55,101 @@ p=iris %&amp;gt;% ggplot(aes(x=Species,y=Sepal.Length))+ geom_boxplot(aes(fill=S
 h 色相，实际是色环角度0-360 c 饱和度，0-100 l 亮度，0-100 例如： p+scale_fill_hue(h=c(120,360)) p+scale_fill_hue(l=80)#设置亮度（l默认45） p+scale_fill_hue(l=30)#设置亮度（l默认45） p+scale_fill_hue(c=50)#设置饱和度（c默认100） p+scale_fill_hue(c=100)#设置饱和度（c默认100） 灰度系统scale_fill_grey() p+scale_fill_grey(start=0.2,end=0.8) 调色板scale_fill_brewer() RColorBrewer包中有多个色板可供选择：
 RColorBrewer::display.brewer.all() RColorBrewer中有3套色板，type参数，分别为：
 Sequential（seq）: 用于表示数值梯度，用于呈现有序的数值信息，数值越高颜色越深，越低颜色越浅。 qualitative(qual)：用于呈现分类信息，颜色之间一般对比鲜明。 diverging(div): 分歧，用于呈现有序/连续的数值信息，这些数值围绕着一个中心值，比中心值越大的方向用一种渐变色，比中心值越小用另一种渐变色。 对于离散变量映射，则有：</description>
+    </item>
+    
+    <item>
+      <title>github使用指南</title>
+      <link>https://osummer.github.io/post/github%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</link>
+      <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://osummer.github.io/post/github%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</guid>
+      <description>github使用指南 1. 新建账户与仓库 在github.com中 osummer 账户下新建 easyANOVA 仓库
+2. ssh公钥建立 首先在本地创建ssh key，在cmd中执行创建ssh key
+$ ssh-keygen -t rsa -C &amp;#34;your_email@youremail.com&amp;#34; your_email@youremail.com改为你在github上注册的邮箱，之后会要求确认路径和输入密码，我们这使用默认的一路回车就行。成功的话会在~/下生成.ssh文件夹，进去，打开id_rsa.pub，复制里面的key。
+3. ssh公钥上传 回到github上，进入 Account Settings（账户配置），左边选择SSH Keys，Add SSH Key,title随便填，粘贴在你电脑上生成的key。
+验证是否成功：
+$ ssh -T git@github.com 4. 本地仓库初始化与提交 设置信息
+$ git config --global user.name &amp;#34;your name&amp;#34; $ git config --global user.email &amp;#34;your_email@youremail.com&amp;#34; 进入要上传的仓库，右键git bash，添加远程地址：
+$ git remote add origin git@github.com:yourName/yourRepo.git 或者重新创建本地仓库：
+echo &amp;#34;# easyANOVA&amp;#34; &amp;gt;&amp;gt; README.md git init git add README.md git commit -m &amp;#34;first commit&amp;#34; git branch -M main git remote add origin https://github.</description>
+    </item>
+    
+    <item>
+      <title>github基本操作</title>
+      <link>https://osummer.github.io/post/github%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/</link>
+      <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://osummer.github.io/post/github%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/</guid>
+      <description>github使用指南 1. 新建账户与仓库 在github.com中 osummer 账户下新建 easyANOVA 仓库
+2. ssh公钥建立 首先在本地创建ssh key，在cmd中执行创建ssh key
+$ ssh-keygen -t rsa -C &amp;#34;your_email@youremail.com&amp;#34; your_email@youremail.com改为你在github上注册的邮箱，之后会要求确认路径和输入密码，我们这使用默认的一路回车就行。成功的话会在~/下生成.ssh文件夹，进去，打开id_rsa.pub，复制里面的key。
+3. ssh公钥上传 回到github上，进入 Account Settings（账户配置），左边选择SSH Keys，Add SSH Key,title随便填，粘贴在你电脑上生成的key。
+验证是否成功：
+$ ssh -T git@github.com 4. 本地仓库初始化与提交 设置信息
+$ git config --global user.name &amp;#34;your name&amp;#34; $ git config --global user.email &amp;#34;your_email@youremail.com&amp;#34; 进入要上传的仓库，右键git bash，添加远程地址：
+$ git remote add origin git@github.com:yourName/yourRepo.git 或者重新创建本地仓库：
+echo &amp;#34;# easyANOVA&amp;#34; &amp;gt;&amp;gt; README.md git init git add README.md git commit -m &amp;#34;first commit&amp;#34; git branch -M main git remote add origin https://github.</description>
+    </item>
+    
+    <item>
+      <title>group_by函数</title>
+      <link>https://osummer.github.io/post/group_by%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://osummer.github.io/post/group_by%E5%87%BD%E6%95%B0/</guid>
+      <description>group_??函数 group_by → summarize group_by → group_map 列表输出 group_by → group_modify 表格输出 group_nest → rowwise → mutate() split → map_df 单个输出 比如分组输出某个相关系数
+library(tidyverse) library(moderndive) #分组求相关系数 iris %&amp;gt;%group_by(Species) %&amp;gt;% moderndive::get_correlation(Sepal.Length~Sepal.Width) #summarize只能输出1个返回值 iris %&amp;gt;%group_by(Species) %&amp;gt;% summarise(cor_coeff=cor(Sepal.Length,Sepal.Width)) # group_map函数可输出多个返回值，如果表格输出可用group_modify() iris %&amp;gt;% group_by(Species) %&amp;gt;% group_map(~cor(.x$Sepal.Length,.x$Sepal.Width)) #group_nest配合map() iris%&amp;gt;%group_nest(Species)%&amp;gt;% mutate(cor_coeff=map_dbl(data,~cor(.x$Sepal.Length,.x$Sepal.Width))) #group_nest配合rowwise()与mutate，但只能输出1个结果 iris%&amp;gt;%group_nest(Species)%&amp;gt;%rowwise() %&amp;gt;% mutate(cor_coeff=cor(data$Sepal.Length,data$Sepal.Width)) 列表输出 比如分组建模，求模型输出结果
+#求回归结果 ##list输出 iris %&amp;gt;% group_by(Species) %&amp;gt;% group_map(~broom::glance(lm(Sepal.Length~Sepal.Width,data=.x))) ##group_modify输出 iris %&amp;gt;% group_by(Species) %&amp;gt;% group_modify(~broom::glance(lm(Sepal.Length~Sepal.Width,data=.x))) ## map() iris%&amp;gt;%split(.$Species)%&amp;gt;% map_df(~broom::glance(lm(Sepal.Length~Sepal.Width,data=.x))) #map() iris%&amp;gt;% group_split(Species) %&amp;gt;% map_df(~broom::glance(lm(Sepal.</description>
+    </item>
+    
+    <item>
+      <title>lme4包做混合模型</title>
+      <link>https://osummer.github.io/post/lme4%E5%8C%85%E5%81%9A%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8B/</link>
+      <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://osummer.github.io/post/lme4%E5%8C%85%E5%81%9A%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8B/</guid>
+      <description>lme4包示例 数据 DAAG::kiwishade Kiwifruit Shading Trial (kiwishade from DAAG package) Blocks (3)/plots (4 per block)/vines (4 per plot) 4 shading treatments, randomized to whole plots within blocks. 实验包含：3区组，每个区组4个小区，每个小区落实4个处理，每个处理测定4个KIWI个体
+模型拟合 vfit &amp;lt;- lmer(yield ~ shade + (1 | block/shade), kiwishade) vfit Linear mixed model fit by REML [&amp;#39;lmerMod&amp;#39;] Formula: yield ~ shade + (1 | block/shade) Data: kiwishade REML criterion at convergence: 251.9663 Random effects: Groups Name Std.Dev. shade:block (Intercept) 1.479 block (Intercept) 2.</description>
+    </item>
+    
+    <item>
+      <title>R-map</title>
+      <link>https://osummer.github.io/post/r-map/</link>
+      <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://osummer.github.io/post/r-map/</guid>
+      <description>绘制ggplot风格地图 1 摘要 主要使用sf包进行空间数据分析。 sf包主要控制simple feature对象，比之前的sp包从数据结构上看更容易懂，也能对空间数据进行大量的操作。
+sf包中的对象主要有：
+sf 数据框 sfc 列表列 sfg sfc中的任一元素 crs 坐标参考系统 2 加载包 library(sf) library(tidyverse) 3 空间数据读取 以中国省级行政划分为例，数据来源于aliyun的datav。
+china_dat &amp;lt;- read_sf(&amp;#34;china_province.json&amp;#34;) attr(china_dat, &amp;#34;sf_column&amp;#34;) ## [1] &amp;#34;geometry&amp;#34; class(china_dat) ## [1] &amp;#34;sf&amp;#34; &amp;#34;tbl_df&amp;#34; &amp;#34;tbl&amp;#34; &amp;#34;data.frame&amp;#34; 4 数据操作 4.1 gfc数据绑定 sf对象中有一列（gfc）,专门存贮空间属性数据，在对sf对象数据进行操作时，默认是不能排除gfc列的。
+china_dat %&amp;gt;% select(1) #绑定 ## Simple feature collection with 36 features and 1 field ## Geometry type: GEOMETRY ## Dimension: XY ## Bounding box: xmin: 73.50078 ymin: 3.553559 xmax: 134.</description>
+    </item>
+    
+    <item>
+      <title>R语言中markdown生成中文pdf</title>
+      <link>https://osummer.github.io/post/r%E8%AF%AD%E8%A8%80%E4%B8%ADmarkdown%E7%94%9F%E6%88%90%E4%B8%AD%E6%96%87pdf/</link>
+      <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://osummer.github.io/post/r%E8%AF%AD%E8%A8%80%E4%B8%ADmarkdown%E7%94%9F%E6%88%90%E4%B8%AD%E6%96%87pdf/</guid>
+      <description>Rmarkdown生成中文pdf 需要电脑已配置好Latex环境（TinyTex，或者至少安装MikTex），并已安装rmarkdown包。
+一.	中文pdf文档 安装rticles包，里面包含了很多模板，特别是CTEX Documents 模板。 File——New File——R Markdown，点From Template，选择CTEX Documents：
+二.	中文pdf幻灯片 （1） 安装xaringan包，提供了中文幻灯片模板。 File——New File——R Markdown，点From Template，选择Ninja Presentation (Simplified Chinese): 注：路径不能有中文。
+（2） 安装Infinite Moon Reader插件，可以在RStudio中预览幻灯片： Tools—Addins—Browse Addins…
+点Execute，若提示更新包则更新。
+只需要敲你的幻灯片正文就够了，预览会自动显示在 RStudio 的Viewer窗口。
+幻灯片分页用三短横线 一张片子里的内容可以任意方式分割（语法是两短横线），分割过的片子在播放的时候会按次序一段段显示在屏幕上。 一张片子要分成左半部分和右半部分可以用using .pull-left[] 和 .pull-right[] 注释（footnote）可以用.footnote[] 备注（观众看不到的那些内容）可以用??? 列表，字体，链接，插入图片，数学公式等的语法跟R Markdown一样。若要插入本地的图片（居中、设置大小）： 如果你想在幻灯片里插入R Markdown的代码，但不要R Markdown执行这些代码，你如果用如下格式 代码段 如果是一句话里单个R代码，用 `r knitr::inline_expr(&amp;quot;expression&amp;quot;)` 三.	中文beamer 使用模板：Zh-beamer-master 将Zh-beamer-master.zip解压，打开test.Rmd, knit PDF</description>
+    </item>
+    
+    <item>
+      <title>R语言分析HLM</title>
+      <link>https://osummer.github.io/post/r%E8%AF%AD%E8%A8%80%E5%88%86%E6%9E%90hlm/</link>
+      <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://osummer.github.io/post/r%E8%AF%AD%E8%A8%80%E5%88%86%E6%9E%90hlm/</guid>
+      <description>R语言分析多层线性模型 数据说明 ham数据集描述的是不同信息给消费者对火腿的喜好的影响。其中两种火腿来自西班牙，两种来自挪威，每一种来源都代表着不同的含盐量和不同的存放时间。 关于起源的信息是这样给出的，即真实的信息，也有虚假的信息。本质上是一个有4个样本和2个信息等级的4x2设计。共有81名消费者参与了这项研究。数据集中有如下变量：
+Consumer:factor with 81 levels: numbering identifying consumers. Product:factor with four levels. Informed.liking:numeric: hedonic liking for the products. Information:factor with two levels. Gender:factor with two levels. Age:numeric: age of Consumer. 模型结构 固定截距（fixed intercept）：固定截距其实并不存在于HLM的模型中，而是“降级”到了一般的最小二乘法回归（OLS），也就是我们最常用的GLM回归分析。
+→ lm(Y ~ 1 R语言代码 R语言的回归方程表达式中，~的前后分别为结果变量Y和预测变量X，例如Y ~ 1 + X1 + X2，其中表示截距的“1”可以省略。需要注意的是，**因变量Y只能是Level 1变量，**不能是Level 2变量。
+模型拟合 fm &amp;lt;- lmer(Informed.liking ~ Product*Information*Gender*Age + + (1|Consumer) + (1|Consumer:Product) + (1|Consumer:Information), data=ham) 逐步回归 step_fm &amp;lt;- step(fm) step_fm # Display elimination results final_fm &amp;lt;- get_model(step_fm) 结果分析 拟合结果 &amp;gt; summary(final_fm) Linear mixed model fit by REML.</description>
     </item>
     
   </channel>

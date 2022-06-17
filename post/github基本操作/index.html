@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <meta name="generator" content="Hugo 0.101.0" />
+
+  
+  <meta name="description" content="Some description">
+  
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="https://osummer.github.io/apple-touch-icon.png">
+
+  
+  <link rel="icon" type="image/png" sizes="32x32" href="https://osummer.github.io/favicon-32x32.png">
+
+  
+  <link rel="icon" type="image/png" sizes="16x16" href="https://osummer.github.io/favicon-16x16.png">
+
+  
+  <link rel="manifest" href="https://osummer.github.io/site.webmanifest">
+
+  
+  <link rel="mask-icon" href="https://osummer.github.io/safari-pinned-tab.svg" color="#5bbad5">
+
+  <meta name="msapplication-TileColor" content="#da532c">
+
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <link rel="stylesheet" href="https://osummer.github.io/css/bootstrap.min.css" />
+
+  
+  <title>github基本操作 | 学海无涯</title>
+  
+
+  <style>
+body {
+  min-width: 300px;
+}
+
+.custom-navbar {
+  margin-bottom: 1em;
+  height: 60px;
+}
+
+.custom-navbar a {
+  display: inline-block; 
+  padding: 18px 0;
+  margin-right: 1em; 
+  font-weight: bold; 
+}
+
+.custom-navbar a:hover,
+.custom-navbar a:focus {
+  text-decoration: none; 
+}
+
+@media print {
+  .custom-navbar {
+    display: none;
+  }
+}
+
+article {
+  padding-bottom: 1em;
+}
+
+img {
+  max-width: 100%;
+}
+
+
+body {
+  background-color: #fff;
+}
+
+
+
+body {
+  color: #212529;
+}
+
+
+
+a {
+  color: #007bff;
+}
+
+
+
+a:hover,
+a:focus {
+  color: #0056b3;
+}
+
+
+
+.custom-navbar {
+  background-color: #1E90FF;
+}
+
+
+
+.custom-navbar a {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+
+
+.custom-navbar a:hover,
+.custom-navbar a:focus {
+  color: rgba(255, 255, 255, 1);
+}
+
+
+
+.container {
+  max-width: 800px;
+}
+
+
+
+pre {
+  display: block;
+  padding: 9.5px;
+  word-break: break-all;
+  word-wrap: break-word;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+pre code {
+  padding: 0;
+  font-size: inherit;
+  color: inherit; 
+  white-space: pre-wrap;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+}
+
+code {
+  padding: 2px 4px;
+  color: inherit; 
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: .9em;
+}
+
+
+
+blockquote,
+.blockquote {
+  padding: 10px 20px;
+  margin: 0 0 20px;
+  font-size: 1em;
+  border-left: 5px solid #6c757d;
+}
+
+</style>
+</head>
+
+<body>
+  <nav class="custom-navbar">
+  <div class="container">
+    
+    <a href="/post/">Posts</a>
+    
+    <a href="/tags/">Tags</a>
+    
+    <a href="/about/">About</a>
+    
+    <a href="/index.xml">RSS</a>
+    
+  </div>
+</nav>
+  
+  <div class="container">
+    <article>
+      <h1>github基本操作</h1>
+<p>
+  <small class="text-secondary">
+  
+  
+  Jun 17, 2022
+  </small>
+  
+
+<small><code><a href="https://osummer.github.io/tags/github">github</a></code></small>
+
+  
+
+</p>
+<hr>
+<h1 id="github使用指南"><strong>github使用指南</strong></h1>
+<h2 id="1-新建账户与仓库">1. 新建账户与仓库</h2>
+<blockquote>
+<p>在github.com中 <strong>osummer</strong> 账户下新建 <strong>easyANOVA</strong> 仓库</p>
+</blockquote>
+<h2 id="2-ssh公钥建立">2. ssh公钥建立</h2>
+<p>首先在本地创建ssh key，在cmd中执行创建ssh key</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span> <span style="color:#a6e22e">ssh</span><span style="color:#f92672">-</span><span style="color:#a6e22e">keygen</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">t</span> <span style="color:#a6e22e">rsa</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">C</span> <span style="color:#e6db74">&#34;your_email@youremail.com&#34;</span>
+</span></span></code></pre></div><p><code>your_email@youremail.com</code>改为你在github上注册的邮箱，之后会要求确认路径和输入密码，我们这使用默认的一路回车就行。成功的话会在<code>~/</code>下生成<code>.ssh</code>文件夹，进去，打开<code>id_rsa.pub</code>，复制里面的<code>key</code>。</p>
+<h2 id="3-ssh公钥上传">3. ssh公钥上传</h2>
+<p>回到github上，进入 Account Settings（账户配置），左边选择SSH Keys，Add SSH Key,title随便填，粘贴在你电脑上生成的key。<br>
+验证是否成功：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span> <span style="color:#a6e22e">ssh</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">T</span> <span style="color:#a6e22e">git</span><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">github</span>.<span style="color:#a6e22e">com</span>
+</span></span></code></pre></div><h2 id="4-本地仓库初始化与提交">4. 本地仓库初始化与提交</h2>
+<p>设置信息</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span> <span style="color:#a6e22e">git</span> <span style="color:#a6e22e">config</span> <span style="color:#f92672">--</span><span style="color:#a6e22e">global</span> <span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">name</span> <span style="color:#e6db74">&#34;your name&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span> <span style="color:#a6e22e">git</span> <span style="color:#a6e22e">config</span> <span style="color:#f92672">--</span><span style="color:#a6e22e">global</span> <span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">email</span> <span style="color:#e6db74">&#34;your_email@youremail.com&#34;</span>
+</span></span></code></pre></div><blockquote>
+<p>进入要上传的仓库，右键git bash，添加远程地址：</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span> <span style="color:#a6e22e">git</span> <span style="color:#a6e22e">remote</span> <span style="color:#a6e22e">add</span> <span style="color:#a6e22e">origin</span> <span style="color:#a6e22e">git</span><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">github</span>.<span style="color:#a6e22e">com</span>:<span style="color:#a6e22e">yourName</span><span style="color:#f92672">/</span><span style="color:#a6e22e">yourRepo</span>.<span style="color:#a6e22e">git</span>
+</span></span></code></pre></div><blockquote>
+<p>或者重新创建本地仓库：</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">echo</span> <span style="color:#e6db74">&#34;# easyANOVA&#34;</span> <span style="color:#f92672">&gt;&gt;</span> <span style="color:#a6e22e">README</span>.<span style="color:#a6e22e">md</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">git</span> <span style="color:#a6e22e">init</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">git</span> <span style="color:#a6e22e">add</span> <span style="color:#a6e22e">README</span>.<span style="color:#a6e22e">md</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">git</span> <span style="color:#a6e22e">commit</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">m</span> <span style="color:#e6db74">&#34;first commit&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">git</span> <span style="color:#a6e22e">branch</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">M</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">git</span> <span style="color:#a6e22e">remote</span> <span style="color:#a6e22e">add</span> <span style="color:#a6e22e">origin</span> <span style="color:#a6e22e">https</span>:<span style="color:#75715e">//github.com/osummer/easyANOVA.git
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">git</span> <span style="color:#a6e22e">push</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">u</span> <span style="color:#a6e22e">origin</span> <span style="color:#a6e22e">main</span>
+</span></span></code></pre></div><h2 id="5-检出仓库">5. 检出仓库</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#a6e22e">本地仓库</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span> <span style="color:#a6e22e">git</span> <span style="color:#a6e22e">clone</span> <span style="color:#f92672">/</span><span style="color:#a6e22e">path</span><span style="color:#f92672">/</span><span style="color:#a6e22e">to</span><span style="color:#f92672">/</span><span style="color:#a6e22e">repository</span> 
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#a6e22e">如果是远程仓库</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#a6e22e">则为</span><span style="color:#960050;background-color:#1e0010">：</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span> <span style="color:#a6e22e">git</span> <span style="color:#a6e22e">clone</span> <span style="color:#a6e22e">username</span><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">host</span>:<span style="color:#f92672">/</span><span style="color:#a6e22e">path</span><span style="color:#f92672">/</span><span style="color:#a6e22e">to</span><span style="color:#f92672">/</span><span style="color:#a6e22e">repository</span>
+</span></span></code></pre></div><h2 id="6-git工作流">6. git工作流</h2>
+<p>你的本地仓库由 git 维护的三棵&quot;树&quot;组成。第一个是你的 <code>工作目录</code>，它持有实际文件；第二个是 <code>暂存区（Index）</code>，它像个缓存区域，临时保存你的改动；最后是 <code>HEAD</code>，它指向你最后一次提交的结果。</p>
+<h3 id="1提出更改-git-add">（1）提出更改 (git add)</h3>
+<p>提出更改是把待提交内容添加到暂存区，代码为：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">git</span> <span style="color:#a6e22e">add</span> &lt;<span style="color:#a6e22e">filename</span>&gt; <span style="color:#960050;background-color:#1e0010">#</span><span style="color:#a6e22e">单个文件</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">git</span> <span style="color:#a6e22e">add</span> <span style="color:#f92672">*</span> <span style="color:#960050;background-color:#1e0010">#</span><span style="color:#a6e22e">或者所有内容</span>
+</span></span></code></pre></div><h3 id="2提交到head-git-commit">（2）提交到head (git commit)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">git</span> <span style="color:#a6e22e">commit</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">m</span> <span style="color:#e6db74">&#34;代码提交信息&#34;</span>
+</span></span></code></pre></div><p>实际提交了改动，但还未到远程仓库。</p>
+<h3 id="3提交到远程git-push">（3）提交到远程（git push）</h3>
+<p>现在，改动现在已经在本地仓库的 HEAD 中了。将这些改动提交到远端仓库：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">git</span> <span style="color:#a6e22e">push</span> <span style="color:#a6e22e">origin</span> <span style="color:#a6e22e">master</span>
+</span></span></code></pre></div><h2 id="7-faq">7. FAQ</h2>
+<p>出现ssh登录错误，比如：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span> <span style="color:#a6e22e">ssh</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">T</span> <span style="color:#a6e22e">git</span><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">github</span>.<span style="color:#a6e22e">com</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">kex_exchange_identification</span>: <span style="color:#a6e22e">read</span>: <span style="color:#a6e22e">Connection</span> <span style="color:#a6e22e">reset</span> <span style="color:#a6e22e">by</span> <span style="color:#a6e22e">peer</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Connection</span> <span style="color:#a6e22e">reset</span> <span style="color:#a6e22e">by</span> <span style="color:#ae81ff">20.205.243.166</span> <span style="color:#a6e22e">port</span> <span style="color:#ae81ff">22</span>
+</span></span></code></pre></div><p>解决方法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">git</span> <span style="color:#a6e22e">remote</span> <span style="color:#a6e22e">set</span><span style="color:#f92672">-</span><span style="color:#a6e22e">url</span> <span style="color:#a6e22e">origin</span> <span style="color:#a6e22e">HTTPS</span><span style="color:#f92672">-</span><span style="color:#a6e22e">url</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#a6e22e">https</span><span style="color:#f92672">-</span><span style="color:#a6e22e">url为仓库的地址</span><span style="color:#960050;background-color:#1e0010">“</span><span style="color:#a6e22e">https</span>:<span style="color:#75715e">//github.com/osummer/easyANOVA.git”
+</span></span></span></code></pre></div>
+    </article>
+  </div>
+
+  
+  
+  
+  <script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-123456789-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+<script>
+window.addEventListener("load", function(){
+window.cookieconsent.initialise({
+  "palette": {
+    "popup": {
+      "background": "#216942",
+      "text": "#b2d192"
+    },
+    "button": {
+      "background": "#afed71"
+    }
+  }
+})});
+</script>
+
+</body>
+
+</html>

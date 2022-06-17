@@ -1,0 +1,647 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <meta name="generator" content="Hugo 0.101.0" />
+
+  
+  <meta name="description" content="Some description">
+  
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="https://osummer.github.io/apple-touch-icon.png">
+
+  
+  <link rel="icon" type="image/png" sizes="32x32" href="https://osummer.github.io/favicon-32x32.png">
+
+  
+  <link rel="icon" type="image/png" sizes="16x16" href="https://osummer.github.io/favicon-16x16.png">
+
+  
+  <link rel="manifest" href="https://osummer.github.io/site.webmanifest">
+
+  
+  <link rel="mask-icon" href="https://osummer.github.io/safari-pinned-tab.svg" color="#5bbad5">
+
+  <meta name="msapplication-TileColor" content="#da532c">
+
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <link rel="stylesheet" href="https://osummer.github.io/css/bootstrap.min.css" />
+
+  
+  <title>R-map | 学海无涯</title>
+  
+
+  <style>
+body {
+  min-width: 300px;
+}
+
+.custom-navbar {
+  margin-bottom: 1em;
+  height: 60px;
+}
+
+.custom-navbar a {
+  display: inline-block; 
+  padding: 18px 0;
+  margin-right: 1em; 
+  font-weight: bold; 
+}
+
+.custom-navbar a:hover,
+.custom-navbar a:focus {
+  text-decoration: none; 
+}
+
+@media print {
+  .custom-navbar {
+    display: none;
+  }
+}
+
+article {
+  padding-bottom: 1em;
+}
+
+img {
+  max-width: 100%;
+}
+
+
+body {
+  background-color: #fff;
+}
+
+
+
+body {
+  color: #212529;
+}
+
+
+
+a {
+  color: #007bff;
+}
+
+
+
+a:hover,
+a:focus {
+  color: #0056b3;
+}
+
+
+
+.custom-navbar {
+  background-color: #1E90FF;
+}
+
+
+
+.custom-navbar a {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+
+
+.custom-navbar a:hover,
+.custom-navbar a:focus {
+  color: rgba(255, 255, 255, 1);
+}
+
+
+
+.container {
+  max-width: 800px;
+}
+
+
+
+pre {
+  display: block;
+  padding: 9.5px;
+  word-break: break-all;
+  word-wrap: break-word;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+pre code {
+  padding: 0;
+  font-size: inherit;
+  color: inherit; 
+  white-space: pre-wrap;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+}
+
+code {
+  padding: 2px 4px;
+  color: inherit; 
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: .9em;
+}
+
+
+
+blockquote,
+.blockquote {
+  padding: 10px 20px;
+  margin: 0 0 20px;
+  font-size: 1em;
+  border-left: 5px solid #6c757d;
+}
+
+</style>
+</head>
+
+<body>
+  <nav class="custom-navbar">
+  <div class="container">
+    
+    <a href="/post/">Posts</a>
+    
+    <a href="/tags/">Tags</a>
+    
+    <a href="/about/">About</a>
+    
+    <a href="/index.xml">RSS</a>
+    
+  </div>
+</nav>
+  
+  <div class="container">
+    <article>
+      <h1>R-map</h1>
+<p>
+  <small class="text-secondary">
+  
+  
+  Jun 17, 2022
+  </small>
+  
+
+<small><code><a href="https://osummer.github.io/tags/ggolot2">ggolot2</a></code></small>
+
+
+<small><code><a href="https://osummer.github.io/tags/map">map</a></code></small>
+
+  
+
+</p>
+<h1 id="绘制ggplot风格地图">绘制ggplot风格地图</h1>
+<hr>
+<h2 id="1-摘要">1 摘要</h2>
+<p>主要使用<code>sf</code>包进行空间数据分析。
+<code>sf</code>包主要控制simple feature对象，比之前的<code>sp</code>包从数据结构上看更容易懂，也能对空间数据进行大量的操作。</p>
+<p><code>sf</code>包中的对象主要有：</p>
+<ul>
+<li>sf 数据框</li>
+<li>sfc 列表列</li>
+<li>sfg sfc中的任一元素</li>
+<li>crs 坐标参考系统</li>
+</ul>
+<h2 id="2-加载包">2 加载包</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(sf)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(tidyverse)
+</span></span></code></pre></div><h2 id="3-空间数据读取">3 空间数据读取</h2>
+<p>以中国省级行政划分为例，数据来源于aliyun的datav。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>china_dat <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">read_sf</span>(<span style="color:#e6db74">&#34;china_province.json&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">attr</span>(china_dat, <span style="color:#e6db74">&#34;sf_column&#34;</span>)
+</span></span></code></pre></div><pre tabindex="0"><code>## [1] &#34;geometry&#34;
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">class</span>(china_dat)
+</span></span></code></pre></div><pre tabindex="0"><code>## [1] &#34;sf&#34;         &#34;tbl_df&#34;     &#34;tbl&#34;        &#34;data.frame&#34;
+</code></pre><h2 id="4-数据操作">4 数据操作</h2>
+<h3 id="41-gfc数据绑定">4.1 gfc数据绑定</h3>
+<p>sf对象中有一列（gfc）,专门存贮空间属性数据，在对sf对象数据进行操作时，默认是不能排除<code>gfc</code>列的。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>china_dat <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">select</span>(<span style="color:#ae81ff">1</span>) <span style="color:#75715e">#绑定</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## Simple feature collection with 36 features and 1 field
+## Geometry type: GEOMETRY
+## Dimension:     XY
+## Bounding box:  xmin: 73.50078 ymin: 3.553559 xmax: 134.7752 ymax: 53.56082
+## Geodetic CRS:  WGS 84
+## # A tibble: 36 x 2
+##    Name_Province                                                        geometry
+##    &lt;chr&gt;                                                 &lt;GEOMETRY [arc_degree]&gt;
+##  1 安徽省         POLYGON ((119.1702 31.2955, 119.1528 31.29677, 119.1429 31.27~
+##  2 澳门特别行政区 MULTIPOLYGON (((113.5348 22.19369, 113.5325 22.17929, 113.549~
+##  3 北京市         POLYGON ((115.961 40.2643, 115.9576 40.25636, 115.9365 40.252~
+##  4 福建省         MULTIPOLYGON (((119.4823 25.35403, 119.4669 25.34719, 119.464~
+##  5 甘肃省         POLYGON ((104.0702 33.67677, 104.0789 33.67631, 104.0989 33.6~
+##  6 广东省         MULTIPOLYGON (((113.6739 22.66379, 113.6655 22.68015, 113.646~
+##  7 广西壮族自治区 MULTIPOLYGON (((109.083 21.0469, 109.0866 21.03204, 109.085 2~
+##  8 贵州省         MULTIPOLYGON (((108.302 25.51802, 108.3148 25.53725, 108.3401~
+##  9 海南省         MULTIPOLYGON (((110.2262 20.06673, 110.2322 20.06196, 110.244~
+## 10 河北省         MULTIPOLYGON (((117.667 39.38564, 117.663 39.411, 117.6373 39~
+## # ... with 26 more rows
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>china_dat <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">as_tibble</span>() <span style="color:#f92672">%&gt;%</span>   <span style="color:#a6e22e">select</span>(<span style="color:#ae81ff">1</span>) <span style="color:#75715e">#绑定解除</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## # A tibble: 36 x 1
+##    Name_Province 
+##    &lt;chr&gt;         
+##  1 安徽省        
+##  2 澳门特别行政区
+##  3 北京市        
+##  4 福建省        
+##  5 甘肃省        
+##  6 广东省        
+##  7 广西壮族自治区
+##  8 贵州省        
+##  9 海南省        
+## 10 河北省        
+## # ... with 26 more rows
+</code></pre><p>可见直接<code>select</code>操作中，gfc列仍然存在。
+如果需要去除这种效应，需要把sf类型转换为tibble、或者data.frame类型。</p>
+<h3 id="42-gfc数据操作">4.2 gfc数据操作</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>china_dat <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">st_geometry</span>() <span style="color:#75715e">#提取geom列</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## Geometry set for 36 features 
+## Geometry type: GEOMETRY
+## Dimension:     XY
+## Bounding box:  xmin: 73.50078 ymin: 3.553559 xmax: 134.7752 ymax: 53.56082
+## Geodetic CRS:  WGS 84
+## First 5 geometries:
+</code></pre><pre tabindex="0"><code>## POLYGON ((119.1702 31.2955, 119.1528 31.29677, ...
+</code></pre><pre tabindex="0"><code>## MULTIPOLYGON (((113.5348 22.19369, 113.5325 22....
+</code></pre><pre tabindex="0"><code>## POLYGON ((115.961 40.2643, 115.9576 40.25636, 1...
+</code></pre><pre tabindex="0"><code>## MULTIPOLYGON (((119.4823 25.35403, 119.4669 25....
+</code></pre><pre tabindex="0"><code>## POLYGON ((104.0702 33.67677, 104.0789 33.67631,...
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>china_dat <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">st_geometry</span>()  <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">class</span>() <span style="color:#75715e">#sfc</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## [1] &#34;sfc_GEOMETRY&#34; &#34;sfc&#34;
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>china_dat <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">st_geometry</span>()  <span style="color:#f92672">%&gt;%</span>  <span style="color:#a6e22e">attributes</span>() <span style="color:#75715e">#sfc的属性</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## $n_empty
+## [1] 0
+## 
+## $crs
+## Coordinate Reference System:
+##   User input: WGS 84 
+##   wkt:
+## GEOGCRS[&#34;WGS 84&#34;,
+##     DATUM[&#34;World Geodetic System 1984&#34;,
+##         ELLIPSOID[&#34;WGS 84&#34;,6378137,298.257223563,
+##             LENGTHUNIT[&#34;metre&#34;,1]]],
+##     PRIMEM[&#34;Greenwich&#34;,0,
+##         ANGLEUNIT[&#34;degree&#34;,0.0174532925199433]],
+##     CS[ellipsoidal,2],
+##         AXIS[&#34;geodetic latitude (Lat)&#34;,north,
+##             ORDER[1],
+##             ANGLEUNIT[&#34;degree&#34;,0.0174532925199433]],
+##         AXIS[&#34;geodetic longitude (Lon)&#34;,east,
+##             ORDER[2],
+##             ANGLEUNIT[&#34;degree&#34;,0.0174532925199433]],
+##     ID[&#34;EPSG&#34;,4326]]
+## 
+## $class
+## [1] &#34;sfc_GEOMETRY&#34; &#34;sfc&#34;         
+## 
+## $precision
+## [1] 0
+## 
+## $bbox
+##       xmin       ymin       xmax       ymax 
+##  73.500775   3.553559 134.775196  53.560815 
+## 
+## $classes
+##  [1] &#34;POLYGON&#34;         &#34;MULTIPOLYGON&#34;    &#34;POLYGON&#34;         &#34;MULTIPOLYGON&#34;   
+##  [5] &#34;POLYGON&#34;         &#34;MULTIPOLYGON&#34;    &#34;MULTIPOLYGON&#34;    &#34;MULTIPOLYGON&#34;   
+##  [9] &#34;MULTIPOLYGON&#34;    &#34;MULTIPOLYGON&#34;    &#34;MULTIPOLYGON&#34;    &#34;POLYGON&#34;        
+## [13] &#34;POLYGON&#34;         &#34;MULTIPOLYGON&#34;    &#34;POLYGON&#34;         &#34;MULTIPOLYGON&#34;   
+## [17] &#34;POLYGON&#34;         &#34;MULTIPOLYGON&#34;    &#34;MULTILINESTRING&#34; &#34;MULTIPOLYGON&#34;   
+## [21] &#34;POLYGON&#34;         &#34;MULTIPOLYGON&#34;    &#34;POLYGON&#34;         &#34;MULTIPOLYGON&#34;   
+## [25] &#34;POLYGON&#34;         &#34;POLYGON&#34;         &#34;MULTIPOLYGON&#34;    &#34;POLYGON&#34;        
+## [29] &#34;MULTIPOLYGON&#34;    &#34;POLYGON&#34;         &#34;POLYGON&#34;         &#34;MULTIPOLYGON&#34;   
+## [33] &#34;POLYGON&#34;         &#34;POLYGON&#34;         &#34;MULTIPOLYGON&#34;    &#34;POLYGON&#34;
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e">#china_dat %&gt;% st_geometry() %&gt;% .[[3]]  #提取第3行，sfg对象</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>china_dat <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">st_geometry</span>() <span style="color:#f92672">%&gt;%</span> .[2]  <span style="color:#75715e">#提取第2行，sfc对象</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## Geometry set for 1 feature 
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: 113.5325 ymin: 22.11169 xmax: 113.5983 ymax: 22.21531
+## Geodetic CRS:  WGS 84
+</code></pre><pre tabindex="0"><code>## MULTIPOLYGON (((113.5348 22.19369, 113.5325 22....
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>china_dat <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">st_geometry</span>() <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">sapply</span>(length) <span style="color:#75715e"># 每一行中的多边形数量</span>
+</span></span></code></pre></div><pre tabindex="0"><code>##  [1]  2  4  1 45  2 55  5  2  9  4  3  1  3  2  1  4  1 15 15 96  1  2  1 10  1
+## [26]  1 10  1 14  3  1 11  1  1 81  1
+</code></pre><h3 id="43-坐标crs数据">4.3 坐标CRS数据</h3>
+<p>一般空间数据读取会自带坐标CRS参数,否则需要制定CRS。CRS操作主要有3类：</p>
+<ul>
+<li>st_crs 获取CRS</li>
+<li>st_set_crs 设置CRS，gfc数据不变，但st_crs返回的参数发生改变</li>
+<li>st_transform 转换CRS，gfc数据发生变化</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>china_dat <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">st_geometry</span>()<span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">attributes</span>()
+</span></span></code></pre></div><pre tabindex="0"><code>## $n_empty
+## [1] 0
+## 
+## $crs
+## Coordinate Reference System:
+##   User input: WGS 84 
+##   wkt:
+## GEOGCRS[&#34;WGS 84&#34;,
+##     DATUM[&#34;World Geodetic System 1984&#34;,
+##         ELLIPSOID[&#34;WGS 84&#34;,6378137,298.257223563,
+##             LENGTHUNIT[&#34;metre&#34;,1]]],
+##     PRIMEM[&#34;Greenwich&#34;,0,
+##         ANGLEUNIT[&#34;degree&#34;,0.0174532925199433]],
+##     CS[ellipsoidal,2],
+##         AXIS[&#34;geodetic latitude (Lat)&#34;,north,
+##             ORDER[1],
+##             ANGLEUNIT[&#34;degree&#34;,0.0174532925199433]],
+##         AXIS[&#34;geodetic longitude (Lon)&#34;,east,
+##             ORDER[2],
+##             ANGLEUNIT[&#34;degree&#34;,0.0174532925199433]],
+##     ID[&#34;EPSG&#34;,4326]]
+## 
+## $class
+## [1] &#34;sfc_GEOMETRY&#34; &#34;sfc&#34;         
+## 
+## $precision
+## [1] 0
+## 
+## $bbox
+##       xmin       ymin       xmax       ymax 
+##  73.500775   3.553559 134.775196  53.560815 
+## 
+## $classes
+##  [1] &#34;POLYGON&#34;         &#34;MULTIPOLYGON&#34;    &#34;POLYGON&#34;         &#34;MULTIPOLYGON&#34;   
+##  [5] &#34;POLYGON&#34;         &#34;MULTIPOLYGON&#34;    &#34;MULTIPOLYGON&#34;    &#34;MULTIPOLYGON&#34;   
+##  [9] &#34;MULTIPOLYGON&#34;    &#34;MULTIPOLYGON&#34;    &#34;MULTIPOLYGON&#34;    &#34;POLYGON&#34;        
+## [13] &#34;POLYGON&#34;         &#34;MULTIPOLYGON&#34;    &#34;POLYGON&#34;         &#34;MULTIPOLYGON&#34;   
+## [17] &#34;POLYGON&#34;         &#34;MULTIPOLYGON&#34;    &#34;MULTILINESTRING&#34; &#34;MULTIPOLYGON&#34;   
+## [21] &#34;POLYGON&#34;         &#34;MULTIPOLYGON&#34;    &#34;POLYGON&#34;         &#34;MULTIPOLYGON&#34;   
+## [25] &#34;POLYGON&#34;         &#34;POLYGON&#34;         &#34;MULTIPOLYGON&#34;    &#34;POLYGON&#34;        
+## [29] &#34;MULTIPOLYGON&#34;    &#34;POLYGON&#34;         &#34;POLYGON&#34;         &#34;MULTIPOLYGON&#34;   
+## [33] &#34;POLYGON&#34;         &#34;POLYGON&#34;         &#34;MULTIPOLYGON&#34;    &#34;POLYGON&#34;
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>china_dat <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">st_crs</span>() <span style="color:#75715e">#默认EPSG4326</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## Coordinate Reference System:
+##   User input: WGS 84 
+##   wkt:
+## GEOGCRS[&#34;WGS 84&#34;,
+##     DATUM[&#34;World Geodetic System 1984&#34;,
+##         ELLIPSOID[&#34;WGS 84&#34;,6378137,298.257223563,
+##             LENGTHUNIT[&#34;metre&#34;,1]]],
+##     PRIMEM[&#34;Greenwich&#34;,0,
+##         ANGLEUNIT[&#34;degree&#34;,0.0174532925199433]],
+##     CS[ellipsoidal,2],
+##         AXIS[&#34;geodetic latitude (Lat)&#34;,north,
+##             ORDER[1],
+##             ANGLEUNIT[&#34;degree&#34;,0.0174532925199433]],
+##         AXIS[&#34;geodetic longitude (Lon)&#34;,east,
+##             ORDER[2],
+##             ANGLEUNIT[&#34;degree&#34;,0.0174532925199433]],
+##     ID[&#34;EPSG&#34;,4326]]
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>china_dat <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">st_set_crs</span>(<span style="color:#ae81ff">3857</span>) <span style="color:#75715e">#更改CRS属性，不计算，gfc不变</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## Warning: st_crs&lt;- : replacing crs does not reproject data; use st_transform for
+## that
+</code></pre><pre tabindex="0"><code>## Simple feature collection with 36 features and 2 fields
+## Geometry type: GEOMETRY
+## Dimension:     XY
+## Bounding box:  xmin: 73.50078 ymin: 3.553559 xmax: 134.7752 ymax: 53.56082
+## Projected CRS: WGS 84 / Pseudo-Mercator
+## # A tibble: 36 x 3
+##    Name_Province  Code_Province                                         geometry
+##  * &lt;chr&gt;          &lt;chr&gt;                                           &lt;GEOMETRY [m]&gt;
+##  1 安徽省         34            POLYGON ((119.1702 31.2955, 119.1528 31.29677, ~
+##  2 澳门特别行政区 82            MULTIPOLYGON (((113.5348 22.19369, 113.5325 22.~
+##  3 北京市         11            POLYGON ((115.961 40.2643, 115.9576 40.25636, 1~
+##  4 福建省         35            MULTIPOLYGON (((119.4823 25.35403, 119.4669 25.~
+##  5 甘肃省         62            POLYGON ((104.0702 33.67677, 104.0789 33.67631,~
+##  6 广东省         44            MULTIPOLYGON (((113.6739 22.66379, 113.6655 22.~
+##  7 广西壮族自治区 45            MULTIPOLYGON (((109.083 21.0469, 109.0866 21.03~
+##  8 贵州省         52            MULTIPOLYGON (((108.302 25.51802, 108.3148 25.5~
+##  9 海南省         46            MULTIPOLYGON (((110.2262 20.06673, 110.2322 20.~
+## 10 河北省         13            MULTIPOLYGON (((117.667 39.38564, 117.663 39.41~
+## # ... with 26 more rows
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>china_dat <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">st_transform</span>(<span style="color:#ae81ff">3857</span>) <span style="color:#75715e">#重新投影，gfc变化</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span><span style="color:#75715e">## Simple feature collection with 36 features and 2 fields</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Geometry type: GEOMETRY</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Dimension:     XY</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Bounding box:  xmin: 8182069 ymin: 395834.3 xmax: 15003110 ymax: 7087415</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Projected CRS: WGS 84 / Pseudo-Mercator</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## # A tibble: 36 x 3</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##    Name_Province  Code_Province                                         geometry</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  * &lt;chr&gt;          &lt;chr&gt;                                           &lt;GEOMETRY [m]&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  1 安徽省         34            POLYGON ((13265965 3671186, 13264033 3671350, 1~</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  2 澳门特别行政区 82            MULTIPOLYGON (((12638632 2534796, 12638384 2533~</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  3 北京市         11            POLYGON ((12908715 4904424, 12908338 4903267, 1~</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  4 福建省         35            MULTIPOLYGON (((13300705 2919292, 13298992 2918~</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  5 甘肃省         62            POLYGON ((11585041 3985482, 11586011 3985421, 1~</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  6 广东省         44            MULTIPOLYGON (((12654123 2591410, 12653183 2593~</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  7 广西壮族自治区 45            MULTIPOLYGON (((12143065 2397471, 12143470 2395~</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  8 贵州省         52            MULTIPOLYGON (((12056128 2939507, 12057548 2941~</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  9 海南省         46            MULTIPOLYGON (((12270323 2280938, 12270989 2280~</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 10 河北省         13            MULTIPOLYGON (((13098626 4777063, 13098181 4780~</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## # ... with 26 more rows</span>
+</span></span></code></pre></div><p><code>st_transform</code>转换后gfc数据发生变化，则可视化地图也会发生改变。</p>
+<h3 id="44-数据有效性">4.4 数据有效性</h3>
+<p><code>st_is_valid</code>检查gfc数据是否有效，否则可以用<code>st_make_valid</code>进行修正。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span><span style="color:#a6e22e">st_is_valid</span>(china_dat)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span><span style="color:#75715e">##  [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [16] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## [31] TRUE TRUE TRUE TRUE TRUE TRUE</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>china_dat <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">st_is_valid</span>(reason<span style="color:#f92672">=</span>T)
+</span></span></code></pre></div><pre tabindex="0"><code>##  [1] &#34;Valid Geometry&#34; &#34;Valid Geometry&#34; &#34;Valid Geometry&#34; &#34;Valid Geometry&#34;
+##  [5] &#34;Valid Geometry&#34; &#34;Valid Geometry&#34; &#34;Valid Geometry&#34; &#34;Valid Geometry&#34;
+##  [9] &#34;Valid Geometry&#34; &#34;Valid Geometry&#34; &#34;Valid Geometry&#34; &#34;Valid Geometry&#34;
+## [13] &#34;Valid Geometry&#34; &#34;Valid Geometry&#34; &#34;Valid Geometry&#34; &#34;Valid Geometry&#34;
+## [17] &#34;Valid Geometry&#34; &#34;Valid Geometry&#34; &#34;Valid Geometry&#34; &#34;Valid Geometry&#34;
+## [21] &#34;Valid Geometry&#34; &#34;Valid Geometry&#34; &#34;Valid Geometry&#34; &#34;Valid Geometry&#34;
+## [25] &#34;Valid Geometry&#34; &#34;Valid Geometry&#34; &#34;Valid Geometry&#34; &#34;Valid Geometry&#34;
+## [29] &#34;Valid Geometry&#34; &#34;Valid Geometry&#34; &#34;Valid Geometry&#34; &#34;Valid Geometry&#34;
+## [33] &#34;Valid Geometry&#34; &#34;Valid Geometry&#34; &#34;Valid Geometry&#34; &#34;Valid Geometry&#34;
+</code></pre><h3 id="45-数据变形">4.5 数据变形</h3>
+<p>基于gfc数据计算距离、面积等。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">st_distance</span>(china_dat<span style="color:#a6e22e">[c</span>(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">10</span>),],china_dat<span style="color:#a6e22e">[c</span>(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">14</span>,<span style="color:#ae81ff">30</span>),]) <span style="color:#75715e">#求距离</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## Units: [m]
+##          [,1]     [,2]     [,3]     [,4]
+## [1,]      0.0 667571.5 221686.7 440083.9
+## [2,] 627042.3 434023.6 505780.6 760186.8
+## [3,] 185372.5 954865.4 701016.8      0.0
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">st_area</span>(china_dat[1,]) <span style="color:#75715e">#求面积</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 140266534479 [m^2]
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">st_centroid</span>(china_dat[15,]) <span style="color:#75715e">#计算重心</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## Warning in st_centroid.sf(china_dat[15, ]): st_centroid assumes attributes are
+## constant over geometries of x
+</code></pre><pre tabindex="0"><code>## Simple feature collection with 1 feature and 2 fields
+## Geometry type: POINT
+## Dimension:     XY
+## Bounding box:  xmin: 126.2348 ymin: 43.66413 xmax: 126.2348 ymax: 43.66413
+## Geodetic CRS:  WGS 84
+## # A tibble: 1 x 3
+##   Name_Province Code_Province             geometry
+## * &lt;chr&gt;         &lt;chr&gt;         &lt;POINT [arc_degree]&gt;
+## 1 吉林省        22             (126.2348 43.66413)
+</code></pre><h2 id="5-可视化">5 可视化</h2>
+<p>ggplot结合geom_sf进行绘图。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>china_dat <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">ggplot</span>()<span style="color:#f92672">+</span><span style="color:#a6e22e">geom_sf</span>()
+</span></span></code></pre></div><h3 id="51-crs变换效果">5.1 CRS变换效果</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(patchwork)
+</span></span></code></pre></div><pre tabindex="0"><code>## Warning: package &#39;patchwork&#39; was built under R version 4.1.1
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span>p1<span style="color:#f92672">=</span>china_dat <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">ggplot</span>()<span style="color:#f92672">+</span><span style="color:#a6e22e">geom_sf</span>()<span style="color:#f92672">+</span><span style="color:#a6e22e">labs</span>(title<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;EPSG4326&#34;</span>)
+</span></span><span style="display:flex;"><span>p2<span style="color:#f92672">=</span>china_dat <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">st_transform</span>(<span style="color:#ae81ff">4508</span>) <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">ggplot</span>()<span style="color:#f92672">+</span><span style="color:#a6e22e">geom_sf</span>()<span style="color:#f92672">+</span><span style="color:#a6e22e">labs</span>(title<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;EPSG4508&#34;</span>) <span style="color:#75715e">#CGCS2000中国地图投影效果，这也是大多数纸质出版物地图的国家标准</span>
+</span></span><span style="display:flex;"><span>p1<span style="color:#f92672">+</span>p2
+</span></span></code></pre></div><h3 id="52-空间数据构造及绘图">5.2 空间数据构造及绘图</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">st_point</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">105</span>,<span style="color:#ae81ff">30</span>)) <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">st_sfc</span>() <span style="color:#f92672">%&gt;%</span>  <span style="color:#a6e22e">st_set_crs</span>(<span style="color:#ae81ff">4326</span>) <span style="color:#75715e">#坐标点</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## Geometry set for 1 feature 
+## Geometry type: POINT
+## Dimension:     XY
+## Bounding box:  xmin: 105 ymin: 30 xmax: 105 ymax: 30
+## Geodetic CRS:  WGS 84
+</code></pre><pre tabindex="0"><code>## POINT (105 30)
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>aa<span style="color:#f92672">=</span><span style="color:#a6e22e">data.frame</span>(long<span style="color:#f92672">=</span><span style="color:#a6e22e">seq</span>(<span style="color:#ae81ff">80</span>,<span style="color:#ae81ff">130</span>,by<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>),lat<span style="color:#f92672">=</span><span style="color:#a6e22e">seq</span>(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">60</span>,by<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>)) 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bb<span style="color:#f92672">=</span>aa <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">st_as_sf</span>(coords<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;long&#34;</span>,<span style="color:#e6db74">&#34;lat&#34;</span>),crs<span style="color:#f92672">=</span><span style="color:#ae81ff">4326</span>) <span style="color:#75715e">#构造经纬度点</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">st_crs</span>(bb)
+</span></span></code></pre></div><pre tabindex="0"><code>## Coordinate Reference System:
+##   User input: EPSG:4326 
+##   wkt:
+## GEOGCRS[&#34;WGS 84&#34;,
+##     DATUM[&#34;World Geodetic System 1984&#34;,
+##         ELLIPSOID[&#34;WGS 84&#34;,6378137,298.257223563,
+##             LENGTHUNIT[&#34;metre&#34;,1]]],
+##     PRIMEM[&#34;Greenwich&#34;,0,
+##         ANGLEUNIT[&#34;degree&#34;,0.0174532925199433]],
+##     CS[ellipsoidal,2],
+##         AXIS[&#34;geodetic latitude (Lat)&#34;,north,
+##             ORDER[1],
+##             ANGLEUNIT[&#34;degree&#34;,0.0174532925199433]],
+##         AXIS[&#34;geodetic longitude (Lon)&#34;,east,
+##             ORDER[2],
+##             ANGLEUNIT[&#34;degree&#34;,0.0174532925199433]],
+##     USAGE[
+##         SCOPE[&#34;Horizontal component of 3D system.&#34;],
+##         AREA[&#34;World.&#34;],
+##         BBOX[-90,-180,90,180]],
+##     ID[&#34;EPSG&#34;,4326]]
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>china_dat <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">ggplot</span>()<span style="color:#f92672">+</span><span style="color:#a6e22e">geom_sf</span>()<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_sf</span>(data<span style="color:#f92672">=</span>bb,<span style="color:#a6e22e">aes</span>(color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;red&#34;</span>))
+</span></span></code></pre></div><h3 id="53-图形微调">5.3 图形微调</h3>
+<h4 id="531-局部放大">5.3.1 局部放大</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e">#p1为主图</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sub_china<span style="color:#f92672">&lt;-</span>p1<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">coord_sf</span>(xlim<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">105</span>,<span style="color:#ae81ff">125</span>),ylim<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">30</span>))<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">labs</span>(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>,y<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>,title<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>)<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">theme_void</span>()<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">theme</span>(panel.border <span style="color:#f92672">=</span> <span style="color:#a6e22e">element_rect</span>(fill<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;NA&#34;</span>),legend.position<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;none&#39;</span>)
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sub_china
+</span></span></code></pre></div><h4 id="532-南海诸岛小图">5.3.2 南海诸岛小图</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>main_china<span style="color:#f92672">&lt;-</span>p1<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">coord_sf</span>(ylim<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">18</span>,<span style="color:#ae81ff">55</span>),xlim<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">70</span>,<span style="color:#ae81ff">140</span>))<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">labs</span>(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Longitude&#34;</span>,y<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Latitude&#34;</span>,fill<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Pops&#34;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>main_china <span style="color:#f92672">+</span> <span style="color:#a6e22e">inset_element</span>(sub_china,<span style="color:#ae81ff">0.7</span>, <span style="color:#ae81ff">0.02</span>, <span style="color:#ae81ff">0.99</span>, <span style="color:#ae81ff">0.45</span>)
+</span></span></code></pre></div><h4 id="533-指南针和比例尺">5.3.3 指南针和比例尺</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span>p1<span style="color:#f92672">=</span>p1<span style="color:#f92672">+</span>ggspatial<span style="color:#f92672">::</span><span style="color:#a6e22e">annotation_scale</span>(location<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;bl&#34;</span>)<span style="color:#f92672">+</span> <span style="color:#75715e">#比例尺</span>
+</span></span><span style="display:flex;"><span>  ggspatial<span style="color:#f92672">::</span><span style="color:#a6e22e">annotation_north_arrow</span>(location<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;tl&#34;</span>,<span style="color:#75715e">#tl为top left</span>
+</span></span><span style="display:flex;"><span>                                    height <span style="color:#f92672">=</span> <span style="color:#a6e22e">unit</span>(<span style="color:#ae81ff">1.5</span>, <span style="color:#e6db74">&#34;cm&#34;</span>),
+</span></span><span style="display:flex;"><span>                                    width <span style="color:#f92672">=</span> <span style="color:#a6e22e">unit</span>(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;cm&#34;</span>),
+</span></span><span style="display:flex;"><span>                                    pad_x <span style="color:#f92672">=</span> <span style="color:#a6e22e">unit</span>(<span style="color:#ae81ff">0.5</span>, <span style="color:#e6db74">&#34;cm&#34;</span>),
+</span></span><span style="display:flex;"><span>                                    pad_y <span style="color:#f92672">=</span> <span style="color:#a6e22e">unit</span>(<span style="color:#ae81ff">0.5</span>, <span style="color:#e6db74">&#34;cm&#34;</span>)) <span style="color:#75715e">#指南针</span>
+</span></span></code></pre></div><h3 id="54-散点饼图">5.4 散点饼图</h3>
+<ul>
+<li><code>geom_grob::geom_grob()</code>元素</li>
+<li><code>scatterpie::geom_scatterpie</code>元素</li>
+</ul>
+<h4 id="541-geom_grob">5.4.1 geom_grob</h4>
+<pre tabindex="0"><code>#对每个省做饼图
+ppp &lt;- dat%&gt;%
+  mutate(Mn_status=cut(Mn,breaks=c(-50,30,80,2000),
+                       labels=c(&#34;low&#34;,&#34;medium&#34;,&#34;high&#34;)))%&gt;%
+  group_nest(province) %&gt;%
+  mutate(prop=map(data,~ggplot(data=.x,aes(x=&#34;&#34;,fill=Mn_status))+
+                    geom_bar(width=1)+
+                    coord_polar(theta=&#34;y&#34;)+
+                    scale_fill_manual(guide=&#34;none&#34;, #不能要legend
+                                      values=ggsci::pal_aaas()(3))+
+                    labs(x=&#34;&#34;,y=&#34;&#34;,fill=(province))+
+                    theme(panel.background = element_blank(),
+                          plot.background = element_blank(),
+                          axis.text = element_blank(),
+                          axis.title=element_blank(),
+                          axis.ticks=element_blank(),
+                          panel.grid=element_blank())
+  )
+  )
+
+#合并到数据集
+china_provin%&lt;&gt;%
+  left_join(ppp,by=&#34;province&#34;)%&gt;%
+  select(1,4,6)%&gt;%
+  mutate(prop2=map(prop,~ggplotGrob(.x))) #转化为图标
+
+#做主图
+df4%&gt;%ggplot()+
+  geom_sf()+
+  ggpmisc::geom_grob(data=china_provin, 
+                     vp.width =0.07, vp.height=0.07,
+                     aes(geometry = centd,label=prop2),
+                     stat=&#34;sf_coordinates&#34;)
+</code></pre><h4 id="542-scatterpie">5.4.2 scatterpie</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span>ppp<span style="color:#f92672">&lt;-</span>dat<span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">mutate</span>(Mn_status<span style="color:#f92672">=</span><span style="color:#a6e22e">cut</span>(Mn,breaks<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">-50</span>,<span style="color:#ae81ff">30</span>,<span style="color:#ae81ff">80</span>,<span style="color:#ae81ff">2000</span>),
+</span></span><span style="display:flex;"><span>                       labels<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;low&#34;</span>,<span style="color:#e6db74">&#34;medium&#34;</span>,<span style="color:#e6db74">&#34;high&#34;</span>)))<span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">group_by</span>(province,Mn_status)<span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">summarize</span>(count<span style="color:#f92672">=</span><span style="color:#a6e22e">n</span>())<span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">pivot_wider</span>(names_from <span style="color:#f92672">=</span> Mn_status,values_from<span style="color:#f92672">=</span>count,values_fill<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)<span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">mutate</span>(size<span style="color:#f92672">=</span>low<span style="color:#f92672">+</span>medium<span style="color:#f92672">+</span>high)
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>df4<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">ggplot</span>()<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_sf</span>()<span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  scatterpie<span style="color:#f92672">::</span><span style="color:#a6e22e">geom_scatterpie</span>(data<span style="color:#f92672">=</span>china_provin,
+</span></span><span style="display:flex;"><span>                              <span style="color:#a6e22e">aes</span>(x<span style="color:#f92672">=</span>sss1,y<span style="color:#f92672">=</span>sss2,r<span style="color:#f92672">=</span>count<span style="color:#f92672">/</span><span style="color:#ae81ff">200</span>),
+</span></span><span style="display:flex;"><span>                              cols<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;low&#34;</span>,<span style="color:#e6db74">&#34;medium&#34;</span>,<span style="color:#e6db74">&#34;high&#34;</span>),
+</span></span><span style="display:flex;"><span>                              legend_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Mn&#39;</span>,
+</span></span><span style="display:flex;"><span>                              color<span style="color:#f92672">=</span><span style="color:#66d9ef">NA</span>,alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.7</span>
+</span></span><span style="display:flex;"><span>                              )
+</span></span></code></pre></div>
+    </article>
+  </div>
+
+  
+  
+  
+  <script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-123456789-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+<script>
+window.addEventListener("load", function(){
+window.cookieconsent.initialise({
+  "palette": {
+    "popup": {
+      "background": "#216942",
+      "text": "#b2d192"
+    },
+    "button": {
+      "background": "#afed71"
+    }
+  }
+})});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,1725 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <meta name="generator" content="Hugo 0.101.0" />
+
+  
+  <meta name="description" content="Some description">
+  
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="https://osummer.github.io/apple-touch-icon.png">
+
+  
+  <link rel="icon" type="image/png" sizes="32x32" href="https://osummer.github.io/favicon-32x32.png">
+
+  
+  <link rel="icon" type="image/png" sizes="16x16" href="https://osummer.github.io/favicon-16x16.png">
+
+  
+  <link rel="manifest" href="https://osummer.github.io/site.webmanifest">
+
+  
+  <link rel="mask-icon" href="https://osummer.github.io/safari-pinned-tab.svg" color="#5bbad5">
+
+  <meta name="msapplication-TileColor" content="#da532c">
+
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <link rel="stylesheet" href="https://osummer.github.io/css/bootstrap.min.css" />
+
+  
+  <title>easystats | 学海无涯</title>
+  
+
+  <style>
+body {
+  min-width: 300px;
+}
+
+.custom-navbar {
+  margin-bottom: 1em;
+  height: 60px;
+}
+
+.custom-navbar a {
+  display: inline-block; 
+  padding: 18px 0;
+  margin-right: 1em; 
+  font-weight: bold; 
+}
+
+.custom-navbar a:hover,
+.custom-navbar a:focus {
+  text-decoration: none; 
+}
+
+@media print {
+  .custom-navbar {
+    display: none;
+  }
+}
+
+article {
+  padding-bottom: 1em;
+}
+
+img {
+  max-width: 100%;
+}
+
+
+body {
+  background-color: #fff;
+}
+
+
+
+body {
+  color: #212529;
+}
+
+
+
+a {
+  color: #007bff;
+}
+
+
+
+a:hover,
+a:focus {
+  color: #0056b3;
+}
+
+
+
+.custom-navbar {
+  background-color: #1E90FF;
+}
+
+
+
+.custom-navbar a {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+
+
+.custom-navbar a:hover,
+.custom-navbar a:focus {
+  color: rgba(255, 255, 255, 1);
+}
+
+
+
+.container {
+  max-width: 800px;
+}
+
+
+
+pre {
+  display: block;
+  padding: 9.5px;
+  word-break: break-all;
+  word-wrap: break-word;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+pre code {
+  padding: 0;
+  font-size: inherit;
+  color: inherit; 
+  white-space: pre-wrap;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+}
+
+code {
+  padding: 2px 4px;
+  color: inherit; 
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: .9em;
+}
+
+
+
+blockquote,
+.blockquote {
+  padding: 10px 20px;
+  margin: 0 0 20px;
+  font-size: 1em;
+  border-left: 5px solid #6c757d;
+}
+
+</style>
+</head>
+
+<body>
+  <nav class="custom-navbar">
+  <div class="container">
+    
+    <a href="/post/">Posts</a>
+    
+    <a href="/tags/">Tags</a>
+    
+    <a href="/about/">About</a>
+    
+    <a href="/index.xml">RSS</a>
+    
+  </div>
+</nav>
+  
+  <div class="container">
+    <article>
+      <h1>easystats</h1>
+<p>
+  <small class="text-secondary">
+  
+  
+  Jun 17, 2022
+  </small>
+  
+
+<small><code><a href="https://osummer.github.io/tags/r">R</a></code></small>
+
+
+<small><code><a href="https://osummer.github.io/tags/%E7%BB%9F%E8%AE%A1">统计</a></code></small>
+
+  
+
+</p>
+<h1 id="参数估计">参数估计</h1>
+<h2 id="parameters">parameters</h2>
+<h3 id="介绍">介绍</h3>
+<p>用户获取模型的相关参数，对参数进行<strong>估计、降维、筛选</strong> 等。</p>
+<blockquote>
+<p>Obtain a table containing all information about the parameters of your models.
+Beyond computing <em>p-values</em> , <em>CIs</em> , <em>Bayesian indices</em>  and other measures for a wide variety of models, this package implements features like <em>bootstrapping</em>  of parameters and models, <em>feature reduction</em>  (feature extraction and variable selection), or tools for data reduction like functions to perform cluster, factor or principal component analysis.</p>
+</blockquote>
+<p>主要功能有：</p>
+<blockquote>
+<p><a href="https://easystats.github.io/parameters/articles/model_parameters.html">Summary of Model Parameters</a>
+<a href="https://easystats.github.io/parameters/articles/model_parameters_standardized.html">Standardized Model Parameters</a>
+<a href="https://easystats.github.io/parameters/articles/model_parameters_robust.html">Robust Estimation of Standard Errors, Confidence Intervals and p-values</a>
+<a href="https://easystats.github.io/parameters/articles/model_parameters_mice.html">Model Parameters and Missing Data</a>
+<a href="https://easystats.github.io/parameters/articles/parameters_reduction.html">Feature reduction (PCA, cMDS, ICA…)</a>
+<a href="https://easystats.github.io/parameters/articles/efa_cfa.html">Structural models (EFA, CFA, SEM…)</a>
+<a href="https://easystats.github.io/parameters/articles/parameters_selection.html">Parameters selection</a>
+<a href="https://easystats.github.io/parameters/articles/demean.html">A Practical Guide for Panel Data Analysis</a></p>
+</blockquote>
+<h3 id="示例">示例</h3>
+<h4 id="描述统计">描述统计</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span><span style="color:#a6e22e">data</span>(iris)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">describe_distribution</span>(iris)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; Variable     | Mean |   SD |  IQR |        Range | Skewness | Kurtosis |   n | n_Missing</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; ----------------------------------------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; Sepal.Length | 5.84 | 0.83 | 1.30 | [4.30, 7.90] |     0.31 |    -0.55 | 150 |         0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; Sepal.Width  | 3.06 | 0.44 | 0.52 | [2.00, 4.40] |     0.32 |     0.23 | 150 |         0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; Petal.Length | 3.76 | 1.77 | 3.52 | [1.00, 6.90] |    -0.27 |    -1.40 | 150 |         0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; Petal.Width  | 1.20 | 0.76 | 1.50 | [0.10, 2.50] |    -0.10 |    -1.34 | 150 |         0</span>
+</span></span></code></pre></div><h4 id="回归模型参数及标准化回归系数">回归模型参数及标准化回归系数</h4>
+<p><img src="https://gitee.com/osummer/blogimg/raw/master/img/202112251633359.png" alt=""></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span>model <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lm</span>(Sepal.Width <span style="color:#f92672">~</span> Petal.Length <span style="color:#f92672">*</span> Species <span style="color:#f92672">+</span> Petal.Width, data <span style="color:#f92672">=</span> iris)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># regular model parameters</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">model_parameters</span>(model)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; Parameter                           | Coefficient |   SE |         95% CI | t(143) |      p</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; -------------------------------------------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; (Intercept)                         |        2.89 | 0.36 | [ 2.18,  3.60] |   8.01 | &lt; .001</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; Petal Length                        |        0.26 | 0.25 | [-0.22,  0.75] |   1.07 | 0.287 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; Species [versicolor]                |       -1.66 | 0.53 | [-2.71, -0.62] |  -3.14 | 0.002 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; Species [virginica]                 |       -1.92 | 0.59 | [-3.08, -0.76] |  -3.28 | 0.001 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; Petal Width                         |        0.62 | 0.14 | [ 0.34,  0.89] |   4.41 | &lt; .001</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; Petal Length * Species [versicolor] |       -0.09 | 0.26 | [-0.61,  0.42] |  -0.36 | 0.721 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; Petal Length * Species [virginica]  |       -0.13 | 0.26 | [-0.64,  0.38] |  -0.50 | 0.618</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># standardized parameters</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">model_parameters</span>(model, standardize <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;refit&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; Parameter                           | Coefficient |   SE |         95% CI | t(143) |      p</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; -------------------------------------------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; (Intercept)                         |        3.59 | 1.30 | [ 1.01,  6.17] |   2.75 | 0.007 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; Petal Length                        |        1.07 | 1.00 | [-0.91,  3.04] |   1.07 | 0.287 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; Species [versicolor]                |       -4.62 | 1.31 | [-7.21, -2.03] |  -3.53 | &lt; .001</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; Species [virginica]                 |       -5.51 | 1.38 | [-8.23, -2.79] |  -4.00 | &lt; .001</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; Petal Width                         |        1.08 | 0.24 | [ 0.59,  1.56] |   4.41 | &lt; .001</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; Petal Length * Species [versicolor] |       -0.38 | 1.06 | [-2.48,  1.72] |  -0.36 | 0.721 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; Petal Length * Species [virginica]  |       -0.52 | 1.04 | [-2.58,  1.54] |  -0.50 | 0.618</span>
+</span></span></code></pre></div><h4 id="混合模型参数">混合模型参数</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(lme4)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lmer</span>(Sepal.Width <span style="color:#f92672">~</span> Petal.Length <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span><span style="color:#f92672">|</span>Species), data <span style="color:#f92672">=</span> iris)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># model parameters with CI, df and p-values based on Wald approximation</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">model_parameters</span>(model, effects <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;all&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; # Fixed Effects</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; Parameter    | Coefficient |   SE |       95% CI | t(146) |      p</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; ------------------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; (Intercept)  |        2.00 | 0.56 | [0.89, 3.11] |   3.56 | &lt; .001</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; Petal Length |        0.28 | 0.06 | [0.16, 0.40] |   4.75 | &lt; .001</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; # Random Effects</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; Parameter               | Coefficient</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; -------------------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; SD (Intercept: Species) |        0.89</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; SD (Residual)           |        0.32</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># model parameters with CI, df and p-values based on Kenward-Roger approximation</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">model_parameters</span>(model, df_method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;kenward&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; # Fixed Effects</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; Parameter    | Coefficient |   SE |       95% CI |    t |     df |      p</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; -------------------------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; (Intercept)  |        2.00 | 0.57 | [0.07, 3.93] | 3.53 |   2.67 | 0.046 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; Petal Length |        0.28 | 0.06 | [0.16, 0.40] | 4.58 | 140.98 | &lt; .001</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; # Random Effects</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; Parameter               | Coefficient</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; -------------------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; SD (Intercept: Species) |        0.89</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; SD (Residual)           |        0.32</span>
+</span></span></code></pre></div><h4 id="结构模型参数">结构模型参数</h4>
+<blockquote>
+<p>Besides many types of regression models and packages, it also works for other types of models, such as <a href="https://easystats.github.io/parameters/articles/efa_cfa.html">structural models</a> (EFA, CFA, SEM…).</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(psych)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">&lt;-</span> psych<span style="color:#f92672">::</span><span style="color:#a6e22e">fa</span>(attitude, nfactors <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">model_parameters</span>(model)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; # Rotated loadings from Factor Analysis (oblimin-rotation)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; Variable   |  MR1  |  MR2  |  MR3  | Complexity | Uniqueness</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; ------------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; rating     | 0.90  | -0.07 | -0.05 |    1.02    |    0.23   </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; complaints | 0.97  | -0.06 | 0.04  |    1.01    |    0.10   </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; privileges | 0.44  | 0.25  | -0.05 |    1.64    |    0.65   </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; learning   | 0.47  | 0.54  | -0.28 |    2.51    |    0.24   </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; raises     | 0.55  | 0.43  | 0.25  |    2.35    |    0.23   </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; critical   | 0.16  | 0.17  | 0.48  |    1.46    |    0.67   </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; advance    | -0.11 | 0.91  | 0.07  |    1.04    |    0.22   </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; The 3 latent factors (oblimin rotation) accounted for 66.60% of the total variance of the original data (MR1 = 38.19%, MR2 = 22.69%, MR3 = 5.72%).</span>
+</span></span></code></pre></div><h4 id="变量筛选">变量筛选</h4>
+<blockquote>
+<p><a href="https://easystats.github.io/parameters/articles/parameters_selection.html">select_parameters()</a> can help you quickly select and retain the most relevant predictors using methods tailored for the model type.</p>
+</blockquote>
+<p><img src="https://gitee.com/osummer/blogimg/raw/master/img/202112251633360.png" alt=""></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(dplyr)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">lm</span>(disp <span style="color:#f92672">~</span> ., data <span style="color:#f92672">=</span> mtcars) <span style="color:#f92672">%&gt;%</span> 
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">select_parameters</span>() <span style="color:#f92672">%&gt;%</span> 
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">model_parameters</span>()
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; Parameter   | Coefficient |     SE |            95% CI | t(26) |      p</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; -----------------------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; (Intercept) |      141.70 | 125.67 | [-116.62, 400.02] |  1.13 | 0.270 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; cyl         |       13.14 |   7.90 | [  -3.10,  29.38] |  1.66 | 0.108 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; hp          |        0.63 |   0.20 | [   0.22,   1.03] |  3.18 | 0.004 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; wt          |       80.45 |  12.22 | [  55.33, 105.57] |  6.58 | &lt; .001</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; qsec        |      -14.68 |   6.14 | [ -27.31,  -2.05] | -2.39 | 0.024 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; carb        |      -28.75 |   5.60 | [ -40.28, -17.23] | -5.13 | &lt; .001</span>
+</span></span></code></pre></div><h1 id="回归分析">回归分析</h1>
+<h2 id="correlation">correlation</h2>
+<h3 id="介绍-1">介绍</h3>
+<p><a href="https://github.com/easystats/correlation">https://github.com/easystats/correlation</a></p>
+<p><a href="https://joss.theoj.org/papers/10.21105/joss.02306">https://joss.theoj.org/papers/10.21105/joss.02306</a></p>
+<p><code>correlation</code> is an <strong>easystats</strong>  package focused on correlation analysis. It’s lightweight, easy to use, and allows for the computation of many different kinds of correlations, such as <strong>partial</strong>  correlations (偏回归), <strong>Bayesian</strong>  correlations, <strong>multilevel</strong>  correlations, <strong>polychoric</strong>  correlations, <strong>biweight</strong> , <strong>percentage bend</strong>  or <strong>Sheperd’s Pi</strong>  correlations (types of robust correlation), <strong>distance</strong>  correlation (a type of non-linear correlation) and more, also allowing for combinations between them (for instance, <em>Bayesian partial multilevel correlation</em> ).</p>
+<p>除了相关系数correlation还可以输出回归的假设检验（p值）、校正p值(Adjusted p value)、相关系数的置信区间（CI）。具体内容可参考：</p>
+<h3 id="回归方式">回归方式</h3>
+<p>correlation::correlation函数可以执行如下回归：</p>
+<ul>
+<li>✅ <strong>Pearson’s correlation</strong></li>
+<li>✅ <strong>Spearman’s rank correlation</strong></li>
+<li>✅ <strong>Kendall’s rank correlation</strong></li>
+<li>✅ <strong>Biweight midcorrelation</strong></li>
+<li>✅ <strong>Distance correlation</strong></li>
+<li>✅ <strong>Percentage bend correlation</strong></li>
+<li>✅ <strong>Shepherd’s Pi correlation</strong></li>
+<li>✅ <strong>Blomqvist’s coefficient</strong></li>
+<li>✅ <strong>Hoeffding’s D</strong></li>
+<li>✅ <strong>Gamma correlation</strong></li>
+<li>✅ <strong>Gaussian rank correlation</strong></li>
+<li>✅ <strong>Point-Biserial and biserial correlation</strong></li>
+<li>✅ <strong>Winsorized correlation</strong></li>
+<li>✅ <strong>Polychoric correlation</strong></li>
+<li>✅ <strong>Tetrachoric correlation</strong></li>
+<li>✅ <strong>Multilevel correlation</strong></li>
+</ul>
+<h3 id="回归示例">回归示例</h3>
+<h4 id="简单回归">简单回归</h4>
+<p>方法（method）可选择pearson，spearman，kendall等常用相关系数计算。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span>results <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">correlation</span>(iris,
+</span></span><span style="display:flex;"><span>                       method<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;pearson&#34;</span>,p_adjust<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;holm&#34;</span>,ci<span style="color:#f92672">=</span>T,
+</span></span><span style="display:flex;"><span>                       bayesian <span style="color:#f92672">=</span> F,
+</span></span><span style="display:flex;"><span>                       partial<span style="color:#f92672">=</span>F,
+</span></span><span style="display:flex;"><span>                       )
+</span></span><span style="display:flex;"><span>results
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">summary</span>(results, redundant <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
+</span></span><span style="display:flex;"><span>results <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">summary</span>(redundant <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>) <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">plot</span>()
+</span></span></code></pre></div><p>结合 <strong>dplyr</strong>  分组函数还可以分组做相关：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span>iris <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">select</span>(Species, Sepal.Length, Sepal.Width, Petal.Width) <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">group_by</span>(Species) <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">correlation</span>()
+</span></span></code></pre></div><hr>
+<h4 id="贝叶斯回归">贝叶斯回归</h4>
+<p>贝叶斯回归可输出贝叶斯因子BF。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span><span style="color:#a6e22e">correlation</span>(iris, bayesian <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
+</span></span></code></pre></div><h4 id="偏相关">偏相关</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span>iris <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">correlation</span>(partial <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>) <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">summary</span>()
+</span></span></code></pre></div><h4 id="gaussian-graphical-models-ggms">Gaussian Graphical Models (GGMs)</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(see) <span style="color:#75715e"># for plotting</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(ggraph) <span style="color:#75715e"># needs to be loaded</span>
+</span></span><span style="display:flex;"><span>mtcars <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">correlation</span>(partial <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>) <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">plot</span>()
+</span></span></code></pre></div><p><img src="https://gitee.com/osummer/blogimg/raw/master/img/202112251633361.png" alt=""></p>
+<h4 id="多层相关">多层相关</h4>
+<p>分层相关指partial correlations based on linear mixed-effects models that include the factors as <strong>random effects</strong> . They can be see as correlations <em>adjusted</em>  for some group (<em>hierarchical</em> ) variability.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span>iris <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">correlation</span>(partial <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>, multilevel <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>) <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">summary</span>()
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## # Correlation Matrix (pearson-method)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Parameter    | Petal.Width | Petal.Length | Sepal.Width</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## -------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Sepal.Length |      -0.17* |      0.71*** |     0.43***</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Sepal.Width  |     0.39*** |       -0.18* |            </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Petal.Length |     0.38*** |              |            </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## p-value adjustment method: Holm (1979)</span>
+</span></span></code></pre></div><h1 id="模型评价">模型评价</h1>
+<h2 id="performance">performance</h2>
+<h2 id="介绍-2">介绍</h2>
+<p>performance包可对模型进行：</p>
+<ul>
+<li>模型诊断（线性、方差异质性、正态性、共线性等）</li>
+<li>模型拟合度比较（AIC\BIC\R2等）</li>
+</ul>
+<p><img src="https://gitee.com/osummer/blogimg/raw/master/img/202112251633362.png" alt=""></p>
+<h2 id="示例-1">示例</h2>
+<h3 id="r2">R2</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span>model <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lm</span>(mpg <span style="color:#f92672">~</span> wt <span style="color:#f92672">+</span> cyl, data <span style="color:#f92672">=</span> mtcars)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">r2</span>(model)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; # R2 for Linear Regression</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt;        R2: 0.830</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt;   adj. R2: 0.819</span>
+</span></span></code></pre></div><blockquote>
+<p>The different R-squared measures can also be accessed directly via functions like <code>r2_bayes()</code>, <code>r2_coxsnell()</code> or <code>r2_nagelkerke()</code>
+For mixed models, the <em>conditional</em>  and <em>marginal</em>  R-squared are returned. The <em>marginal R-squared</em>  considers only the variance of the fixed effects and indicates <strong>how much of the model’s variance is explained by the fixed effects part only</strong> . The <em>conditional R-squared</em>  takes both the fixed and random effects into account and indicates how much of the model’s variance is explained by the “complete” model.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(lme4)
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lmer</span>(Reaction <span style="color:#f92672">~</span> Days <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> Days <span style="color:#f92672">|</span> Subject), data <span style="color:#f92672">=</span> sleepstudy)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">r2</span>(model)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; # R2 for Mixed Models</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt;   Conditional R2: 0.799</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt;      Marginal R2: 0.279</span>
+</span></span></code></pre></div><h3 id="类内相关度icc">类内相关度ICC</h3>
+<blockquote>
+<p>Similar to R-squared, the ICC provides information on the explained variance and can be interpreted as “the proportion of the variance explained by the grouping structure in the population” (Hox 2010).
+<code>icc()</code> calculates the ICC for various mixed model objects, including <code>stanreg</code> models.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(lme4)
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lmer</span>(Reaction <span style="color:#f92672">~</span> Days <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> Days <span style="color:#f92672">|</span> Subject), data <span style="color:#f92672">=</span> sleepstudy)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">icc</span>(model)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; # Intraclass Correlation Coefficient</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt;      Adjusted ICC: 0.722</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt;   Conditional ICC: 0.521</span>
+</span></span></code></pre></div><h3 id="模型诊断">模型诊断</h3>
+<ul>
+<li>check_overdispersion(model)</li>
+<li>check_zeroinflation(model)</li>
+<li>check_singularity(model)</li>
+<li>check_heteroscedasticity(model)</li>
+<li><code>check_collinearity()</code></li>
+<li><code>check_normality()</code></li>
+<li>check_model(model) 综合诊断</li>
+</ul>
+<h4 id="check-for-overdispersion">Check for overdispersion</h4>
+<blockquote>
+<p>Overdispersion occurs when the observed variance in the data is higher than the expected variance from the model assumption (for Poisson, variance roughly equals the mean of an outcome). <code>check_overdispersion()</code> checks if a count model (including mixed models) is overdispersed or not.
+Overdispersion can be fixed by either modelling the dispersion parameter (not possible with all packages), or by choosing a different distributional family (like Quasi-Poisson, or negative binomial, see (Gelman and Hill 2007)).</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(glmmTMB)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">data</span>(Salamanders)
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">glm</span>(count <span style="color:#f92672">~</span> spp <span style="color:#f92672">+</span> mined, family <span style="color:#f92672">=</span> poisson, data <span style="color:#f92672">=</span> Salamanders)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">check_overdispersion</span>(model)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; # Overdispersion test</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt;        dispersion ratio =    2.946</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt;   Pearson&#39;s Chi-Squared = 1873.710</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt;                 p-value =  &lt; 0.001</span>
+</span></span></code></pre></div><h3 id="模型表现">模型表现</h3>
+<ul>
+<li>model_performance(model)</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span>m1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lm</span>(mpg <span style="color:#f92672">~</span> wt <span style="color:#f92672">+</span> cyl, data <span style="color:#f92672">=</span> mtcars)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">model_performance</span>(m1)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; # Indices of model performance</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; AIC     |     BIC |    R2 | R2 (adj.) |  RMSE | Sigma</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; -----------------------------------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; 156.010 | 161.873 | 0.830 |     0.819 | 2.444 | 2.568</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(lme4)
+</span></span><span style="display:flex;"><span>m3 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lmer</span>(Reaction <span style="color:#f92672">~</span> Days <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> Days <span style="color:#f92672">|</span> Subject), data <span style="color:#f92672">=</span> sleepstudy)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">model_performance</span>(m3)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; # Indices of model performance</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; AIC      |      BIC | R2 (cond.) | R2 (marg.) |   ICC |   RMSE |  Sigma</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; -----------------------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; 1755.628 | 1774.786 |      0.799 |      0.279 | 0.722 | 23.438 | 25.592</span>
+</span></span></code></pre></div><h3 id="模型比较">模型比较</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span>counts <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">18</span>, <span style="color:#ae81ff">17</span>, <span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">25</span>, <span style="color:#ae81ff">13</span>, <span style="color:#ae81ff">12</span>)
+</span></span><span style="display:flex;"><span>outcome <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">gl</span>(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">9</span>)
+</span></span><span style="display:flex;"><span>treatment <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">gl</span>(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>m4 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">glm</span>(counts <span style="color:#f92672">~</span> outcome <span style="color:#f92672">+</span> treatment, family <span style="color:#f92672">=</span> <span style="color:#a6e22e">poisson</span>())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">compare_performance</span>(m1, m2, m3, m4)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; # Comparison of Model Performance Indices</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; Name |   Model |      AIC |      BIC |   RMSE |  Sigma | Score_log | Score_spherical |    R2 | R2 (adj.) | Tjur&#39;s R2 | Log_loss |   PCP | R2 (cond.) | R2 (marg.) |   ICC | Nagelkerke&#39;s R2</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; m1   |      lm |  156.010 |  161.873 |  2.444 |  2.568 |           |                 | 0.830 |     0.819 |           |          |       |            |            |       |                </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; m2   |     glm |   31.298 |   35.695 |  0.359 |  0.934 |   -14.903 |           0.095 |       |           |     0.478 |    0.395 | 0.743 |            |            |       |                </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; m3   | lmerMod | 1755.628 | 1774.786 | 23.438 | 25.592 |           |                 |       |           |           |          |       |      0.799 |      0.279 | 0.722 |                </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; m4   |     glm |   56.761 |   57.747 |  3.043 |  1.132 |    -2.598 |           0.324 |       |           |           |          |       |            |            |       |           0.657</span>
+</span></span></code></pre></div><p>排序比较</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span><span style="color:#a6e22e">compare_performance</span>(m1, m2, m3, m4, rank <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; # Comparison of Model Performance Indices</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; Name |   Model |      AIC |      BIC |   RMSE |  Sigma | Performance-Score</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; --------------------------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; m2   |     glm |   31.298 |   35.695 |  0.359 |  0.934 |           100.00%</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; m4   |     glm |   56.761 |   57.747 |  3.043 |  1.132 |            96.21%</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; m1   |      lm |  156.010 |  161.873 |  2.444 |  2.568 |            92.46%</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; m3   | lmerMod | 1755.628 | 1774.786 | 23.438 | 25.592 |             0.00%</span>
+</span></span></code></pre></div><p>可视化</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span><span style="color:#a6e22e">plot</span>(<span style="color:#a6e22e">compare_performance</span>(m1, m2, m4, rank <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>))
+</span></span></code></pre></div><p><img src="https://gitee.com/osummer/blogimg/raw/master/img/202112251633363.png" alt=""></p>
+<h3 id="模型测试">模型测试</h3>
+<blockquote>
+<p><code>test_performance()</code> (and <code>test_bf</code>, its Bayesian sister) carries out the most relevant and appropriate tests based on the input (for instance, whether the models are nested or not).</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span><span style="color:#a6e22e">set.seed</span>(<span style="color:#ae81ff">123</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">data</span>(iris)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>lm1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lm</span>(Sepal.Length <span style="color:#f92672">~</span> Species, data <span style="color:#f92672">=</span> iris)
+</span></span><span style="display:flex;"><span>lm2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lm</span>(Sepal.Length <span style="color:#f92672">~</span> Species <span style="color:#f92672">+</span> Petal.Length, data <span style="color:#f92672">=</span> iris)
+</span></span><span style="display:flex;"><span>lm3 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lm</span>(Sepal.Length <span style="color:#f92672">~</span> Species <span style="color:#f92672">*</span> Sepal.Width, data <span style="color:#f92672">=</span> iris)
+</span></span><span style="display:flex;"><span>lm4 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lm</span>(Sepal.Length <span style="color:#f92672">~</span> Species <span style="color:#f92672">*</span> Sepal.Width <span style="color:#f92672">+</span> Petal.Length <span style="color:#f92672">+</span> Petal.Width, data <span style="color:#f92672">=</span> iris)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">compare_performance</span>(lm1, lm2, lm3, lm4)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; # Comparison of Model Performance Indices</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; Name | Model |     AIC |     BIC |    R2 | R2 (adj.) |  RMSE | Sigma</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; --------------------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; lm1  |    lm | 231.452 | 243.494 | 0.619 |     0.614 | 0.510 | 0.515</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; lm2  |    lm | 106.233 | 121.286 | 0.837 |     0.833 | 0.333 | 0.338</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; lm3  |    lm | 187.092 | 208.167 | 0.727 |     0.718 | 0.431 | 0.440</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; lm4  |    lm |  78.797 | 105.892 | 0.871 |     0.865 | 0.296 | 0.305</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">test_bf</span>(lm1, lm2, lm3, lm4)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; Bayes Factors for Model Comparison</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt;       Model                                                    BF</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; [lm2] Species + Petal.Length                             3.45e+26</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; [lm3] Species * Sepal.Width                              4.69e+07</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; [lm4] Species * Sepal.Width + Petal.Length + Petal.Width 7.58e+29</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; * Against Denominator: [lm1] Species</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; *   Bayes Factor Type: BIC approximation</span>
+</span></span></code></pre></div><h1 id="统计结果整洁输出">统计结果整洁输出</h1>
+<hr>
+<ul>
+<li><a href="https://indrajeetpatil.github.io/statsExpressions//articles/web_only/dataframe_outputs.html">https://indrajeetpatil.github.io/statsExpressions//articles/web_only/dataframe_outputs.html</a></li>
+<li>statsExpressions</li>
+<li>2021/11/07 14:45:40</li>
+</ul>
+<hr>
+<h2 id="introduction">Introduction</h2>
+<p>The <code>statsExpressions</code> package has two key aims: to provide a consistent syntax to do statistical analysis with tidy data, and to provide statistical expressions (i.e., a pre-formatted in-text statistical result) for plotting functions. Currently, it supports common types of statistical approaches and tests: parametric, nonparametric, robust, and Bayesian  <em>t</em> -test, one-way ANOVA, correlation analyses, contingency table analyses, and meta-analyses. The functions are pipe-friendly and compatible with tidy data.</p>
+<p>Statistical packages exhibit substantial diversity in terms of their syntax and expected input type. This can make it difficult to switch from one statistical approach to another. For example, some functions expect vectors as inputs, while others expect dataframes. Depending on whether it is a repeated measures design or not, different functions might expect data to be in wide or long format. Some functions can internally omit missing values, while other functions error in their presence. Furthermore, if someone wishes to utilize the objects returned by these packages downstream in their workflow, this is not straightforward either because even functions from the same package can return a list, a matrix, an array, a dataframe, etc., depending on the function.</p>
+<p>This is where <code>statsExpressions</code> comes in: It can be thought of as a unified portal through which most of the functionality in these underlying packages can be accessed, with a simpler interface and no requirement to change data format.</p>
+<h2 id="dataframes">Dataframes</h2>
+<p>The dataframe will contain the following columns (the exact columns will depend on the test and the statistical approach):</p>
+<ul>
+<li><code>statistic</code>: the numeric value of a statistic.</li>
+<li><code>df</code>: the numeric value of a parameter being modeled (often degrees of freedom for the test); note that if <code>no.parameters = 0L</code> (e.g., for non-parametric tests), this column will be irrelevant.</li>
+<li><code>df.error</code> and <code>df</code>: relevant only if the statistic in question has two degrees of freedom (e.g., anova).</li>
+<li><code>p.value</code>: the two-sided  <em>p</em> -value associated with the observed statistic.</li>
+<li><code>method</code>: the details of the statistical test carried out.</li>
+<li><code>estimate</code>: estimated value of the effect size.</li>
+<li><code>conf.low</code>: lower bound for the effect size estimate.</li>
+<li><code>conf.high</code>: upper bound for the effect size estimate.</li>
+<li><code>conf.level</code>: width of the confidence interval.</li>
+<li><code>effectsize</code>: the type of the effect size.</li>
+</ul>
+<p>For details about the tests and types of effect size estimates they correspond to, see: <a href="https://indrajeetpatil.github.io/statsExpressions/articles/stats_details.html">https://indrajeetpatil.github.io/statsExpressions/articles/stats_details.html</a></p>
+<h2 id="单变量检验one-sample-tests">单变量检验One-sample tests</h2>
+<pre tabindex="0"><code># setup
+library(statsExpressions)
+
+# ----------------------- parametric ---------------------------------------
+
+# for reproducibility
+set.seed(123)
+one_sample_test(
+  data = ggplot2::msleep,
+  x = brainwt,
+  test.value = 0.275,
+  type = &#34;parametric&#34;,
+)
+#&gt; # A tibble: 1 × 14
+#&gt;      mu statistic df.error p.value method            alternative effectsize
+#&gt;   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;             &lt;chr&gt;       &lt;chr&gt;   
+#&gt; 1 0.275    0.0504       55   0.960 One Sample t-test two.sided   Hedges&#39; g 
+#&gt;   estimate conf.level conf.low conf.high conf.method conf.distribution
+#&gt;      &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;          
+#&gt; 1  0.00665       0.95   -0.254     0.267 ncp         t              
+#&gt;   expression
+#&gt;   &lt;list&gt;  
+#&gt; 1 &lt;language&gt;
+
+# ----------------------- non-parametric -----------------------------------
+
+# for reproducibility
+set.seed(123)
+one_sample_test(
+  data = ggplot2::msleep,
+  x = brainwt,
+  test.value = 0.275,
+  type = &#34;nonparametric&#34;,
+)
+#&gt; # A tibble: 1 × 11
+#&gt;   statistic    p.value method                    alternative effectsize     
+#&gt;       &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;                     &lt;chr&gt;       &lt;chr&gt;          
+#&gt; 1       248 0.00000738 Wilcoxon signed rank test two.sided   r (rank biserial)
+#&gt;   estimate conf.level conf.low conf.high conf.method expression
+#&gt;      &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;       &lt;list&gt;  
+#&gt; 1   -0.689       0.95   -0.817    -0.497 normal      &lt;language&gt;
+
+# ----------------------- robust --------------------------------------------
+
+# for reproducibility
+set.seed(123)
+one_sample_test(
+  data = ggplot2::msleep,
+  x = brainwt,
+  test.value = 0.275,
+  type = &#34;robust&#34;,
+)
+#&gt; # A tibble: 1 × 10
+#&gt;   statistic p.value n.obs method                                 effectsize  
+#&gt;       &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt; &lt;chr&gt;                                  &lt;chr&gt;     
+#&gt; 1     -14.7       0    56 Bootstrap-t method for one-sample test Trimmed mean
+#&gt;   estimate conf.level conf.low conf.high expression
+#&gt;      &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;list&gt;  
+#&gt; 1   0.0390       0.95  -0.0132    0.0911 &lt;language&gt;
+
+# ----------------------- Bayes Factor ---------------------------------------
+
+# for reproducibility
+set.seed(123)
+one_sample_test(
+  data = ggplot2::msleep,
+  x = brainwt,
+  test.value = 0.275,
+  type = &#34;bayes&#34;,
+  bf.prior = 0.8,
+)
+#&gt; # A tibble: 2 × 14
+#&gt;   term       estimate conf.level conf.low conf.high    pd rope.percentage
+#&gt;   &lt;chr&gt;         &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;           &lt;dbl&gt;
+#&gt; 1 Difference  0.00952       0.95  -0.250      0.255 0.532          0.580 
+#&gt; 2 Cohens_d    0.276         0.95   0.0153     0.536 0.978          0.0768
+#&gt;   prior.distribution prior.location prior.scale  bf10 method          log_e_bf10
+#&gt;   &lt;chr&gt;                       &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;                &lt;dbl&gt;
+#&gt; 1 cauchy                          0         0.8 0.130 Bayesian t-test      -2.04
+#&gt; 2 cauchy                          0         0.8 0.130 Bayesian t-test      -2.04
+#&gt;   expression
+#&gt;   &lt;list&gt;  
+#&gt; 1 &lt;language&gt;
+#&gt; 2 &lt;language&gt;
+</code></pre><h2 id="两组检验two-sample-tests">两组检验Two-sample tests</h2>
+<h3 id="组内设计within-subjects-design">组内设计within-subjects design</h3>
+<pre tabindex="0"><code># setup
+library(statsExpressions)
+
+# data
+df &lt;- dplyr::filter(bugs_long, condition %in% c(&#34;LDLF&#34;, &#34;LDHF&#34;))
+
+# ----------------------- parametric ---------------------------------------
+
+# for reproducibility
+set.seed(123)
+two_sample_test(
+  data = df,
+  x = condition,
+  y = desire,
+  paired = TRUE,
+  subject.id = subject,
+  type = &#34;p&#34;,
+)
+#&gt; # A tibble: 1 × 15
+#&gt;   term   group     statistic df.error       p.value method        alternative
+#&gt;   &lt;chr&gt;  &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;    
+#&gt; 1 desire condition      6.65       90 0.00000000222 Paired t-test two.sided  
+#&gt;   effectsize estimate conf.level conf.low conf.high conf.method
+#&gt;   &lt;chr&gt;         &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;    
+#&gt; 1 Hedges&#39; g     0.691       0.95    0.465     0.922 ncp      
+#&gt;   conf.distribution expression
+#&gt;   &lt;chr&gt;             &lt;list&gt;  
+#&gt; 1 t                 &lt;language&gt;
+
+# ----------------------- non-parametric -----------------------------------
+
+# for reproducibility
+set.seed(123)
+two_sample_test(
+  data = df,
+  x = condition,
+  y = desire,
+  paired = TRUE,
+  subject.id = subject,
+  type = &#34;np&#34;
+)
+#&gt; # A tibble: 1 × 13
+#&gt;   parameter1 parameter2 statistic      p.value method                 
+#&gt;   &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt;        &lt;dbl&gt; &lt;chr&gt;                  
+#&gt; 1 desire     condition      2250. 0.0000000241 Wilcoxon signed rank test
+#&gt;   alternative effectsize        estimate conf.level conf.low conf.high
+#&gt;   &lt;chr&gt;       &lt;chr&gt;                &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+#&gt; 1 two.sided   r (rank biserial)    0.761       0.95    0.642     0.844
+#&gt;   conf.method expression
+#&gt;   &lt;chr&gt;       &lt;list&gt;  
+#&gt; 1 normal      &lt;language&gt;
+
+# ----------------------- robust --------------------------------------------
+
+# for reproducibility
+set.seed(123)
+two_sample_test(
+  data = df,
+  x = condition,
+  y = desire,
+  paired = TRUE,
+  subject.id = subject,
+  type = &#34;r&#34;
+)
+#&gt; # A tibble: 1 × 14
+#&gt;   statistic df.error      p.value
+#&gt;       &lt;dbl&gt;    &lt;dbl&gt;        &lt;dbl&gt;
+#&gt; 1      6.46       54 0.0000000313
+#&gt;   method                                          
+#&gt;   &lt;chr&gt;                                           
+#&gt; 1 Yuen&#39;s test on trimmed means for dependent samples
+#&gt;   effectsize                                              estimate conf.level
+#&gt;   &lt;chr&gt;                                                      &lt;dbl&gt;      &lt;dbl&gt;
+#&gt; 1 Algina-Keselman-Penfield robust standardized difference    0.533       0.95
+#&gt;   conf.low conf.high    mu small medium large expression
+#&gt;      &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;list&gt;  
+#&gt; 1    0.369     0.707     0   0.1    0.3   0.5 &lt;language&gt;
+
+# ----------------------- Bayes Factor ---------------------------------------
+
+# for reproducibility
+set.seed(123)
+two_sample_test(
+  data = df,
+  x = condition,
+  y = desire,
+  paired = TRUE,
+  subject.id = subject,
+  type = &#34;bayes&#34;
+)
+#&gt; # A tibble: 2 × 14
+#&gt;   term       estimate conf.level conf.low conf.high    pd rope.percentage
+#&gt;   &lt;chr&gt;         &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;           &lt;dbl&gt;
+#&gt; 1 Difference   -1.62        0.95   -2.12     -1.14      1               0
+#&gt; 2 Cohens_d      0.680       0.95    0.449     0.901     1               0
+#&gt;   prior.distribution prior.location prior.scale     bf10 method       
+#&gt;   &lt;chr&gt;                       &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;        
+#&gt; 1 cauchy                          0       0.707 4762370. Bayesian t-test
+#&gt; 2 cauchy                          0       0.707 4762370. Bayesian t-test
+#&gt;   log_e_bf10 expression
+#&gt;        &lt;dbl&gt; &lt;list&gt;  
+#&gt; 1       15.4 &lt;language&gt;
+#&gt; 2       15.4 &lt;language&gt;
+</code></pre><h3 id="组间设计between-subjects-design">组间设计between-subjects design</h3>
+<pre tabindex="0"><code># setup
+set.seed(123)
+library(statsExpressions)
+
+# ----------------------- parametric ---------------------------------------
+
+# for reproducibility
+set.seed(123)
+# unequal variance
+two_sample_test(
+  data = ToothGrowth,
+  x = supp,
+  y = len,
+  type = &#34;p&#34;
+)
+#&gt; # A tibble: 1 × 17
+#&gt;   term  group mean.group1 mean.group2 statistic df.error p.value
+#&gt;   &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+#&gt; 1 len   supp         20.7        17.0      1.92     55.3  0.0606
+#&gt;   method                  alternative effectsize estimate conf.level conf.low
+#&gt;   &lt;chr&gt;                   &lt;chr&gt;       &lt;chr&gt;         &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1 Welch Two Sample t-test two.sided   Hedges&#39; g     0.488       0.95  -0.0217
+#&gt;   conf.high conf.method conf.distribution expression
+#&gt;       &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;             &lt;list&gt;  
+#&gt; 1     0.993 ncp         t                 &lt;language&gt;
+
+# for reproducibility
+set.seed(123)
+# equal variance
+two_sample_test(
+  data = ToothGrowth,
+  x = supp,
+  y = len,
+  var.equal = TRUE,
+  type = &#34;p&#34;
+)
+#&gt; # A tibble: 1 × 17
+#&gt;   term  group mean.group1 mean.group2 statistic df.error p.value
+#&gt;   &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+#&gt; 1 len   supp         20.7        17.0      1.92       58  0.0604
+#&gt;   method            alternative effectsize estimate conf.level conf.low
+#&gt;   &lt;chr&gt;             &lt;chr&gt;       &lt;chr&gt;         &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1 Two Sample t-test two.sided   Hedges&#39; g     0.488       0.95  -0.0217
+#&gt;   conf.high conf.method conf.distribution expression
+#&gt;       &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;             &lt;list&gt;  
+#&gt; 1     0.993 ncp         t                 &lt;language&gt;
+
+# ----------------------- non-parametric -----------------------------------
+
+# for reproducibility
+set.seed(123)
+two_sample_test(
+  data = ToothGrowth,
+  x = supp,
+  y = len,
+  type = &#34;np&#34;
+)
+#&gt; # A tibble: 1 × 13
+#&gt;   parameter1 parameter2 statistic p.value method                 alternative
+#&gt;   &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;                  &lt;chr&gt;    
+#&gt; 1 len        supp            576.  0.0645 Wilcoxon rank sum test two.sided  
+#&gt;   effectsize        estimate conf.level conf.low conf.high conf.method
+#&gt;   &lt;chr&gt;                &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;    
+#&gt; 1 r (rank biserial)    0.279       0.95 -0.00812     0.523 normal   
+#&gt;   expression
+#&gt;   &lt;list&gt;  
+#&gt; 1 &lt;language&gt;
+
+# ----------------------- robust --------------------------------------------
+
+# for reproducibility
+set.seed(123)
+two_sample_test(
+  data = ToothGrowth,
+  x = supp,
+  y = len,
+  type = &#34;r&#34;
+)
+#&gt; # A tibble: 1 × 10
+#&gt;   statistic df.error p.value
+#&gt;       &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+#&gt; 1      2.29     33.5  0.0286
+#&gt;   method                                            
+#&gt;   &lt;chr&gt;                                             
+#&gt; 1 Yuen&#39;s test on trimmed means for independent samples
+#&gt;   effectsize                                              estimate conf.level
+#&gt;   &lt;chr&gt;                                                      &lt;dbl&gt;      &lt;dbl&gt;
+#&gt; 1 Algina-Keselman-Penfield robust standardized difference    0.683       0.95
+#&gt;   conf.low conf.high expression
+#&gt;      &lt;dbl&gt;     &lt;dbl&gt; &lt;list&gt;  
+#&gt; 1 -0.00736      2.36 &lt;language&gt;
+
+# ----------------------- Bayes Factor ---------------------------------------
+
+# for reproducibility
+set.seed(123)
+two_sample_test(
+  data = ToothGrowth,
+  x = supp,
+  y = len,
+  type = &#34;bayes&#34;
+)
+#&gt; # A tibble: 2 × 14
+#&gt;   term       estimate conf.level conf.low conf.high    pd rope.percentage
+#&gt;   &lt;chr&gt;         &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;           &lt;dbl&gt;
+#&gt; 1 Difference   -3.16        0.95  -6.66       0.528 0.960          0.0821
+#&gt; 2 Cohens_d      0.416       0.95  -0.0277     0.921 0.964          0.0666
+#&gt;   prior.distribution prior.location prior.scale  bf10 method          log_e_bf10
+#&gt;   &lt;chr&gt;                       &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;                &lt;dbl&gt;
+#&gt; 1 cauchy                          0       0.707  1.20 Bayesian t-test      0.181
+#&gt; 2 cauchy                          0       0.707  1.20 Bayesian t-test      0.181
+#&gt;   expression
+#&gt;   &lt;list&gt;  
+#&gt; 1 &lt;language&gt;
+#&gt; 2 &lt;language&gt;
+</code></pre><h2 id="单变量方差分析one-way-anovas">单变量方差分析One-way ANOVAs</h2>
+<h3 id="组内设计within-subjects-design-1">组内设计within-subjects design</h3>
+<pre tabindex="0"><code># setup
+library(statsExpressions)
+
+# ----------------------- parametric ---------------------------------------
+
+if (require(&amp;#34;afex&amp;#34;, quietly = TRUE)) {
+  # for reproducibility
+  set.seed(123)
+  oneway_anova(
+    data = bugs_long,
+    x = condition,
+    y = desire,
+    paired = TRUE,
+    subject.id = subject,
+    type = &#34;p&#34;
+  )
+}
+#&gt; # A tibble: 1 × 17
+#&gt;   term      sumsq sum.squares.error    df df.error meansq statistic  p.value
+#&gt;   &lt;chr&gt;     &lt;dbl&gt;             &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1 condition  233.              984.  2.63     229.   4.30      20.6 8.27e-11
+#&gt;   method                                              effectsize       estimate
+#&gt;   &lt;chr&gt;                                               &lt;chr&gt;               &lt;dbl&gt;
+#&gt; 1 ANOVA estimation for factorial designs using &#39;afex&#39; Omega2 (partial)   0.0783
+#&gt;   conf.level conf.low conf.high conf.method conf.distribution expression
+#&gt;        &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;             &lt;list&gt;  
+#&gt; 1       0.95   0.0280         1 ncp         F                 &lt;language&gt;
+
+# ----------------------- non-parametric -----------------------------------
+
+# for reproducibility
+set.seed(123)
+oneway_anova(
+  data = bugs_long,
+  x = condition,
+  y = desire,
+  paired = TRUE,
+  subject.id = subject,
+  type = &#34;np&#34;
+)
+#&gt; # A tibble: 1 × 14
+#&gt;   parameter1 parameter2 statistic df.error  p.value method              
+#&gt;   &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;               
+#&gt; 1 desire     condition       55.8        3 4.56e-12 Friedman rank sum test
+#&gt;   effectsize  estimate conf.level conf.low conf.high conf.method       
+#&gt;   &lt;chr&gt;          &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;             
+#&gt; 1 Kendall&#39;s W    0.175       0.95    0.125         1 percentile bootstrap
+#&gt;   conf.iterations expression
+#&gt;             &lt;int&gt; &lt;list&gt;  
+#&gt; 1             100 &lt;language&gt;
+
+# ----------------------- robust --------------------------------------------
+
+# for reproducibility
+set.seed(123)
+oneway_anova(
+  data = bugs_long,
+  x = condition,
+  y = desire,
+  paired = TRUE,
+  subject.id = subject,
+  type = &#34;r&#34;
+)
+#&gt; # A tibble: 1 × 11
+#&gt;   statistic    df df.error  p.value
+#&gt;       &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1      21.0  2.73     145. 1.15e-10
+#&gt;   method                                                           
+#&gt;   &lt;chr&gt;                                                            
+#&gt; 1 A heteroscedastic one-way repeated measures ANOVA for trimmed means
+#&gt;   effectsize                                                      estimate
+#&gt;   &lt;chr&gt;                                                              &lt;dbl&gt;
+#&gt; 1 Algina-Keselman-Penfield robust standardized difference average    0.664
+#&gt;   conf.level conf.low conf.high expression
+#&gt;        &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;list&gt;  
+#&gt; 1       0.95    0.466     0.971 &lt;language&gt;
+
+# ----------------------- Bayes Factor ---------------------------------------
+
+if (utils::packageVersion(&#34;BayesFactor&#34;) &gt;= package_version(&#34;0.9.12-4.3&#34;)) {
+  # for reproducibility
+  set.seed(123)
+  oneway_anova(
+    data = bugs_long,
+    x = condition,
+    y = desire,
+    paired = TRUE,
+    subject.id = subject,
+    type = &#34;bayes&#34;
+  )
+}
+</code></pre><h3 id="组间设计between-subjects-design-1">组间设计between-subjects design</h3>
+<pre tabindex="0"><code># setup
+library(statsExpressions)
+
+# ----------------------- parametric ---------------------------------------
+
+# for reproducibility
+set.seed(123)
+# unequal variance
+oneway_anova(
+  data = iris,
+  x = Species,
+  y = Sepal.Length,
+  type = &#34;p&#34;
+)
+#&gt; # A tibble: 1 × 13
+#&gt;   statistic    df df.error  p.value
+#&gt;       &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1      139.     2     92.2 1.51e-28
+#&gt;   method                                                   effectsize estimate
+#&gt;   &lt;chr&gt;                                                    &lt;chr&gt;         &lt;dbl&gt;
+#&gt; 1 One-way analysis of means (not assuming equal variances) Omega2        0.743
+#&gt;   conf.level conf.low conf.high conf.method conf.distribution expression
+#&gt;        &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;             &lt;list&gt;  
+#&gt; 1       0.95    0.671         1 ncp         F                 &lt;language&gt;
+
+# for reproducibility
+set.seed(123)
+# equal variance
+oneway_anova(
+  data = iris,
+  x = Species,
+  y = Sepal.Length,
+  var.equal = TRUE,
+  type = &#34;p&#34;
+)
+#&gt; # A tibble: 1 × 13
+#&gt;   statistic    df df.error  p.value method                    effectsize
+#&gt;       &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;                     &lt;chr&gt;   
+#&gt; 1      119.     2      147 1.67e-31 One-way analysis of means Omega2  
+#&gt;   estimate conf.level conf.low conf.high conf.method conf.distribution
+#&gt;      &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;          
+#&gt; 1    0.612       0.95    0.534         1 ncp         F              
+#&gt;   expression
+#&gt;   &lt;list&gt;  
+#&gt; 1 &lt;language&gt;
+
+# ----------------------- non-parametric -----------------------------------
+
+# for reproducibility
+set.seed(123)
+oneway_anova(
+  data = iris,
+  x = Species,
+  y = Sepal.Length,
+  type = &#34;np&#34;
+)
+#&gt; # A tibble: 1 × 14
+#&gt;   parameter1   parameter2 statistic df.error  p.value
+#&gt;   &lt;chr&gt;        &lt;chr&gt;          &lt;dbl&gt;    &lt;int&gt;    &lt;dbl&gt;
+#&gt; 1 Sepal.Length Species         96.9        2 8.92e-22
+#&gt;   method                       effectsize      estimate conf.level conf.low
+#&gt;   &lt;chr&gt;                        &lt;chr&gt;              &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1 Kruskal-Wallis rank sum test Epsilon2 (rank)    0.651       0.95    0.595
+#&gt;   conf.high conf.method          conf.iterations expression
+#&gt;       &lt;dbl&gt; &lt;chr&gt;                          &lt;int&gt; &lt;list&gt;  
+#&gt; 1         1 percentile bootstrap             100 &lt;language&gt;
+
+# ----------------------- robust --------------------------------------------
+
+# for reproducibility
+set.seed(123)
+oneway_anova(
+  data = iris,
+  x = Species,
+  y = Sepal.Length,
+  type = &#34;r&#34;
+)
+#&gt; # A tibble: 1 × 11
+#&gt;   statistic    df df.error p.value
+#&gt;       &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+#&gt; 1      112.     2     53.8       0
+#&gt;   method                                         
+#&gt;   &lt;chr&gt;                                          
+#&gt; 1 A heteroscedastic one-way ANOVA for trimmed means
+#&gt;   effectsize                         estimate conf.level conf.low conf.high
+#&gt;   &lt;chr&gt;                                 &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+#&gt; 1 Explanatory measure of effect size    0.846       0.95    0.759     0.933
+#&gt;   expression
+#&gt;   &lt;list&gt;  
+#&gt; 1 &lt;language&gt;
+
+# ----------------------- Bayes Factor ---------------------------------------
+
+# for reproducibility
+set.seed(123)
+oneway_anova(
+  data = iris,
+  x = Species,
+  y = Sepal.Length,
+  type = &#34;bayes&#34;
+)
+#&gt; # A tibble: 6 × 20
+#&gt;   term               estimate conf.level conf.low conf.high    pd
+#&gt;   &lt;chr&gt;                 &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1 mu                   5.84         0.95   5.76       5.93  1  
+#&gt; 2 Species-setosa      -0.829        0.95  -0.947     -0.713 1  
+#&gt; 3 Species-versicolor   0.0916       0.95  -0.0275     0.208 0.936
+#&gt; 4 Species-virginica    0.737        0.95   0.618      0.852 1  
+#&gt; 5 sig2                 0.267        0.95   0.210      0.335 1  
+#&gt; 6 g_Species            2.15         0.95   0.188     15.0   1  
+#&gt;   rope.percentage prior.distribution prior.location prior.scale component  
+#&gt;             &lt;dbl&gt; &lt;chr&gt;                       &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;    
+#&gt; 1           0     cauchy                          0       0.707 extra    
+#&gt; 2           0     cauchy                          0       0.707 conditional
+#&gt; 3           0.435 cauchy                          0       0.707 conditional
+#&gt; 4           0     cauchy                          0       0.707 conditional
+#&gt; 5           0     cauchy                          0       0.707 extra    
+#&gt; 6           0     cauchy                          0       0.707 extra    
+#&gt;      bf10 method                          log_e_bf10    r2 std.dev r2.conf.level
+#&gt;     &lt;dbl&gt; &lt;chr&gt;                                &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;         &lt;dbl&gt;
+#&gt; 1 1.87e28 Bayes factors for linear models       65.1 0.612  0.0311          0.95
+#&gt; 2 1.87e28 Bayes factors for linear models       65.1 0.612  0.0311          0.95
+#&gt; 3 1.87e28 Bayes factors for linear models       65.1 0.612  0.0311          0.95
+#&gt; 4 1.87e28 Bayes factors for linear models       65.1 0.612  0.0311          0.95
+#&gt; 5 1.87e28 Bayes factors for linear models       65.1 0.612  0.0311          0.95
+#&gt; 6 1.87e28 Bayes factors for linear models       65.1 0.612  0.0311          0.95
+#&gt;   r2.conf.low r2.conf.high expression
+#&gt;         &lt;dbl&gt;        &lt;dbl&gt; &lt;list&gt;  
+#&gt; 1       0.544        0.667 &lt;language&gt;
+#&gt; 2       0.544        0.667 &lt;language&gt;
+#&gt; 3       0.544        0.667 &lt;language&gt;
+#&gt; 4       0.544        0.667 &lt;language&gt;
+#&gt; 5       0.544        0.667 &lt;language&gt;
+#&gt; 6       0.544        0.667 &lt;language&gt;
+</code></pre><h2 id="列联表分析contingency-table-analyses">列联表分析Contingency table analyses</h2>
+<pre tabindex="0"><code># for reproducibility
+set.seed(123)
+library(statsExpressions)
+
+# create data structure
+paired_data &lt;-
+  structure(
+    list(
+      response_before =
+        structure(
+          c(1L, 2L, 1L, 2L),
+          .Label = c(&#34;no&#34;, &#34;yes&#34;),
+          class = &#34;factor&#34;
+        ),
+      response_after = structure(
+        c(1L, 1L, 2L, 2L),
+        .Label = c(&#34;no&#34;, &#34;yes&#34;),
+        class = &#34;factor&#34;
+      ),
+      Freq = c(65L, 25L, 5L, 5L)
+    ),
+    class = &#34;data.frame&#34;,
+    row.names = c(NA, -4L)
+  )
+
+# ------------------------ non-Bayesian -----------------------------
+
+# association tests
+
+# unpaired
+set.seed(123)
+contingency_table(
+  data = mtcars,
+  x = am,
+  y = cyl,
+  paired = FALSE,
+)
+#&gt; # A tibble: 1 × 12
+#&gt;   statistic    df p.value method                     effectsize        estimate
+#&gt;       &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;                      &lt;chr&gt;                &lt;dbl&gt;
+#&gt; 1      8.74     2  0.0126 Pearson&#39;s Chi-squared test Cramer&#39;s V (adj.)    0.464
+#&gt;   conf.level conf.low conf.high conf.method conf.distribution expression
+#&gt;        &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;             &lt;list&gt;  
+#&gt; 1       0.95        0         1 ncp         chisq             &lt;language&gt;
+
+# paired
+set.seed(123)
+contingency_table(
+  data = paired_data,
+  x = response_before,
+  y = response_after,
+  paired = TRUE,
+  counts = &#34;Freq&#34;
+)
+#&gt; # A tibble: 1 × 11
+#&gt;   statistic    df  p.value method                     effectsize estimate
+#&gt;       &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;                      &lt;chr&gt;         &lt;dbl&gt;
+#&gt; 1      13.3     1 0.000261 McNemar&#39;s Chi-squared test Cohen&#39;s g     0.333
+#&gt;   conf.level conf.low conf.high conf.method expression
+#&gt;        &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;       &lt;list&gt;  
+#&gt; 1       0.95    0.164     0.427 binomial    &lt;language&gt;
+
+# goodness-of-fit tests
+
+# with counts
+set.seed(123)
+contingency_table(
+  data = as.data.frame(HairEyeColor),
+  x = Eye,
+  counts = Freq,
+)
+#&gt; # A tibble: 1 × 12
+#&gt;   statistic    df  p.value method                                   effectsize 
+#&gt;       &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;                                    &lt;chr&gt;    
+#&gt; 1      133.     3 9.65e-29 Chi-squared test for given probabilities Pearson&#39;s C
+#&gt;   estimate conf.level conf.low conf.high conf.method conf.distribution
+#&gt;      &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;          
+#&gt; 1    0.429       0.95    0.374         1 ncp         chisq          
+#&gt;   expression
+#&gt;   &lt;list&gt;  
+#&gt; 1 &lt;language&gt;
+
+# ------------------------ Bayesian -----------------------------
+
+# association test
+contingency_table(
+  data = mtcars,
+  x = am,
+  y = cyl,
+  paired = FALSE,
+  type = &#34;bayes&#34;
+)
+#&gt; # A tibble: 8 × 14
+#&gt;   term      estimate conf.level conf.low conf.high    pd rope.percentage
+#&gt;   &lt;chr&gt;        &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;           &lt;dbl&gt;
+#&gt; 1 cell[1,1]    3.15        0.95    0.692     6.55      1               0
+#&gt; 2 cell[2,1]    7.47        0.95    3.34     11.7       1               0
+#&gt; 3 cell[1,2]    3.96        0.95    1.20      7.70      1               0
+#&gt; 4 cell[2,2]    3.18        0.95    0.778     6.51      1               0
+#&gt; 5 cell[1,3]   10.8         0.95    6.56     15.9       1               0
+#&gt; 6 cell[2,3]    2.27        0.95    0.332     5.31      1               0
+#&gt; 7 Ratio       NA          NA      NA        NA        NA              NA
+#&gt; 8 Cramers_v    0.478       0.95    0.221     0.725     1               0
+#&gt;   prior.distribution      prior.location prior.scale  bf10
+#&gt;   &lt;chr&gt;                            &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1 independent multinomial              0           1  16.8
+#&gt; 2 independent multinomial              0           1  16.8
+#&gt; 3 independent multinomial              0           1  16.8
+#&gt; 4 independent multinomial              0           1  16.8
+#&gt; 5 independent multinomial              0           1  16.8
+#&gt; 6 independent multinomial              0           1  16.8
+#&gt; 7 independent multinomial              0           1  16.8
+#&gt; 8 independent multinomial              0           1  16.8
+#&gt;   method                              log_e_bf10 expression
+#&gt;   &lt;chr&gt;                                    &lt;dbl&gt; &lt;list&gt;  
+#&gt; 1 Bayesian contingency table analysis       2.82 &lt;language&gt;
+#&gt; 2 Bayesian contingency table analysis       2.82 &lt;language&gt;
+#&gt; 3 Bayesian contingency table analysis       2.82 &lt;language&gt;
+#&gt; 4 Bayesian contingency table analysis       2.82 &lt;language&gt;
+#&gt; 5 Bayesian contingency table analysis       2.82 &lt;language&gt;
+#&gt; 6 Bayesian contingency table analysis       2.82 &lt;language&gt;
+#&gt; 7 Bayesian contingency table analysis       2.82 &lt;language&gt;
+#&gt; 8 Bayesian contingency table analysis       2.82 &lt;language&gt;
+
+# goodness-of-fit test
+contingency_table(
+  data = as.data.frame(HairEyeColor),
+  x = Eye,
+  counts = Freq,
+  ratio = c(0.2, 0.2, 0.3, 0.3),
+  type = &#34;bayes&#34;
+)
+#&gt; # A tibble: 1 × 3
+#&gt;      bf10 prior.scale expression
+#&gt;     &lt;dbl&gt;       &lt;dbl&gt; &lt;list&gt;  
+#&gt; 1 3.74e55           1 &lt;language&gt;
+</code></pre><h2 id="相关分析correlation-analyses">相关分析Correlation analyses</h2>
+<pre tabindex="0"><code># for reproducibility
+set.seed(123)
+library(statsExpressions)
+
+# ----------------------- parametric ---------------------------------------
+
+# for reproducibility
+set.seed(123)
+corr_test(
+  data = mtcars,
+  x = wt,
+  y = mpg,
+  type = &#34;parametric&#34;
+)
+#&gt; # A tibble: 1 × 13
+#&gt;   parameter1 parameter2 effectsize          estimate conf.level conf.low
+#&gt;   &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;                  &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1 wt         mpg        Pearson correlation   -0.868       0.95   -0.934
+#&gt;   conf.high statistic df.error  p.value method              n.obs expression
+#&gt;       &lt;dbl&gt;     &lt;dbl&gt;    &lt;int&gt;    &lt;dbl&gt; &lt;chr&gt;               &lt;int&gt; &lt;list&gt;  
+#&gt; 1    -0.744     -9.56       30 1.29e-10 Pearson correlation    32 &lt;language&gt;
+
+# ----------------------- non-parametric -----------------------------------
+
+# for reproducibility
+set.seed(123)
+corr_test(
+  data = mtcars,
+  x = wt,
+  y = mpg,
+  type = &#34;nonparametric&#34;
+)
+#&gt; # A tibble: 1 × 12
+#&gt;   parameter1 parameter2 effectsize           estimate conf.level conf.low
+#&gt;   &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;                   &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1 wt         mpg        Spearman correlation   -0.886       0.95   -0.945
+#&gt;   conf.high statistic  p.value method               n.obs expression
+#&gt;       &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;                &lt;int&gt; &lt;list&gt;  
+#&gt; 1    -0.774    10292. 1.49e-11 Spearman correlation    32 &lt;language&gt;
+
+# ----------------------- robust --------------------------------------------
+
+# for reproducibility
+set.seed(123)
+corr_test(
+  data = mtcars,
+  x = wt,
+  y = mpg,
+  type = &#34;robust&#34;
+)
+#&gt; # A tibble: 1 × 13
+#&gt;   parameter1 parameter2 effectsize                     estimate conf.level
+#&gt;   &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;                             &lt;dbl&gt;      &lt;dbl&gt;
+#&gt; 1 wt         mpg        Winsorized Pearson correlation   -0.864       0.95
+#&gt;   conf.low conf.high statistic df.error  p.value method                      
+#&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;int&gt;    &lt;dbl&gt; &lt;chr&gt;                       
+#&gt; 1   -0.932    -0.738     -9.41       30 1.84e-10 Winsorized Pearson correlation
+#&gt;   n.obs expression
+#&gt;   &lt;int&gt; &lt;list&gt;  
+#&gt; 1    32 &lt;language&gt;
+
+# ----------------------- Bayes Factor ---------------------------------------
+
+# for reproducibility
+set.seed(123)
+corr_test(
+  data = mtcars,
+  x = wt,
+  y = mpg,
+  type = &#34;bayes&#34;
+)
+#&gt; # A tibble: 1 × 17
+#&gt;   parameter1 parameter2 effectsize                   estimate conf.level
+#&gt;   &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;                           &lt;dbl&gt;      &lt;dbl&gt;
+#&gt; 1 wt         mpg        Bayesian Pearson correlation   -0.843       0.95
+#&gt;   conf.low conf.high    pd rope.percentage `log(bayes.factor)`      bf10
+#&gt;      &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;           &lt;dbl&gt;               &lt;dbl&gt;     &lt;dbl&gt;
+#&gt; 1   -0.934    -0.734     1               0                17.8 56223033.
+#&gt;   prior.distribution prior.location prior.scale method                    
+#&gt;   &lt;chr&gt;                       &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;                     
+#&gt; 1 beta                         1.41        1.41 Bayesian Pearson correlation
+#&gt;   n.obs expression
+#&gt;   &lt;int&gt; &lt;list&gt;  
+#&gt; 1    32 &lt;language&gt;
+</code></pre><h2 id="描述统计centrality-description">描述统计Centrality description</h2>
+<pre tabindex="0"><code># ----------------------- parametric -----------------------
+
+set.seed(123)
+centrality_description(iris, Species, Sepal.Length)
+#&gt; # A tibble: 3 × 15
+#&gt;   Species    Sepal.Length n_obs variable     std.dev   iqr conf.low conf.high
+#&gt;   &lt;fct&gt;             &lt;dbl&gt; &lt;int&gt; &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+#&gt; 1 setosa             5.01    50 Sepal.Length   0.352 0.400     4.90      5.10
+#&gt; 2 versicolor         5.94    50 Sepal.Length   0.516 0.7       5.80      6.07
+#&gt; 3 virginica          6.59    50 Sepal.Length   0.636 0.750     6.39      6.79
+#&gt;     min   max skewness kurtosis n.missing expression                    
+#&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;int&gt; &lt;chr&gt;                         
+#&gt; 1   4.3   5.8    0.120  -0.253          0 list(~widehat(mu)[mean]==&#39;5.01&#39;)
+#&gt; 2   4.9   7      0.105  -0.533          0 list(~widehat(mu)[mean]==&#39;5.94&#39;)
+#&gt; 3   4.9   7.9    0.118   0.0329         0 list(~widehat(mu)[mean]==&#39;6.59&#39;)
+#&gt;   n_label             
+#&gt;   &lt;chr&gt;               
+#&gt; 1 &#34;setosa\n(n = 50)&#34;  
+#&gt; 2 &#34;versicolor\n(n = 50)&#34;
+#&gt; 3 &#34;virginica\n(n = 50)&#34;
+
+# ----------------------- non-parametric -------------------
+
+set.seed(123)
+centrality_description(mtcars, am, wt, type = &#34;n&#34;)
+#&gt; # A tibble: 2 × 15
+#&gt;   am       wt n_obs variable   mad   iqr conf.low conf.high   min   max skewness
+#&gt;   &lt;fct&gt; &lt;dbl&gt; &lt;int&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1 0      3.52    19 wt       0.452 0.41      3.44      3.84  2.46  5.42    1.15 
+#&gt; 2 1      2.32    13 wt       0.682 0.942     1.94      2.78  1.51  3.57    0.269
+#&gt;   kurtosis n.missing expression                         n_label    
+#&gt;      &lt;dbl&gt;     &lt;int&gt; &lt;chr&gt;                              &lt;chr&gt;      
+#&gt; 1    1.06          0 list(~widehat(mu)[median]==&#39;3.52&#39;) &#34;0\n(n = 19)&#34;
+#&gt; 2   -0.654         0 list(~widehat(mu)[median]==&#39;2.32&#39;) &#34;1\n(n = 13)&#34;
+
+# ----------------------- robust ---------------------------
+
+set.seed(123)
+centrality_description(ToothGrowth, supp, len, type = &#34;r&#34;)
+#&gt; # A tibble: 2 × 15
+#&gt;   supp    len n_obs variable std.dev   iqr conf.low conf.high   min   max
+#&gt;   &lt;fct&gt; &lt;dbl&gt; &lt;int&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1 OJ     21.7    30 len         6.61  10.9     18.1      23.6   8.2  30.9
+#&gt; 2 VC     16.6    30 len         8.27  12.5     13.6      19.9   4.2  33.9
+#&gt;   skewness kurtosis n.missing expression                        
+#&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;int&gt; &lt;chr&gt;                             
+#&gt; 1   -0.580   -0.831         0 list(~widehat(mu)[trimmed]==&#39;21.71&#39;)
+#&gt; 2    0.306   -0.700         0 list(~widehat(mu)[trimmed]==&#39;16.58&#39;)
+#&gt;   n_label     
+#&gt;   &lt;chr&gt;       
+#&gt; 1 &#34;OJ\n(n = 30)&#34;
+#&gt; 2 &#34;VC\n(n = 30)&#34;
+
+# ----------------------- Bayesian -------------------------
+
+set.seed(123)
+centrality_description(sleep, group, extra, type = &#34;b&#34;)
+#&gt; # A tibble: 2 × 14
+#&gt;   group  extra n_obs variable   iqr conf.low conf.high   min   max skewness
+#&gt;   &lt;fct&gt;  &lt;dbl&gt; &lt;int&gt; &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1 1     0.0579    10 extra     2.8   -1.29        3.55  -1.6   3.7    0.581
+#&gt; 2 2     0.973     10 extra     3.82   0.0527      4.79  -0.1   5.5    0.386
+#&gt;   kurtosis n.missing expression                      n_label    
+#&gt;      &lt;dbl&gt;     &lt;int&gt; &lt;chr&gt;                           &lt;chr&gt;      
+#&gt; 1   -0.630         0 list(~widehat(mu)[MAP]==&#39;0.06&#39;) &#34;1\n(n = 10)&#34;
+#&gt; 2   -1.42          0 list(~widehat(mu)[MAP]==&#39;0.97&#39;) &#34;2\n(n = 10)&#34;
+</code></pre><h1 id="效应估计">效应估计</h1>
+<h2 id="modelbased">modelbased</h2>
+<h3 id="介绍-3">介绍</h3>
+<p><a href="https://github.com/easystats/modelbased">https://github.com/easystats/modelbased</a></p>
+<blockquote>
+<p><code>modelbased</code> is a package helping with model-based estimations, to easily compute of marginal means, contrast analysis and model predictions.</p>
+</blockquote>
+<p>modelbased包用于计算边际均值、比较和模型预测等。</p>
+<p><a href="https://easystats.github.io/modelbased/articles/estimate_response.html">https://easystats.github.io/modelbased/articles/estimate_response.html</a></p>
+<h3 id="主要函数">主要函数</h3>
+<p>    - estimate_means()估计每个因子的均值</p>
+<p>    - estimate_contrasts()估计不同因子间的比较</p>
+<p>    - estimate_slopes()估计不同因子下的斜率</p>
+<p>    - estimate_response()预测模型</p>
+<p>    - visualisation_matrix()</p>
+<p>    ### 示例</p>
+<p>    #### 交互作用Create smart grids to represent complex interactions</p>
+<p>    &gt; <strong>Problem</strong> : I want to graphically represent the interaction between two continuous variable. On top of that, I would like to express one of them in terms of standardized change (i.e., standard deviation relative to the mean).
+    <strong>Solution</strong> : Create a data grid following the desired specifications, and feed it to the model to obtain predictions. Format some of the columns for better readability, and plot using <code>ggplot</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(ggplot2)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(see)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(modelbased)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 1. Fit model and get visualization matrix</span>
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lm</span>(Sepal.Length <span style="color:#f92672">~</span> Petal.Length <span style="color:#f92672">*</span> Petal.Width, data <span style="color:#f92672">=</span> iris)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2. Create a visualisation matrix with expected Z-score values of Petal.Width</span>
+</span></span><span style="display:flex;"><span>vizdata <span style="color:#f92672">&lt;-</span> modelbased<span style="color:#f92672">::</span><span style="color:#a6e22e">visualisation_matrix</span>(model, at <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;Petal.Length&#34;</span>, <span style="color:#e6db74">&#34;Petal.Width = c(-1, 0, 1)&#34;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 3. Revert from expected SD to actual values</span>
+</span></span><span style="display:flex;"><span>vizdata <span style="color:#f92672">&lt;-</span> effectsize<span style="color:#f92672">::</span><span style="color:#a6e22e">unstandardize</span>(vizdata, select <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Petal.Width&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 4. Add predicted relationship from the model</span>
+</span></span><span style="display:flex;"><span>vizdata <span style="color:#f92672">&lt;-</span> modelbased<span style="color:#f92672">::</span><span style="color:#a6e22e">estimate_expectation</span>(vizdata)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 5. Express Petal.Width as z-score (&#34;-1 SD&#34;, &#34;+2 SD&#34;, etc.)</span>
+</span></span><span style="display:flex;"><span>vizdata<span style="color:#f92672">$</span>Petal.Width <span style="color:#f92672">&lt;-</span> effectsize<span style="color:#f92672">::</span><span style="color:#a6e22e">format_standardize</span>(vizdata<span style="color:#f92672">$</span>Petal.Width, reference <span style="color:#f92672">=</span> iris<span style="color:#f92672">$</span>Petal.Width)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 6. Plot</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ggplot</span>(iris, <span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> Petal.Length, y <span style="color:#f92672">=</span> Sepal.Length)) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Add points from original dataset (only shapes 21-25 have a fill aesthetic)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_point2</span>(<span style="color:#a6e22e">aes</span>(fill <span style="color:#f92672">=</span> Petal.Width), shape <span style="color:#f92672">=</span> <span style="color:#ae81ff">21</span>, size <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Add relationship lines</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_line</span>(data <span style="color:#f92672">=</span> vizdata, <span style="color:#a6e22e">aes</span>(y <span style="color:#f92672">=</span> Predicted, color <span style="color:#f92672">=</span> Petal.Width), size <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Improve colors / themes</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">scale_color_viridis_d</span>(direction <span style="color:#f92672">=</span> <span style="color:#ae81ff">-1</span>) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">scale_fill_viridis_c</span>(guide <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;none&#34;</span>) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">theme_modern</span>() 
+</span></span></code></pre></div><p><img src="https://gitee.com/osummer/blogimg/raw/master/img/202112251633364.png" alt=""></p>
+<h4 id="均值估计estimate-marginal-means">均值估计Estimate marginal means</h4>
+<blockquote>
+<p><strong>Problem</strong> : My model has a factor as a predictor, and the parameters only return the difference between levels and the intercept. I want to see the values <em>at</em>  each factor level.
+<strong>Solution</strong> : Estimate model-based means (“marginal means”). You can visualize them by plotting their confidence interval and the original data.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span><span style="color:#75715e"># 1. The model</span>
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lm</span>(Sepal.Width <span style="color:#f92672">~</span> Species, data <span style="color:#f92672">=</span> iris)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2. Obtain estimated means</span>
+</span></span><span style="display:flex;"><span>means <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">estimate_means</span>(model)
+</span></span><span style="display:flex;"><span>means
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Estimated Marginal Means</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Species    | Mean |   SE |       95% CI</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## ---------------------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## setosa     | 3.43 | 0.05 | [3.33, 3.52]</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## versicolor | 2.77 | 0.05 | [2.68, 2.86]</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## virginica  | 2.97 | 0.05 | [2.88, 3.07]</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Marginal means estimated at Species</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 3. Plot</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ggplot</span>(iris, <span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> Species, y <span style="color:#f92672">=</span> Sepal.Width)) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Add base data</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_violin</span>(<span style="color:#a6e22e">aes</span>(fill <span style="color:#f92672">=</span> Species), color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;white&#34;</span>) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_jitter2</span>(width <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.05</span>, alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Add pointrange and line from means</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_line</span>(data <span style="color:#f92672">=</span> means, <span style="color:#a6e22e">aes</span>(y <span style="color:#f92672">=</span> Mean, group <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>), size <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_pointrange</span>(
+</span></span><span style="display:flex;"><span>    data <span style="color:#f92672">=</span> means,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">aes</span>(y <span style="color:#f92672">=</span> Mean, ymin <span style="color:#f92672">=</span> CI_low, ymax <span style="color:#f92672">=</span> CI_high),
+</span></span><span style="display:flex;"><span>    size <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>    color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;white&#34;</span>
+</span></span><span style="display:flex;"><span>  ) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Improve colors</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">scale_fill_material</span>() <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">theme_modern</span>()
+</span></span></code></pre></div><p><img src="https://gitee.com/osummer/blogimg/raw/master/img/202112251633366.png" alt=""></p>
+<h4 id="差异比较contrast-analysis">差异比较Contrast analysis</h4>
+<blockquote>
+<p><strong>Problem</strong> : The parameters of my model only return the difference between some of the factor levels and the intercept. I want to see the differences between each levels, as I would do with post-hoc comparison tests in ANOVAs.
+<strong>Solution</strong> : Estimate model-based contrasts (“marginal contrasts”). You can visualize them by plotting their confidence interval.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span><span style="color:#75715e"># 1. The model</span>
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lm</span>(Sepal.Width <span style="color:#f92672">~</span> Species, data <span style="color:#f92672">=</span> iris)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2. Estimate marginal contrasts</span>
+</span></span><span style="display:flex;"><span>contrasts <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">estimate_contrasts</span>(model)
+</span></span><span style="display:flex;"><span>contrasts
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Marginal Contrasts Analysis</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Level1     |     Level2 | Difference |         95% CI |   SE | t(147) |      p</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## ------------------------------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## setosa     | versicolor |       0.66 | [ 0.49,  0.82] | 0.07 |   9.69 | &lt; .001</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## setosa     |  virginica |       0.45 | [ 0.29,  0.62] | 0.07 |   6.68 | &lt; .001</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## versicolor |  virginica |      -0.20 | [-0.37, -0.04] | 0.07 |  -3.00 | 0.009 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Marginal contrasts estimated at Species</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## p-value adjustment method: Holm (1979)</span>
+</span></span></code></pre></div><p><img src="https://gitee.com/osummer/blogimg/raw/master/img/202112251633367.png" alt=""></p>
+<h4 id="check-the-contrasts-at-different-points-of-another-linear-predictor">Check the contrasts at different points of another linear predictor</h4>
+<blockquote>
+<p><strong>Problem</strong> : In the case of an interaction between a factor and a continuous variable, you might be interested in computing how the differences between the factor levels (the contrasts) change depending on the other continuous variable.
+<strong>Solution</strong> : You can estimate the marginal contrasts at different values of a continuous variable (the <em>modulator</em> ), and plot these differences (they are significant if their 95% CI doesn’t cover 0).</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span>model <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lm</span>(Sepal.Width <span style="color:#f92672">~</span> Species <span style="color:#f92672">*</span> Petal.Length, data <span style="color:#f92672">=</span> iris)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">estimate_contrasts</span>(model, at <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Petal.Length&#34;</span>, length <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Marginal Contrasts Analysis</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Level1     |     Level2 | Petal.Length | Difference |        95% CI |   SE | t(144) |      p</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## --------------------------------------------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## setosa     | versicolor |         1.00 |       1.70 | [ 0.87, 2.53] | 0.34 |   4.97 | &lt; .001</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## setosa     | versicolor |         3.95 |       1.74 | [ 0.16, 3.32] | 0.65 |   2.67 | 0.023 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## setosa     | versicolor |         6.90 |       1.78 | [-1.71, 5.26] | 1.44 |   1.24 | 0.434 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## setosa     |  virginica |         1.00 |       1.34 | [ 0.38, 2.30] | 0.40 |   3.38 | 0.003 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## setosa     |  virginica |         3.95 |       1.79 | [ 0.19, 3.40] | 0.66 |   2.70 | 0.021 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## setosa     |  virginica |         6.90 |       2.25 | [-1.19, 5.69] | 1.42 |   1.58 | 0.257 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## versicolor |  virginica |         1.00 |      -0.36 | [-1.55, 0.83] | 0.49 |  -0.73 | 0.747 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## versicolor |  virginica |         3.95 |       0.06 | [-0.30, 0.42] | 0.15 |   0.37 | 0.926 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## versicolor |  virginica |         6.90 |       0.47 | [-0.22, 1.16] | 0.28 |   1.65 | 0.229 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Marginal contrasts estimated at Species</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## p-value adjustment method: Holm (1979)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Recompute contrasts with a higher precision (for a smoother plot)</span>
+</span></span><span style="display:flex;"><span>contrasts <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">estimate_contrasts</span>(model, at <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Petal.Length&#34;</span>, length <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Add Contrast column by concatenating</span>
+</span></span><span style="display:flex;"><span>contrasts<span style="color:#f92672">$</span>Contrast <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">paste</span>(contrasts<span style="color:#f92672">$</span>Level1, <span style="color:#e6db74">&#34;-&#34;</span>, contrasts<span style="color:#f92672">$</span>Level2)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Plot</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ggplot</span>(contrasts, <span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> Petal.Length, y <span style="color:#f92672">=</span> Difference, )) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Add line and CI band</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_line</span>(<span style="color:#a6e22e">aes</span>(color <span style="color:#f92672">=</span> Contrast)) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_ribbon</span>(<span style="color:#a6e22e">aes</span>(ymin <span style="color:#f92672">=</span> CI_low, ymax <span style="color:#f92672">=</span> CI_high, fill <span style="color:#f92672">=</span> Contrast), alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.2</span>) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Add line at 0, indicating no difference</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_hline</span>(yintercept <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, linetype <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;dashed&#34;</span>) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Colors</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">theme_modern</span>()
+</span></span></code></pre></div><p><img src="https://gitee.com/osummer/blogimg/raw/master/img/202112251633368.png" alt=""></p>
+<h4 id="模型预测">模型预测</h4>
+<blockquote>
+<p><strong>Problem</strong> : You fitted different models, and you want to intuitively visualize how they compare in terms of fit quality and prediction accuracy, so that you don’t only rely on abstract indices of performance.
+<strong>Solution</strong> : You can predict the response variable from different models and plot them against the original true response. The closest the points are on the identity line (the diagonal), the closest they are from a perfect fit.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span><span style="color:#75715e"># Fit model 1 and predict the response variable</span>
+</span></span><span style="display:flex;"><span>model1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lm</span>(Petal.Length <span style="color:#f92672">~</span> Sepal.Length, data <span style="color:#f92672">=</span> iris)
+</span></span><span style="display:flex;"><span>pred1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">estimate_response</span>(model1)
+</span></span><span style="display:flex;"><span>pred1<span style="color:#f92672">$</span>Petal.Length <span style="color:#f92672">&lt;-</span> iris<span style="color:#f92672">$</span>Petal.Length <span style="color:#75715e"># Add true response</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Print first 5 lines of output</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">head</span>(pred1, n <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Model-based Response</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Sepal.Length | Predicted |   SE |        95% CI | Residuals | Petal.Length</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## --------------------------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 5.10         |      2.38 | 0.87 | [ 0.65, 4.10] |      0.98 |         1.40</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 4.90         |      2.00 | 0.87 | [ 0.28, 3.73] |      0.60 |         1.40</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 4.70         |      1.63 | 0.88 | [-0.10, 3.36] |      0.33 |         1.30</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 4.60         |      1.45 | 0.88 | [-0.29, 3.18] |     -0.05 |         1.50</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 5.00         |      2.19 | 0.87 | [ 0.46, 3.92] |      0.79 |         1.40</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Variable predicted: Petal.Length</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Same for model 2</span>
+</span></span><span style="display:flex;"><span>model2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lm</span>(Petal.Length <span style="color:#f92672">~</span> Sepal.Length <span style="color:#f92672">*</span> Species, data <span style="color:#f92672">=</span> iris)
+</span></span><span style="display:flex;"><span>pred2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">estimate_response</span>(model2)
+</span></span><span style="display:flex;"><span>pred2<span style="color:#f92672">$</span>Petal.Length <span style="color:#f92672">&lt;-</span> iris<span style="color:#f92672">$</span>Petal.Length
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Initialize plot for model 1</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ggplot</span>(data <span style="color:#f92672">=</span> pred1, <span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> Petal.Length, y <span style="color:#f92672">=</span> Predicted)) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># with identity line (diagonal) representing perfect predictions</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_abline</span>(linetype <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;dashed&#34;</span>) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Add the actual predicted points of the models</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_point</span>(<span style="color:#a6e22e">aes</span>(color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Model 1&#34;</span>)) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_point</span>(data <span style="color:#f92672">=</span> pred2, <span style="color:#a6e22e">aes</span>(color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Model 2&#34;</span>)) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Aesthetics changes</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">labs</span>(y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Petal.Length (predicted)&#34;</span>, color <span style="color:#f92672">=</span> <span style="color:#66d9ef">NULL</span>) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">scale_color_manual</span>(values <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;Model 1&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>, <span style="color:#e6db74">&#34;Model 2&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;red&#34;</span>)) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">theme_modern</span>()
+</span></span></code></pre></div><p><img src="https://gitee.com/osummer/blogimg/raw/master/img/202112251633369.png" alt=""></p>
+<h4 id="混合模型提取">混合模型提取</h4>
+<blockquote>
+<p><strong>Problem</strong> : You have a mixed model and you would like to easily access the random part, i.e., the group-level effects (e.g., the individuals scores).
+<strong>Solution</strong> : You can apply <code>estimate_grouplevel</code> on a mixed model.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(lme4)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lmer</span>(mpg <span style="color:#f92672">~</span> drat <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> drat <span style="color:#f92672">|</span> cyl), data <span style="color:#f92672">=</span> mtcars)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ranef</span>(model)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## $cyl</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  (Intercept)        drat</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 4  -3.4515684  2.23577150</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 6   0.1326199 -0.08590512</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 8   3.3189485 -2.14986638</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>random <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">estimate_grouplevel</span>(model)
+</span></span><span style="display:flex;"><span>random
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Group | Level |   Parameter | Coefficient |   SE |         95% CI</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## -----------------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## cyl   |     4 | (Intercept) |       -3.45 | 0.56 | [-4.55, -2.36]</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## cyl   |     4 |        drat |        2.24 | 0.36 | [ 1.53,  2.95]</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## cyl   |     6 | (Intercept) |        0.13 | 0.84 | [-1.52,  1.78]</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## cyl   |     6 |        drat |       -0.09 | 0.54 | [-1.15,  0.98]</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## cyl   |     8 | (Intercept) |        3.32 | 0.73 | [ 1.89,  4.74]</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## cyl   |     8 |        drat |       -2.15 | 0.47 | [-3.07, -1.23]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">plot</span>(random)
+</span></span></code></pre></div><p><img src="https://gitee.com/osummer/blogimg/raw/master/img/202112251633370.png" alt=""></p>
+<h4 id="非线性关系估计">非线性关系估计</h4>
+<blockquote>
+<p><strong>Problem</strong> : You model a non-linear relationship using polynomials, splines or GAMs. You want to know which parts of the curve are significant positive or negative trends.
+<strong>Solution</strong> : You can estimate the <em>derivative</em>  of smooth using <code>estimate_slopes</code>.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span><span style="color:#75715e"># Fit a non-linear General Additive Model (GAM)</span>
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">&lt;-</span> mgcv<span style="color:#f92672">::</span><span style="color:#a6e22e">gam</span>(Sepal.Width <span style="color:#f92672">~</span> <span style="color:#a6e22e">s</span>(Petal.Length), data <span style="color:#f92672">=</span> iris)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 1. Compute derivatives</span>
+</span></span><span style="display:flex;"><span>deriv <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">estimate_slopes</span>(model,
+</span></span><span style="display:flex;"><span>  trend <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Petal.Length&#34;</span>,
+</span></span><span style="display:flex;"><span>  at <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Petal.Length&#34;</span>,
+</span></span><span style="display:flex;"><span>  length <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2. Visualise</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">plot</span>(deriv)
+</span></span></code></pre></div><p><img src="https://gitee.com/osummer/blogimg/raw/master/img/202112251633371.png" alt=""></p>
+<h4 id="平滑估计">平滑估计</h4>
+<blockquote>
+<p><strong>Problem</strong> : You model a non-linear relationship using polynomials, splines or GAMs. You want to describe it in terms of linear parts: where does it decrease, how much, where does it increase, etc.
+<strong>Solution</strong> : You can apply <code>describe_nonlinear</code> on a predicted relationship that will return the different parts of increase and decrease.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span>model <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lm</span>(Sepal.Width <span style="color:#f92672">~</span> <span style="color:#a6e22e">poly</span>(Petal.Length, <span style="color:#ae81ff">2</span>), data <span style="color:#f92672">=</span> iris)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 1. Visualize</span>
+</span></span><span style="display:flex;"><span>vizdata <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">estimate_relation</span>(model, length <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ggplot</span>(vizdata, <span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> Petal.Length, y <span style="color:#f92672">=</span> Predicted)) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_ribbon</span>(<span style="color:#a6e22e">aes</span>(ymin <span style="color:#f92672">=</span> CI_low, ymax <span style="color:#f92672">=</span> CI_high), alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.3</span>) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_line</span>() <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Add original data points</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_point</span>(data <span style="color:#f92672">=</span> iris, <span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> Petal.Length, y <span style="color:#f92672">=</span> Sepal.Width)) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Aesthetics</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">theme_modern</span>()
+</span></span></code></pre></div><p><img src="https://gitee.com/osummer/blogimg/raw/master/img/202112251633372.png" alt=""></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span><span style="color:#75715e"># 2. Describe smooth line</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">describe_nonlinear</span>(vizdata, x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Petal.Length&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Start |  End | Length | Change | Slope |   R2</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## ---------------------------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1.00  | 4.05 |   0.50 |  -0.84 | -0.28 | 0.05</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 4.05  | 6.90 |   0.47 |   0.66 |  0.23 | 0.05</span>
+</span></span></code></pre></div><h4 id="understand-interactions-between-two-continuous-variables">Understand interactions between two continuous variables</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span>model <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lm</span>(mpg <span style="color:#f92672">~</span> hp <span style="color:#f92672">*</span> wt, data <span style="color:#f92672">=</span> mtcars)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>slopes <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">estimate_slopes</span>(model, trend <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hp&#34;</span>, at <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;wt&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">plot</span>(slopes)
+</span></span></code></pre></div><p><img src="https://gitee.com/osummer/blogimg/raw/master/img/202112251633373.png" alt=""></p>
+<h4 id="visualize-predictions-with-random-effects">Visualize predictions with random effects</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(lme4)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lmer</span>(Reaction <span style="color:#f92672">~</span> Days <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> Subject), data <span style="color:#f92672">=</span> sleepstudy)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>preds <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">estimate_relation</span>(model, include_random <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">plot</span>(preds, ribbon <span style="color:#f92672">=</span> <span style="color:#a6e22e">list</span>(alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>)) <span style="color:#75715e"># Make CI ribbon transparent for clarity</span>
+</span></span></code></pre></div><p><img src="https://gitee.com/osummer/blogimg/raw/master/img/202112251633374.png" alt=""></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span>model <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lmer</span>(Reaction <span style="color:#f92672">~</span> Days <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> Days <span style="color:#f92672">|</span> Subject), data <span style="color:#f92672">=</span> sleepstudy)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>preds <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">estimate_relation</span>(model, include_random <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">plot</span>(preds, ribbon <span style="color:#f92672">=</span> <span style="color:#a6e22e">list</span>(alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>))
+</span></span></code></pre></div><p><img src="https://gitee.com/osummer/blogimg/raw/master/img/202112251633375.png" alt=""></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span>fixed_pred <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">estimate_relation</span>(model) <span style="color:#75715e"># This time, include_random is FALSE (default)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">plot</span>(preds, ribbon <span style="color:#f92672">=</span> <span style="color:#a6e22e">list</span>(alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>)) <span style="color:#f92672">+</span> <span style="color:#75715e"># Previous plot</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_ribbon</span>(data <span style="color:#f92672">=</span> fixed_pred, <span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> Days, ymin <span style="color:#f92672">=</span> CI_low, ymax <span style="color:#f92672">=</span> CI_high), alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.4</span>) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_line</span>(data <span style="color:#f92672">=</span> fixed_pred, <span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> Days, y <span style="color:#f92672">=</span> Predicted), size <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><p><img src="https://gitee.com/osummer/blogimg/raw/master/img/202112251633376.png" alt=""></p>
+
+    </article>
+  </div>
+
+  
+  
+  
+  <script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-123456789-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+<script>
+window.addEventListener("load", function(){
+window.cookieconsent.initialise({
+  "palette": {
+    "popup": {
+      "background": "#216942",
+      "text": "#b2d192"
+    },
+    "button": {
+      "background": "#afed71"
+    }
+  }
+})});
+</script>
+
+</body>
+
+</html>

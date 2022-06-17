@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>map on 学海无涯</title>
+    <link>https://osummer.github.io/tags/map/</link>
+    <description>Recent content in map on 学海无涯</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 17 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://osummer.github.io/tags/map/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>R-map</title>
+      <link>https://osummer.github.io/post/r-map/</link>
+      <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://osummer.github.io/post/r-map/</guid>
+      <description>绘制ggplot风格地图 1 摘要 主要使用sf包进行空间数据分析。 sf包主要控制simple feature对象，比之前的sp包从数据结构上看更容易懂，也能对空间数据进行大量的操作。
+sf包中的对象主要有：
+sf 数据框 sfc 列表列 sfg sfc中的任一元素 crs 坐标参考系统 2 加载包 library(sf) library(tidyverse) 3 空间数据读取 以中国省级行政划分为例，数据来源于aliyun的datav。
+china_dat &amp;lt;- read_sf(&amp;#34;china_province.json&amp;#34;) attr(china_dat, &amp;#34;sf_column&amp;#34;) ## [1] &amp;#34;geometry&amp;#34; class(china_dat) ## [1] &amp;#34;sf&amp;#34; &amp;#34;tbl_df&amp;#34; &amp;#34;tbl&amp;#34; &amp;#34;data.frame&amp;#34; 4 数据操作 4.1 gfc数据绑定 sf对象中有一列（gfc）,专门存贮空间属性数据，在对sf对象数据进行操作时，默认是不能排除gfc列的。
+china_dat %&amp;gt;% select(1) #绑定 ## Simple feature collection with 36 features and 1 field ## Geometry type: GEOMETRY ## Dimension: XY ## Bounding box: xmin: 73.50078 ymin: 3.553559 xmax: 134.</description>
+    </item>
+    
+  </channel>
+</rss>

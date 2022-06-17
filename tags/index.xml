@@ -8,6 +8,15 @@
     <language>en-us</language>
     <lastBuildDate>Fri, 17 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://osummer.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>ggolot2</title>
+      <link>https://osummer.github.io/tags/ggolot2/</link>
+      <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://osummer.github.io/tags/ggolot2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>ggplot2</title>
       <link>https://osummer.github.io/tags/ggplot2/</link>
       <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
@@ -17,11 +26,56 @@
     </item>
     
     <item>
+      <title>github</title>
+      <link>https://osummer.github.io/tags/github/</link>
+      <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://osummer.github.io/tags/github/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>map</title>
+      <link>https://osummer.github.io/tags/map/</link>
+      <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://osummer.github.io/tags/map/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>R</title>
+      <link>https://osummer.github.io/tags/r/</link>
+      <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://osummer.github.io/tags/r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tidyverse</title>
+      <link>https://osummer.github.io/tags/tidyverse/</link>
+      <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://osummer.github.io/tags/tidyverse/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>可视化</title>
       <link>https://osummer.github.io/tags/%E5%8F%AF%E8%A7%86%E5%8C%96/</link>
       <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
       
       <guid>https://osummer.github.io/tags/%E5%8F%AF%E8%A7%86%E5%8C%96/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>统计</title>
+      <link>https://osummer.github.io/tags/%E7%BB%9F%E8%AE%A1/</link>
+      <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://osummer.github.io/tags/%E7%BB%9F%E8%AE%A1/</guid>
       <description></description>
     </item>
     

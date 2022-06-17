@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <meta name="generator" content="Hugo 0.101.0" />
+
+  
+  <meta name="description" content="Some description">
+  
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="https://osummer.github.io/apple-touch-icon.png">
+
+  
+  <link rel="icon" type="image/png" sizes="32x32" href="https://osummer.github.io/favicon-32x32.png">
+
+  
+  <link rel="icon" type="image/png" sizes="16x16" href="https://osummer.github.io/favicon-16x16.png">
+
+  
+  <link rel="manifest" href="https://osummer.github.io/site.webmanifest">
+
+  
+  <link rel="mask-icon" href="https://osummer.github.io/safari-pinned-tab.svg" color="#5bbad5">
+
+  <meta name="msapplication-TileColor" content="#da532c">
+
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <link rel="stylesheet" href="https://osummer.github.io/css/bootstrap.min.css" />
+
+  
+  <title>group_by函数 | 学海无涯</title>
+  
+
+  <style>
+body {
+  min-width: 300px;
+}
+
+.custom-navbar {
+  margin-bottom: 1em;
+  height: 60px;
+}
+
+.custom-navbar a {
+  display: inline-block; 
+  padding: 18px 0;
+  margin-right: 1em; 
+  font-weight: bold; 
+}
+
+.custom-navbar a:hover,
+.custom-navbar a:focus {
+  text-decoration: none; 
+}
+
+@media print {
+  .custom-navbar {
+    display: none;
+  }
+}
+
+article {
+  padding-bottom: 1em;
+}
+
+img {
+  max-width: 100%;
+}
+
+
+body {
+  background-color: #fff;
+}
+
+
+
+body {
+  color: #212529;
+}
+
+
+
+a {
+  color: #007bff;
+}
+
+
+
+a:hover,
+a:focus {
+  color: #0056b3;
+}
+
+
+
+.custom-navbar {
+  background-color: #1E90FF;
+}
+
+
+
+.custom-navbar a {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+
+
+.custom-navbar a:hover,
+.custom-navbar a:focus {
+  color: rgba(255, 255, 255, 1);
+}
+
+
+
+.container {
+  max-width: 800px;
+}
+
+
+
+pre {
+  display: block;
+  padding: 9.5px;
+  word-break: break-all;
+  word-wrap: break-word;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+pre code {
+  padding: 0;
+  font-size: inherit;
+  color: inherit; 
+  white-space: pre-wrap;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+}
+
+code {
+  padding: 2px 4px;
+  color: inherit; 
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: .9em;
+}
+
+
+
+blockquote,
+.blockquote {
+  padding: 10px 20px;
+  margin: 0 0 20px;
+  font-size: 1em;
+  border-left: 5px solid #6c757d;
+}
+
+</style>
+</head>
+
+<body>
+  <nav class="custom-navbar">
+  <div class="container">
+    
+    <a href="/post/">Posts</a>
+    
+    <a href="/tags/">Tags</a>
+    
+    <a href="/about/">About</a>
+    
+    <a href="/index.xml">RSS</a>
+    
+  </div>
+</nav>
+  
+  <div class="container">
+    <article>
+      <h1>group_by函数</h1>
+<p>
+  <small class="text-secondary">
+  
+  
+  Jun 17, 2022
+  </small>
+  
+
+<small><code><a href="https://osummer.github.io/tags/tidyverse">tidyverse</a></code></small>
+
+  
+
+</p>
+<hr>
+<h1 id="group_函数">group_??函数</h1>
+<ul>
+<li>group_by → summarize</li>
+<li>group_by → group_map 列表输出</li>
+<li>group_by → group_modify 表格输出</li>
+<li>group_nest → rowwise → mutate()</li>
+<li>split → map_df</li>
+</ul>
+<h2 id="单个输出">单个输出</h2>
+<p>比如分组输出某个相关系数</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(tidyverse)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(moderndive)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#分组求相关系数</span>
+</span></span><span style="display:flex;"><span>iris <span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">group_by</span>(Species) <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  moderndive<span style="color:#f92672">::</span><span style="color:#a6e22e">get_correlation</span>(Sepal.Length<span style="color:#f92672">~</span>Sepal.Width)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#summarize只能输出1个返回值</span>
+</span></span><span style="display:flex;"><span>iris <span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">group_by</span>(Species) <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">summarise</span>(cor_coeff<span style="color:#f92672">=</span><span style="color:#a6e22e">cor</span>(Sepal.Length,Sepal.Width))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># group_map函数可输出多个返回值，如果表格输出可用group_modify()</span>
+</span></span><span style="display:flex;"><span>iris <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">group_by</span>(Species) <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">group_map</span>(<span style="color:#f92672">~</span><span style="color:#a6e22e">cor</span>(.x<span style="color:#f92672">$</span>Sepal.Length,.x<span style="color:#f92672">$</span>Sepal.Width))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#group_nest配合map()</span>
+</span></span><span style="display:flex;"><span>iris<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">group_nest</span>(Species)<span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">mutate</span>(cor_coeff<span style="color:#f92672">=</span><span style="color:#a6e22e">map_dbl</span>(data,<span style="color:#f92672">~</span><span style="color:#a6e22e">cor</span>(.x<span style="color:#f92672">$</span>Sepal.Length,.x<span style="color:#f92672">$</span>Sepal.Width)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#group_nest配合rowwise()与mutate，但只能输出1个结果</span>
+</span></span><span style="display:flex;"><span>iris<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">group_nest</span>(Species)<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">rowwise</span>() <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">mutate</span>(cor_coeff<span style="color:#f92672">=</span><span style="color:#a6e22e">cor</span>(data<span style="color:#f92672">$</span>Sepal.Length,data<span style="color:#f92672">$</span>Sepal.Width))
+</span></span></code></pre></div><h2 id="列表输出">列表输出</h2>
+<p>比如分组建模，求模型输出结果</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span><span style="color:#75715e">#求回归结果</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##list输出</span>
+</span></span><span style="display:flex;"><span>iris <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">group_by</span>(Species) <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">group_map</span>(<span style="color:#f92672">~</span>broom<span style="color:#f92672">::</span><span style="color:#a6e22e">glance</span>(<span style="color:#a6e22e">lm</span>(Sepal.Length<span style="color:#f92672">~</span>Sepal.Width,data<span style="color:#f92672">=</span>.x)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##group_modify输出</span>
+</span></span><span style="display:flex;"><span>iris <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">group_by</span>(Species) <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">group_modify</span>(<span style="color:#f92672">~</span>broom<span style="color:#f92672">::</span><span style="color:#a6e22e">glance</span>(<span style="color:#a6e22e">lm</span>(Sepal.Length<span style="color:#f92672">~</span>Sepal.Width,data<span style="color:#f92672">=</span>.x)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## map()</span>
+</span></span><span style="display:flex;"><span>iris<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">split</span>(.$Species)<span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">map_df</span>(<span style="color:#f92672">~</span>broom<span style="color:#f92672">::</span><span style="color:#a6e22e">glance</span>(<span style="color:#a6e22e">lm</span>(Sepal.Length<span style="color:#f92672">~</span>Sepal.Width,data<span style="color:#f92672">=</span>.x)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#map()</span>
+</span></span><span style="display:flex;"><span>iris<span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">group_split</span>(Species) <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">map_df</span>(<span style="color:#f92672">~</span>broom<span style="color:#f92672">::</span><span style="color:#a6e22e">glance</span>(<span style="color:#a6e22e">lm</span>(Sepal.Length<span style="color:#f92672">~</span>Sepal.Width,data<span style="color:#f92672">=</span>.x)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># nest与map</span>
+</span></span><span style="display:flex;"><span>iris<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">group_nest</span>(Species)<span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">mutate</span>(lm_coeff<span style="color:#f92672">=</span><span style="color:#a6e22e">map_df</span>(data,<span style="color:#f92672">~</span>broom<span style="color:#f92672">::</span><span style="color:#a6e22e">glance</span>(<span style="color:#a6e22e">lm</span>(Sepal.Length<span style="color:#f92672">~</span>Sepal.Width,data<span style="color:#f92672">=</span>.x))))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># nest rowwise</span>
+</span></span><span style="display:flex;"><span>iris<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">group_nest</span>(Species)<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">rowwise</span>() <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">mutate</span>(model<span style="color:#f92672">=</span><span style="color:#a6e22e">list</span>(<span style="color:#a6e22e">lm</span>(Sepal.Length<span style="color:#f92672">~</span>Sepal.Width,data<span style="color:#f92672">=</span>data))) <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">mutate</span>(cor_coeff<span style="color:#f92672">=</span>broom<span style="color:#f92672">::</span><span style="color:#a6e22e">glance</span>(model))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>iris<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">nest_by</span>(Species) <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">mutate</span>(model<span style="color:#f92672">=</span><span style="color:#a6e22e">list</span>(<span style="color:#a6e22e">lm</span>(Sepal.Length<span style="color:#f92672">~</span>Sepal.Width,data<span style="color:#f92672">=</span>data))) <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">summarize</span>(broom<span style="color:#f92672">::</span><span style="color:#a6e22e">glance</span>(model))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>iris<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">nest_by</span>(Species) <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">mutate</span>(model<span style="color:#f92672">=</span><span style="color:#a6e22e">list</span>(<span style="color:#a6e22e">lm</span>(Sepal.Length<span style="color:#f92672">~</span>Sepal.Width,data<span style="color:#f92672">=</span>data))) <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">mutate</span>(aa<span style="color:#f92672">=</span><span style="color:#a6e22e">list</span>(<span style="color:#a6e22e">coefficients</span>(model))) <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">select</span>(Species,aa) <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">unnest</span>(aa)
+</span></span></code></pre></div>
+    </article>
+  </div>
+
+  
+  
+  
+  <script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-123456789-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+<script>
+window.addEventListener("load", function(){
+window.cookieconsent.initialise({
+  "palette": {
+    "popup": {
+      "background": "#216942",
+      "text": "#b2d192"
+    },
+    "button": {
+      "background": "#afed71"
+    }
+  }
+})});
+</script>
+
+</body>
+
+</html>

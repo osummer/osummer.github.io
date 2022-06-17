@@ -34,7 +34,7 @@
   <link rel="stylesheet" href="https://osummer.github.io/css/bootstrap.min.css" />
 
   
-  <title>Tags | 学海无涯</title>
+  <title>R语言中markdown生成中文pdf | 学海无涯</title>
   
 
   <style>
@@ -183,24 +183,53 @@ blockquote,
   
   <div class="container">
     <article>
-      <h1>Tags</h1>
+      <h1>R语言中markdown生成中文pdf</h1>
+<p>
+  <small class="text-secondary">
+  
+  
+  Jun 17, 2022
+  </small>
+  
 
+<small><code><a href="https://osummer.github.io/tags/r">R</a></code></small>
 
-  <p><a href="/tags/ggolot2/"><code>ggolot2</code></a> 1</p>
+  
 
-  <p><a href="/tags/ggplot2/"><code>ggplot2</code></a> 2</p>
-
-  <p><a href="/tags/github/"><code>github</code></a> 2</p>
-
-  <p><a href="/tags/map/"><code>map</code></a> 1</p>
-
-  <p><a href="/tags/r/"><code>R</code></a> 5</p>
-
-  <p><a href="/tags/tidyverse/"><code>tidyverse</code></a> 2</p>
-
-  <p><a href="/tags/%E5%8F%AF%E8%A7%86%E5%8C%96/"><code>可视化</code></a> 2</p>
-
-  <p><a href="/tags/%E7%BB%9F%E8%AE%A1/"><code>统计</code></a> 3</p>
+</p>
+<h1 id="rmarkdown生成中文pdf">Rmarkdown生成中文pdf</h1>
+<p>需要电脑已配置好Latex环境（TinyTex，或者至少安装MikTex），并已安装rmarkdown包。</p>
+<h2 id="一-中文pdf文档">一.	 中文pdf文档</h2>
+<p>安装rticles包，里面包含了很多模板，特别是CTEX Documents 模板。
+File——New File——R Markdown，点From Template，选择CTEX Documents：</p>
+<h2 id="二-中文pdf幻灯片">二.	 中文pdf幻灯片</h2>
+<p>（1）  安装<strong>xaringan</strong>包，提供了中文幻灯片模板。
+File——New File——R Markdown，点From Template，选择Ninja Presentation (Simplified Chinese):
+注：路径不能有中文。</p>
+<p>（2） 安装Infinite Moon Reader插件，可以在RStudio中预览幻灯片：
+Tools—Addins—Browse Addins…</p>
+<p>点Execute，若提示更新包则更新。</p>
+<p>只需要敲你的幻灯片正文就够了，预览会自动显示在 RStudio 的Viewer窗口。</p>
+<ul>
+<li>幻灯片分页用三短横线</li>
+<li>一张片子里的内容可以任意方式分割（语法是两短横线），分割过的片子在播放的时候会按次序一段段显示在屏幕上。</li>
+<li>一张片子要分成左半部分和右半部分可以用using .pull-left[] 和 .pull-right[]</li>
+<li>注释（footnote）可以用.footnote[]</li>
+<li>备注（观众看不到的那些内容）可以用???</li>
+<li>列表，字体，链接，插入图片，数学公式等的语法跟R Markdown一样。若要插入本地的图片（居中、设置大小）：</li>
+<li>
+<div align=center> <img src="./figs/MyZhihu.png", width=80%> </div>
+</li>
+<li>如果你想在幻灯片里插入R Markdown的代码，但不要R Markdown执行这些代码，你如果用如下格式</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>代码段
+</span></span></code></pre></div><ul>
+<li>如果是一句话里单个R代码，用
+<code>`r knitr::inline_expr(&quot;expression&quot;)`</code></li>
+</ul>
+<h2 id="三-中文beamer">三.	 中文beamer</h2>
+<p>使用模板：Zh-beamer-master
+将Zh-beamer-master.zip解压，打开test.Rmd,  knit PDF</p>
 
     </article>
   </div>
