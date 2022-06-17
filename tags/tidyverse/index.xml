@@ -16,16 +16,5 @@
       <description>多重比较 Duncan_Test #&amp;#39; Duncan_Test #&amp;#39; @param data dataset #&amp;#39; @param xx x-variable #&amp;#39; @param yy y-variable #&amp;#39; #&amp;#39; @return data frame #&amp;#39; @export #&amp;#39; #&amp;#39; @import dplyr #&amp;#39; @import tibble #&amp;#39; @import ggplot2 #&amp;#39; @import tidyr #&amp;#39; @import patchwork #&amp;#39; @examples #&amp;#39; Duncan_Test(iris,Species,Sepal.Length) Duncan_Test&amp;lt;-function(data,xx,yy){ trt&amp;lt;- as.character(substitute(xx)) aov1&amp;lt;-aov(formula(substitute(yy~xx)),data) res &amp;lt;- aov1 %&amp;gt;% agricolae::duncan.test(trt=trt) res_mean &amp;lt;- res$means %&amp;gt;% as_tibble(rownames=trt) %&amp;gt;% select(1:4) res_group &amp;lt;- res$groups %&amp;gt;% as_tibble(rownames=trt)%&amp;gt;% select(1,3) multicom_result &amp;lt;- res_mean %&amp;gt;% left_join(res_group,by=trt) result&amp;lt;-list(anova_test=summary(aov1), multi_test=multicom_result) return(result) } LSD_Test #&amp;#39; LSD_Test #&amp;#39; @param data dataset #&amp;#39; @param xx x-variable #&amp;#39; @param yy y-variable #&amp;#39; #&amp;#39; @return data frame #&amp;#39; @export #&amp;#39; #&amp;#39; @examples #&amp;#39; LSD_Test(iris,Species,Sepal.</description>
     </item>
     
-    <item>
-      <title>group_by函数</title>
-      <link>https://osummer.github.io/post/group_by%E5%87%BD%E6%95%B0/</link>
-      <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://osummer.github.io/post/group_by%E5%87%BD%E6%95%B0/</guid>
-      <description>group_??函数 group_by → summarize group_by → group_map 列表输出 group_by → group_modify 表格输出 group_nest → rowwise → mutate() split → map_df 单个输出 比如分组输出某个相关系数
-library(tidyverse) library(moderndive) #分组求相关系数 iris %&amp;gt;%group_by(Species) %&amp;gt;% moderndive::get_correlation(Sepal.Length~Sepal.Width) #summarize只能输出1个返回值 iris %&amp;gt;%group_by(Species) %&amp;gt;% summarise(cor_coeff=cor(Sepal.Length,Sepal.Width)) # group_map函数可输出多个返回值，如果表格输出可用group_modify() iris %&amp;gt;% group_by(Species) %&amp;gt;% group_map(~cor(.x$Sepal.Length,.x$Sepal.Width)) #group_nest配合map() iris%&amp;gt;%group_nest(Species)%&amp;gt;% mutate(cor_coeff=map_dbl(data,~cor(.x$Sepal.Length,.x$Sepal.Width))) #group_nest配合rowwise()与mutate，但只能输出1个结果 iris%&amp;gt;%group_nest(Species)%&amp;gt;%rowwise() %&amp;gt;% mutate(cor_coeff=cor(data$Sepal.Length,data$Sepal.Width)) 列表输出 比如分组建模，求模型输出结果
-#求回归结果 ##list输出 iris %&amp;gt;% group_by(Species) %&amp;gt;% group_map(~broom::glance(lm(Sepal.Length~Sepal.Width,data=.x))) ##group_modify输出 iris %&amp;gt;% group_by(Species) %&amp;gt;% group_modify(~broom::glance(lm(Sepal.Length~Sepal.Width,data=.x))) ## map() iris%&amp;gt;%split(.$Species)%&amp;gt;% map_df(~broom::glance(lm(Sepal.Length~Sepal.Width,data=.x))) #map() iris%&amp;gt;% group_split(Species) %&amp;gt;% map_df(~broom::glance(lm(Sepal.</description>
-    </item>
-    
   </channel>
 </rss>

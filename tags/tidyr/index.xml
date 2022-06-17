@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tidyr on 学海无涯</title>
+    <link>https://osummer.github.io/tags/tidyr/</link>
+    <description>Recent content in tidyr on 学海无涯</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 17 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://osummer.github.io/tags/tidyr/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>group_by函数</title>
+      <link>https://osummer.github.io/post/group_by%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://osummer.github.io/post/group_by%E5%87%BD%E6%95%B0/</guid>
+      <description>group_??函数 group_by → summarize group_by → group_map 列表输出 group_by → group_modify 表格输出 group_nest → rowwise → mutate() split → map_df 单个输出 比如分组输出某个相关系数
+library(tidyverse) library(moderndive) #分组求相关系数 iris %&amp;gt;%group_by(Species) %&amp;gt;% moderndive::get_correlation(Sepal.Length~Sepal.Width) #summarize只能输出1个返回值 iris %&amp;gt;%group_by(Species) %&amp;gt;% summarise(cor_coeff=cor(Sepal.Length,Sepal.Width)) # group_map函数可输出多个返回值，如果表格输出可用group_modify() iris %&amp;gt;% group_by(Species) %&amp;gt;% group_map(~cor(.x$Sepal.Length,.x$Sepal.Width)) #group_nest配合map() iris%&amp;gt;%group_nest(Species)%&amp;gt;% mutate(cor_coeff=map_dbl(data,~cor(.x$Sepal.Length,.x$Sepal.Width))) #group_nest配合rowwise()与mutate，但只能输出1个结果 iris%&amp;gt;%group_nest(Species)%&amp;gt;%rowwise() %&amp;gt;% mutate(cor_coeff=cor(data$Sepal.Length,data$Sepal.Width)) 列表输出 比如分组建模，求模型输出结果
+#求回归结果 ##list输出 iris %&amp;gt;% group_by(Species) %&amp;gt;% group_map(~broom::glance(lm(Sepal.Length~Sepal.Width,data=.x))) ##group_modify输出 iris %&amp;gt;% group_by(Species) %&amp;gt;% group_modify(~broom::glance(lm(Sepal.Length~Sepal.Width,data=.x))) ## map() iris%&amp;gt;%split(.$Species)%&amp;gt;% map_df(~broom::glance(lm(Sepal.Length~Sepal.Width,data=.x))) #map() iris%&amp;gt;% group_split(Species) %&amp;gt;% map_df(~broom::glance(lm(Sepal.</description>
+    </item>
+    
+  </channel>
+</rss>

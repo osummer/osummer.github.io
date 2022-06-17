@@ -8,15 +8,6 @@
     <language>en-us</language>
     <lastBuildDate>Fri, 17 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://osummer.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>ggolot2</title>
-      <link>https://osummer.github.io/tags/ggolot2/</link>
-      <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://osummer.github.io/tags/ggolot2/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>ggplot2</title>
       <link>https://osummer.github.io/tags/ggplot2/</link>
       <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
@@ -35,6 +26,15 @@
     </item>
     
     <item>
+      <title>lme4</title>
+      <link>https://osummer.github.io/tags/lme4/</link>
+      <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://osummer.github.io/tags/lme4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>map</title>
       <link>https://osummer.github.io/tags/map/</link>
       <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
@@ -49,6 +49,24 @@
       <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
       
       <guid>https://osummer.github.io/tags/r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>test</title>
+      <link>https://osummer.github.io/tags/test/</link>
+      <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://osummer.github.io/tags/test/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tidyr</title>
+      <link>https://osummer.github.io/tags/tidyr/</link>
+      <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://osummer.github.io/tags/tidyr/</guid>
       <description></description>
     </item>
     

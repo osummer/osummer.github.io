@@ -14,7 +14,7 @@
       
       <guid>https://osummer.github.io/post/ggplot2%E4%B8%AD%E7%9A%84theme%E5%87%BD%E6%95%B0/</guid>
       <description>ggplot2-theme函数 1 theme函数定义内容 plot区域 panel区域 axis坐标轴 legend图例 strip分面栏 2 theme中使用的元素 rect line text FAQ 3 坐标轴 3.1 坐标轴线格式 axis.line=element_line(color,size,linetype) 3.2 坐标刻度线格式 axis.ticks=element_line() 3.3 坐标刻度线方向 负数向内，正数向外
-axis.ticks.length=unit(2,&amp;#34;mm&amp;#34;) 3.4 刻度线标签文本 axis.text=element_text(color,size,face,family,margin,vjust,hjust,angle) 3.5 坐标轴标题文本 axis.title=element_text(color,size,face,family,margin,vjust,hjust,angle) 4 图例legend 4.1 图例位置 #pannel外 legend.postion=&amp;#34;right&amp;#34; #left, top, bottom #pannel内，如右上角 legend.position = c(0.9,0.9) legend.justification = c(0.9,0.9) 4.2 图列内元素方向分布 legend.direction = &amp;#34;vertical&amp;#34;, #legend内方向 legend.spacing.x = unit(1,&amp;#34;cm&amp;#34;), legend.spacing.y = unit(1,&amp;#34;cm&amp;#34;), 4.3 多组图例方向分布 legend.box=&amp;#34;horizontal&amp;#34;, #legend间排列 legend.box.just=&amp;#34;bottom&amp;#34;, legend.box.spacing = unit(1,&amp;#34;cm&amp;#34;), 4.4 图例中文本格式 #标题文本 legend.</description>
+axis.ticks.length=unit(2,&amp;#34;mm&amp;#34;) 3.4 刻度线标签文本 axis.text=element_text(color,size,face,family,margin,vjust,hjust,angle) 3.5 坐标轴标题文本 axis.title=element_text(color,size,face,family,margin,vjust,hjust,angle) 4 图例legend 4.1 图例位置 #pannel外legend.postion=&amp;#34;right&amp;#34; #left, top, bottom#pannel内，如右上角legend.position = c(0.9,0.9)legend.justification = c(0.9,0.9) 4.2 图列内元素方向分布 legend.direction = &amp;#34;vertical&amp;#34;, #legend内方向legend.spacing.x = unit(1,&amp;#34;cm&amp;#34;),legend.spacing.y = unit(1,&amp;#34;cm&amp;#34;), 4.3 多组图例方向分布 legend.box=&amp;#34;horizontal&amp;#34;, #legend间排列legend.box.just=&amp;#34;bottom&amp;#34;, legend.box.spacing = unit(1,&amp;#34;cm&amp;#34;), 4.4 图例中文本格式 #标题文本legend.</description>
     </item>
     
     <item>
@@ -34,6 +34,19 @@ p=iris %&amp;gt;% ggplot(aes(x=Species,y=Sepal.Length))+ geom_boxplot(aes(fill=S
 h 色相，实际是色环角度0-360 c 饱和度，0-100 l 亮度，0-100 例如： p+scale_fill_hue(h=c(120,360)) p+scale_fill_hue(l=80)#设置亮度（l默认45） p+scale_fill_hue(l=30)#设置亮度（l默认45） p+scale_fill_hue(c=50)#设置饱和度（c默认100） p+scale_fill_hue(c=100)#设置饱和度（c默认100） 灰度系统scale_fill_grey() p+scale_fill_grey(start=0.2,end=0.8) 调色板scale_fill_brewer() RColorBrewer包中有多个色板可供选择：
 RColorBrewer::display.brewer.all() RColorBrewer中有3套色板，type参数，分别为：
 Sequential（seq）: 用于表示数值梯度，用于呈现有序的数值信息，数值越高颜色越深，越低颜色越浅。 qualitative(qual)：用于呈现分类信息，颜色之间一般对比鲜明。 diverging(div): 分歧，用于呈现有序/连续的数值信息，这些数值围绕着一个中心值，比中心值越大的方向用一种渐变色，比中心值越小用另一种渐变色。 对于离散变量映射，则有：</description>
+    </item>
+    
+    <item>
+      <title>R-map</title>
+      <link>https://osummer.github.io/post/r-map/</link>
+      <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://osummer.github.io/post/r-map/</guid>
+      <description>绘制ggplot风格地图 1 摘要 主要使用sf包进行空间数据分析。 sf包主要控制simple feature对象，比之前的sp包从数据结构上看更容易懂，也能对空间数据进行大量的操作。
+sf包中的对象主要有：
+sf 数据框 sfc 列表列 sfg sfc中的任一元素 crs 坐标参考系统 2 加载包 library(sf) library(tidyverse) 3 空间数据读取 以中国省级行政划分为例，数据来源于aliyun的datav。
+china_dat &amp;lt;- read_sf(&amp;#34;china_province.json&amp;#34;) attr(china_dat, &amp;#34;sf_column&amp;#34;) ## [1] &amp;#34;geometry&amp;#34; class(china_dat) ## [1] &amp;#34;sf&amp;#34; &amp;#34;tbl_df&amp;#34; &amp;#34;tbl&amp;#34; &amp;#34;data.frame&amp;#34; 4 数据操作 4.1 gfc数据绑定 sf对象中有一列（gfc）,专门存贮空间属性数据，在对sf对象数据进行操作时，默认是不能排除gfc列的。
+china_dat %&amp;gt;% select(1) #绑定 ## Simple feature collection with 36 features and 1 field## Geometry type: GEOMETRY## Dimension: XY## Bounding box: xmin: 73.50078 ymin: 3.553559 xmax: 134.</description>
     </item>
     
   </channel>

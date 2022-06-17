@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>lme4 on 学海无涯</title>
+    <link>https://osummer.github.io/tags/lme4/</link>
+    <description>Recent content in lme4 on 学海无涯</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 17 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://osummer.github.io/tags/lme4/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>lme4包做混合模型</title>
+      <link>https://osummer.github.io/post/lme4%E5%8C%85%E5%81%9A%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8B/</link>
+      <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://osummer.github.io/post/lme4%E5%8C%85%E5%81%9A%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8B/</guid>
+      <description>lme4包示例 数据 DAAG::kiwishade Kiwifruit Shading Trial (kiwishade from DAAG package) Blocks (3)/plots (4 per block)/vines (4 per plot) 4 shading treatments, randomized to whole plots within blocks. 实验包含：3区组，每个区组4个小区，每个小区落实4个处理，每个处理测定4个KIWI个体
+模型拟合 vfit &amp;lt;- lmer(yield ~ shade + (1 | block/shade), kiwishade) vfit Linear mixed model fit by REML [&amp;#39;lmerMod&amp;#39;] Formula: yield ~ shade + (1 | block/shade) Data: kiwishade REML criterion at convergence: 251.9663 Random effects: Groups Name Std.Dev. shade:block (Intercept) 1.479 block (Intercept) 2.</description>
+    </item>
+    
+  </channel>
+</rss>
