@@ -152,5 +152,14 @@ Consumer:factor with 81 levels: numbering identifying consumers. Product:factor 
 模型拟合 fm &amp;lt;- lmer(Informed.liking ~ Product*Information*Gender*Age + + (1|Consumer) + (1|Consumer:Product) + (1|Consumer:Information), data=ham) 逐步回归 step_fm &amp;lt;- step(fm) step_fm # Display elimination results final_fm &amp;lt;- get_model(step_fm) 结果分析 拟合结果 &amp;gt; summary(final_fm) Linear mixed model fit by REML.</description>
     </item>
     
+    <item>
+      <title>test1</title>
+      <link>https://osummer.github.io/post/test1/</link>
+      <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://osummer.github.io/post/test1/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>
