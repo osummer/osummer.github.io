@@ -171,14 +171,5 @@ Consumer:factor with 81 levels: numbering identifying consumers. Product:factor 
       <description></description>
     </item>
     
-    <item>
-      <title>Search Results</title>
-      <link>https://osummer.github.io/search/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://osummer.github.io/search/</guid>
-      <description></description>
-    </item>
-    
   </channel>
 </rss>
