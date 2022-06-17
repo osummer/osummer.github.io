@@ -85,23 +85,6 @@ echo &amp;#34;# easyANOVA&amp;#34; &amp;gt;&amp;gt; README.md git init git add R
     </item>
     
     <item>
-      <title>github基本操作</title>
-      <link>https://osummer.github.io/post/github%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/</link>
-      <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://osummer.github.io/post/github%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/</guid>
-      <description>github使用指南 1. 新建账户与仓库 在github.com中 osummer 账户下新建 easyANOVA 仓库
-2. ssh公钥建立 首先在本地创建ssh key，在cmd中执行创建ssh key
-$ ssh-keygen -t rsa -C &amp;#34;your_email@youremail.com&amp;#34; your_email@youremail.com改为你在github上注册的邮箱，之后会要求确认路径和输入密码，我们这使用默认的一路回车就行。成功的话会在~/下生成.ssh文件夹，进去，打开id_rsa.pub，复制里面的key。
-3. ssh公钥上传 回到github上，进入 Account Settings（账户配置），左边选择SSH Keys，Add SSH Key,title随便填，粘贴在你电脑上生成的key。
-验证是否成功：
-$ ssh -T git@github.com 4. 本地仓库初始化与提交 设置信息
-$ git config --global user.name &amp;#34;your name&amp;#34; $ git config --global user.email &amp;#34;your_email@youremail.com&amp;#34; 进入要上传的仓库，右键git bash，添加远程地址：
-$ git remote add origin git@github.com:yourName/yourRepo.git 或者重新创建本地仓库：
-echo &amp;#34;# easyANOVA&amp;#34; &amp;gt;&amp;gt; README.md git init git add README.md git commit -m &amp;#34;first commit&amp;#34; git branch -M main git remote add origin https://github.</description>
-    </item>
-    
-    <item>
       <title>group_by函数</title>
       <link>https://osummer.github.io/post/group_by%E5%87%BD%E6%95%B0/</link>
       <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
