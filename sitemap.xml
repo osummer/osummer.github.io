@@ -5,6 +5,12 @@
     <loc>https://osummer.github.io/about/</loc>
     <lastmod>2022-06-17T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://osummer.github.io/tags/blogdown/</loc>
+    <lastmod>2022-06-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://osummer.github.io/post/blogdown%E5%88%B6%E4%BD%9C%E5%8D%9A%E5%AE%A2/</loc>
+    <lastmod>2022-06-17T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://osummer.github.io/categories/</loc>
     <lastmod>2022-06-17T00:00:00+00:00</lastmod>
   </url><url>
@@ -26,7 +32,7 @@
     <loc>https://osummer.github.io/tags/github/</loc>
     <lastmod>2022-06-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://osummer.github.io/post/github%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</loc>
+    <loc>https://osummer.github.io/post/github%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/</loc>
     <lastmod>2022-06-17T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://osummer.github.io/post/group_by%E5%87%BD%E6%95%B0/</loc>
@@ -85,5 +91,7 @@
   </url><url>
     <loc>https://osummer.github.io/tags/%E7%BB%9F%E8%AE%A1/</loc>
     <lastmod>2022-06-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://osummer.github.io/post/2021%E5%B9%B4%E5%86%9C%E4%B8%9A%E7%A0%94%E7%A9%B6%E7%83%AD%E7%82%B9%E5%85%B3%E6%B3%A8/</loc>
   </url>
 </urlset>

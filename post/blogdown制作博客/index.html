@@ -34,7 +34,7 @@
   <link rel="stylesheet" href="https://osummer.github.io/css/bootstrap.min.css" />
 
   
-  <title>Tags | 学海无涯</title>
+  <title>blogdown制作博客 | 学海无涯</title>
   
 
   <style>
@@ -185,30 +185,85 @@ blockquote,
   
   <div class="container">
     <article>
-      <h1>Tags</h1>
+      <h1>blogdown制作博客</h1>
+<p>
+  <small class="text-secondary">
+  
+  
+  Jun 17, 2022
+  </small>
+  
+
+<small><code><a href="https://osummer.github.io/tags/blogdown">blogdown</a></code></small>
+
+  
+
+<small><code><a href="https://osummer.github.io/categories/r%E8%AF%AD%E8%A8%80">R语言</a></code></small>
 
 
-  <p><a href="/tags/blogdown/"><code>blogdown</code></a> 1</p>
-
-  <p><a href="/tags/ggplot2/"><code>ggplot2</code></a> 3</p>
-
-  <p><a href="/tags/github/"><code>github</code></a> 1</p>
-
-  <p><a href="/tags/lme4/"><code>lme4</code></a> 1</p>
-
-  <p><a href="/tags/map/"><code>map</code></a> 1</p>
-
-  <p><a href="/tags/r/"><code>R</code></a> 4</p>
-
-  <p><a href="/tags/test/"><code>test</code></a> 1</p>
-
-  <p><a href="/tags/tidyr/"><code>tidyr</code></a> 1</p>
-
-  <p><a href="/tags/tidyverse/"><code>tidyverse</code></a> 1</p>
-
-  <p><a href="/tags/%E5%8F%AF%E8%A7%86%E5%8C%96/"><code>可视化</code></a> 2</p>
-
-  <p><a href="/tags/%E7%BB%9F%E8%AE%A1/"><code>统计</code></a> 2</p>
+</p>
+<h2 id="blogdown博客">blogdown博客</h2>
+<ul>
+<li>所需软件
+<ul>
+<li>rstudio</li>
+<li>hugo</li>
+<li>git</li>
+</ul>
+</li>
+<li>安装与配置
+<ul>
+<li>blodown
+<ul>
+<li>新建project选择blog</li>
+<li>new_site()新建站点
+<ul>
+<li>install_theme()安装主题</li>
+<li>编辑config.yaml配置主题</li>
+</ul>
+</li>
+<li>new_post()新建博文</li>
+<li>serve_site()本地预览</li>
+<li>stop_server()结束本地预览</li>
+<li>hugo_build()/build_site站点发布于public</li>
+</ul>
+</li>
+<li>git
+<ul>
+<li>github站点创建仓库<em>name</em>name.github.io</li>
+<li>public文件夹
+<ul>
+<li>初始化git init</li>
+<li>远程连接 git remote add</li>
+<li>加入缓存区git add .</li>
+<li>提交 git commit</li>
+<li>远程提交git push</li>
+</ul>
+</li>
+<li>查看<em>name</em>.github.io</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>文件架构
+<ul>
+<li>cotent文档内容md文件等</li>
+<li>public发布内容</li>
+<li>static所有内容均会复制到public</li>
+<li>config.toml或者config.yaml配置文件</li>
+</ul>
+</li>
+<li>重要问题
+<ul>
+<li>图片引用
+<ul>
+<li>绝对路径</li>
+<li>最前部&quot;/&ldquo;不可省略</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
     </article>
   </div>
