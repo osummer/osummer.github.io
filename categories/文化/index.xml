@@ -3,23 +3,7 @@
         <title>文化 - Category - 学海无涯</title>
         <link>http://example.org/categories/%E6%96%87%E5%8C%96/</link>
         <description>文化 - Category - 学海无涯</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 22 Jan 2024 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://example.org/categories/%E6%96%87%E5%8C%96/" rel="self" type="application/rss+xml" /><item>
-    <title>中国传统建筑</title>
-    <link>http://example.org/posts/%E4%B8%AD%E5%9B%BD%E4%BC%A0%E7%BB%9F%E5%BB%BA%E7%AD%91/</link>
-    <pubDate>Mon, 22 Jan 2024 00:00:00 &#43;0000</pubDate>
-    <author>陈文捷</author>
-    <guid>http://example.org/posts/%E4%B8%AD%E5%9B%BD%E4%BC%A0%E7%BB%9F%E5%BB%BA%E7%AD%91/</guid>
-    <description><![CDATA[序章 建筑主要结构 台基：抬高柱脚 柱：支撑屋架 枋：连接柱，形成框架结构 梁：承压不落地柱，减少柱子数量 檩：与建筑正面平行，支撑椽 椽：沿进深方向铺设]]></description>
-</item>
-<item>
-    <title>青铜器</title>
-    <link>http://example.org/posts/%E9%9D%92%E9%93%9C%E5%99%A8/</link>
-    <pubDate>Fri, 25 Aug 2023 00:00:00 &#43;0000</pubDate>
-    <author>Author</author>
-    <guid>http://example.org/posts/%E9%9D%92%E9%93%9C%E5%99%A8/</guid>
-    <description><![CDATA[基本知识 铜是人类最早认识和利用的金属，自然界中存在的天然纯铜呈紫红色，又称&quot;红铜&quot;。此外，自然界还存在不少其它铜矿石，比]]></description>
-</item>
-<item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 03 Aug 2023 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://example.org/categories/%E6%96%87%E5%8C%96/" rel="self" type="application/rss+xml" /><item>
     <title>绿茶加工</title>
     <link>http://example.org/posts/%E7%BB%BF%E8%8C%B6%E5%8A%A0%E5%B7%A5/</link>
     <pubDate>Thu, 03 Aug 2023 00:00:00 &#43;0000</pubDate>

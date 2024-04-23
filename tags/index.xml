@@ -3,36 +3,12 @@
         <title>Tags - Tag - 学海无涯</title>
         <link>http://example.org/tags/</link>
         <description>Tags - Tag - 学海无涯</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 19 Mar 2024 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://example.org/tags/" rel="self" type="application/rss+xml" /><item>
-    <title>R</title>
-    <link>http://example.org/tags/r/</link>
-    <pubDate>Tue, 19 Mar 2024 00:00:00 &#43;0000</pubDate>
-    <author>Author</author>
-    <guid>http://example.org/tags/r/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 27 Jan 2024 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://example.org/tags/" rel="self" type="application/rss+xml" /><item>
     <title>GPT</title>
     <link>http://example.org/tags/gpt/</link>
     <pubDate>Sat, 27 Jan 2024 00:00:00 &#43;0000</pubDate>
     <author>Author</author>
     <guid>http://example.org/tags/gpt/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>建筑</title>
-    <link>http://example.org/tags/%E5%BB%BA%E7%AD%91/</link>
-    <pubDate>Mon, 22 Jan 2024 00:00:00 &#43;0000</pubDate>
-    <author>Author</author>
-    <guid>http://example.org/tags/%E5%BB%BA%E7%AD%91/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>历史</title>
-    <link>http://example.org/tags/%E5%8E%86%E5%8F%B2/</link>
-    <pubDate>Fri, 25 Aug 2023 00:00:00 &#43;0000</pubDate>
-    <author>Author</author>
-    <guid>http://example.org/tags/%E5%8E%86%E5%8F%B2/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
@@ -44,19 +20,11 @@
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>方法论</title>
-    <link>http://example.org/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/</link>
-    <pubDate>Mon, 13 Mar 2023 00:00:00 &#43;0000</pubDate>
+    <title>R</title>
+    <link>http://example.org/tags/r/</link>
+    <pubDate>Sat, 17 Jun 2023 00:00:00 &#43;0000</pubDate>
     <author>Author</author>
-    <guid>http://example.org/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>统计</title>
-    <link>http://example.org/tags/%E7%BB%9F%E8%AE%A1/</link>
-    <pubDate>Fri, 02 Sep 2022 00:00:00 &#43;0000</pubDate>
-    <author>Author</author>
-    <guid>http://example.org/tags/%E7%BB%9F%E8%AE%A1/</guid>
+    <guid>http://example.org/tags/r/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>

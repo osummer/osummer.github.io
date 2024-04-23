@@ -3,37 +3,13 @@
         <title>All Posts - 学海无涯</title>
         <link>http://example.org/posts/</link>
         <description>All Posts | 学海无涯</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 19 Mar 2024 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
-    <title>geom_col</title>
-    <link>http://example.org/posts/geom_col/</link>
-    <pubDate>Tue, 19 Mar 2024 00:00:00 &#43;0000</pubDate>
-    <author>Author</author>
-    <guid>http://example.org/posts/geom_col/</guid>
-    <description><![CDATA[iris %&gt;% mutate(ss=if_else(Sepal.Length&lt;6,&#34;Y&#34;,&#34;N&#34;)) %&gt;% summarise(mean=mean(Sepal.Length),sd=sd(Sepal.Length),.by=c(Species,ss)) %&gt;% ggplot(aes(x=Species,y=mean))+ geom_col(aes(fill=ss), # width=0.8, # 柱子组宽度，默认0.9 just=0.5, # 柱子对齐位置，默认0.5 居中刻度对齐 position=position_dodge2(preserve = &#34;single&#34;, # padding=0.1 # 同组柱子间距 ))+ geom_errorbar(aes(ymin=mean,ymax=mean+sd), # width=0.8, position=position_dodge2(preserve = &#34;single&#34;, padding=0.5 ))+ geom_text(aes(y=mean+sd,label=round(mean+sd,2), hjust=0.5, # 左对齐 vjust=-0.5),]]></description>
-</item>
-<item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 27 Jan 2024 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
     <title>GPT审稿</title>
     <link>http://example.org/posts/gpt%E5%AE%A1%E7%A8%BF/</link>
     <pubDate>Sat, 27 Jan 2024 00:00:00 &#43;0000</pubDate>
     <author>Author</author>
     <guid>http://example.org/posts/gpt%E5%AE%A1%E7%A8%BF/</guid>
     <description><![CDATA[略读 提问 第一步：请你按以下三个问题总结这篇文章的内容，第1个问题：这篇文章的研究问题是什么？ 第2个问题：这篇文章的研究结论是什么？ 第3个问题]]></description>
-</item>
-<item>
-    <title>中国传统建筑</title>
-    <link>http://example.org/posts/%E4%B8%AD%E5%9B%BD%E4%BC%A0%E7%BB%9F%E5%BB%BA%E7%AD%91/</link>
-    <pubDate>Mon, 22 Jan 2024 00:00:00 &#43;0000</pubDate>
-    <author>陈文捷</author>
-    <guid>http://example.org/posts/%E4%B8%AD%E5%9B%BD%E4%BC%A0%E7%BB%9F%E5%BB%BA%E7%AD%91/</guid>
-    <description><![CDATA[序章 建筑主要结构 台基：抬高柱脚 柱：支撑屋架 枋：连接柱，形成框架结构 梁：承压不落地柱，减少柱子数量 檩：与建筑正面平行，支撑椽 椽：沿进深方向铺设]]></description>
-</item>
-<item>
-    <title>青铜器</title>
-    <link>http://example.org/posts/%E9%9D%92%E9%93%9C%E5%99%A8/</link>
-    <pubDate>Fri, 25 Aug 2023 00:00:00 &#43;0000</pubDate>
-    <author>Author</author>
-    <guid>http://example.org/posts/%E9%9D%92%E9%93%9C%E5%99%A8/</guid>
-    <description><![CDATA[基本知识 铜是人类最早认识和利用的金属，自然界中存在的天然纯铜呈紫红色，又称&quot;红铜&quot;。此外，自然界还存在不少其它铜矿石，比]]></description>
 </item>
 <item>
     <title>绿茶加工</title>
@@ -82,6 +58,30 @@
     <author>Author</author>
     <guid>http://example.org/posts/r%E5%8C%85%E5%BC%80%E5%8F%91/</guid>
     <description><![CDATA[需要的相关包 devtools 编译相关 usethis 相关设置 roxygen2 自动化文档生成 R包文件架构 主要流程 创建工程project create_package 修改desciption use_package use_data use_??_license use_description 创建R源文件 usethis::use_r 在]]></description>
+</item>
+<item>
+    <title>读科研论文的三个层次、四个阶段与十个问题</title>
+    <link>http://example.org/posts/%E8%AF%BB%E7%A7%91%E7%A0%94%E8%AE%BA%E6%96%87%E7%9A%84%E4%B8%89%E4%B8%AA%E5%B1%82%E6%AC%A1%E5%9B%9B%E4%B8%AA%E9%98%B6%E6%AE%B5%E4%B8%8E%E5%8D%81%E4%B8%AA%E9%97%AE%E9%A2%98/</link>
+    <pubDate>Fri, 31 Mar 2023 00:00:00 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>http://example.org/posts/%E8%AF%BB%E7%A7%91%E7%A0%94%E8%AE%BA%E6%96%87%E7%9A%84%E4%B8%89%E4%B8%AA%E5%B1%82%E6%AC%A1%E5%9B%9B%E4%B8%AA%E9%98%B6%E6%AE%B5%E4%B8%8E%E5%8D%81%E4%B8%AA%E9%97%AE%E9%A2%98/</guid>
+    <description><![CDATA[沈向洋博士：如何以正确方式打开一篇科研论文？ 好研究员的特质 open-minded——要有批判性思考的能力 要努力工作 要不断更新自己的知识面，要]]></description>
+</item>
+<item>
+    <title>bayestestR</title>
+    <link>http://example.org/posts/0-easystats/bayestestr/</link>
+    <pubDate>Sat, 22 Oct 2022 00:00:00 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>http://example.org/posts/0-easystats/bayestestr/</guid>
+    <description><![CDATA[bayestestR 主要用于对大量Bayes模型包的结果： rstanarm brms BayesFactor]]></description>
+</item>
+<item>
+    <title>correlation</title>
+    <link>http://example.org/posts/0-easystats/correlation/</link>
+    <pubDate>Sat, 22 Oct 2022 00:00:00 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>http://example.org/posts/0-easystats/correlation/</guid>
+    <description><![CDATA[简介 相关分析包 计算不同的相关系数： 主要函数包含： correlation() cor_test() 示例 相关矩阵 # 相关矩阵 results &lt;- correlation(iris) results summary(results) summary(results, redundant = TRUE) results %&gt;% summary(redundant = TRUE) %&gt;% see::plot() 相关性检验 cor_test(iris, &#34;Sepal.Width&#34;, &#34;Sepal.Length&#34;) |&gt; see::plot() 分组相关相关 iris]]></description>
 </item>
 </channel>
 </rss>
