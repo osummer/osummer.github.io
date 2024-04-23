@@ -44,44 +44,44 @@
     <description><![CDATA[沈向洋博士：如何以正确方式打开一篇科研论文？ 好研究员的特质 open-minded——要有批判性思考的能力 要努力工作 要不断更新自己的知识面，要]]></description>
 </item>
 <item>
-    <title>bayestestR</title>
-    <link>http://example.org/posts/0-easystats/bayestestr/</link>
-    <pubDate>Sat, 22 Oct 2022 00:00:00 &#43;0000</pubDate>
+    <title>blogdown</title>
+    <link>http://example.org/posts/blogdown/</link>
+    <pubDate>Fri, 17 Jun 2022 00:00:00 &#43;0000</pubDate>
     <author>Author</author>
-    <guid>http://example.org/posts/0-easystats/bayestestr/</guid>
-    <description><![CDATA[bayestestR 主要用于对大量Bayes模型包的结果： rstanarm brms BayesFactor]]></description>
+    <guid>http://example.org/posts/blogdown/</guid>
+    <description><![CDATA[blogdown博客 所需软件 rstudio hugo git 安装与配置 blodown 新建project选择blog new_site()新建站点 install_theme()安装主]]></description>
 </item>
 <item>
-    <title>correlation</title>
-    <link>http://example.org/posts/0-easystats/correlation/</link>
-    <pubDate>Sat, 22 Oct 2022 00:00:00 &#43;0000</pubDate>
+    <title>github基本操作</title>
+    <link>http://example.org/posts/github%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/</link>
+    <pubDate>Fri, 17 Jun 2022 00:00:00 &#43;0000</pubDate>
     <author>Author</author>
-    <guid>http://example.org/posts/0-easystats/correlation/</guid>
-    <description><![CDATA[简介 相关分析包 计算不同的相关系数： 主要函数包含： correlation() cor_test() 示例 相关矩阵 # 相关矩阵 results &lt;- correlation(iris) results summary(results) summary(results, redundant = TRUE) results %&gt;% summary(redundant = TRUE) %&gt;% see::plot() 相关性检验 cor_test(iris, &#34;Sepal.Width&#34;, &#34;Sepal.Length&#34;) |&gt; see::plot() 分组相关相关 iris]]></description>
+    <guid>http://example.org/posts/github%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/</guid>
+    <description><![CDATA[github使用指南 1. 新建账户与仓库 在github.com中 osummer 账户下新建 easyANOVA 仓库 2. ssh公钥建立 首先在本地创建ssh key，在cmd中执行创建]]></description>
 </item>
 <item>
-    <title>effectsize</title>
-    <link>http://example.org/posts/0-easystats/effectsize/</link>
-    <pubDate>Sat, 22 Oct 2022 00:00:00 &#43;0000</pubDate>
+    <title>group_by函数</title>
+    <link>http://example.org/posts/group_by%E5%87%BD%E6%95%B0/</link>
+    <pubDate>Fri, 17 Jun 2022 00:00:00 &#43;0000</pubDate>
     <author>Author</author>
-    <guid>http://example.org/posts/0-easystats/effectsize/</guid>
-    <description><![CDATA[effectsize包主要处理效应值计算与转换： 简介 效应值大小解读可参考如下标准：效应值解读 示例 效应值计算 # 标准化差 cohens_d(mpg ~ am, data = mtcars) hedges_g(mpg ~ am, data = mtcars)]]></description>
+    <guid>http://example.org/posts/group_by%E5%87%BD%E6%95%B0/</guid>
+    <description><![CDATA[group_??函数 group_by → summarize group_by → group_map 列表输出 group_by → group_modify 表格输出 group_nest → rowwise → mutate() split → map_df 单个输出 比如分组输出某个相关系数 library(tidyverse) library(moderndive) #分组求相关系数 iris %&gt;%group_by(Species) %&gt;% moderndive::get_correlation(Sepal.Length~Sepal.Width) #summ]]></description>
 </item>
 <item>
-    <title>insight</title>
-    <link>http://example.org/posts/0-easystats/insight/</link>
-    <pubDate>Sat, 22 Oct 2022 00:00:00 &#43;0000</pubDate>
+    <title>R-map</title>
+    <link>http://example.org/posts/r-map/</link>
+    <pubDate>Fri, 17 Jun 2022 00:00:00 &#43;0000</pubDate>
     <author>Author</author>
-    <guid>http://example.org/posts/0-easystats/insight/</guid>
-    <description><![CDATA[简介 insight 包用于模型诊断及模型内部参数提取，通过两个函数族对模型内容进行提取： get_**() find_**() get函数 get_**()提取基于模型结果的参数、变量的内容。]]></description>
+    <guid>http://example.org/posts/r-map/</guid>
+    <description><![CDATA[绘制ggplot风格地图 1 摘要 主要使用sf包进行空间数据分析。 sf包主要控制simple feature对象，比之前的sp包从数据结构上看更容]]></description>
 </item>
 <item>
-    <title>modelbased</title>
-    <link>http://example.org/posts/0-easystats/modelbased/</link>
-    <pubDate>Sat, 22 Oct 2022 00:00:00 &#43;0000</pubDate>
+    <title>R语言中markdown生成中文pdf</title>
+    <link>http://example.org/posts/rmarkdown%E4%B8%AD%E6%96%87pdf/</link>
+    <pubDate>Fri, 17 Jun 2022 00:00:00 &#43;0000</pubDate>
     <author>Author</author>
-    <guid>http://example.org/posts/0-easystats/modelbased/</guid>
-    <description><![CDATA[modelbased用于基于模型结果的边际均值（基于模型计算的均值）计算、组间对比、模型预测。 主要函数 visualisation_matrix() estimate_expectation() estimate_means estimate_contrasts estimate_grouplevel estimate_relation estimate_slopes 示例 数据网格 # 1. Fit model and get]]></description>
+    <guid>http://example.org/posts/rmarkdown%E4%B8%AD%E6%96%87pdf/</guid>
+    <description><![CDATA[Rmarkdown生成中文pdf 需要电脑已配置好Latex环境（TinyTex，或者至少安装MikTex），并已安装rmarkdown包。 中]]></description>
 </item>
 </channel>
 </rss>
