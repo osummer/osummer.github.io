@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>可视化 - Tag - 学海无涯</title>
+        <link>http://example.org/tags/%E5%8F%AF%E8%A7%86%E5%8C%96/</link>
+        <description>可视化 - Tag - 学海无涯</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 17 Jun 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://example.org/tags/%E5%8F%AF%E8%A7%86%E5%8C%96/" rel="self" type="application/rss+xml" /><item>
+    <title>R-map</title>
+    <link>http://example.org/posts/r-map/</link>
+    <pubDate>Fri, 17 Jun 2022 00:00:00 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>http://example.org/posts/r-map/</guid>
+    <description><![CDATA[绘制ggplot风格地图 1 摘要 主要使用sf包进行空间数据分析。 sf包主要控制simple feature对象，比之前的sp包从数据结构上看更容]]></description>
+</item>
+</channel>
+</rss>

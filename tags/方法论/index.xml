@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>方法论 - Tag - 学海无涯</title>
+        <link>http://example.org/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/</link>
+        <description>方法论 - Tag - 学海无涯</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 13 Mar 2023 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://example.org/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="self" type="application/rss+xml" /><item>
+    <title>第一性原理</title>
+    <link>http://example.org/posts/%E7%AC%AC%E4%B8%80%E6%80%A7%E5%8E%9F%E7%90%86/</link>
+    <pubDate>Mon, 13 Mar 2023 00:00:00 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>http://example.org/posts/%E7%AC%AC%E4%B8%80%E6%80%A7%E5%8E%9F%E7%90%86/</guid>
+    <description><![CDATA[什么是第一性原理 [[第一性原理]]这个词语出自[[亚里斯多德]]的哲学书籍《形而上学》(Metaphysics)。 In every systematic inquiry (methodos) where there are first principles, or causes, or]]></description>
+</item>
+</channel>
+</rss>

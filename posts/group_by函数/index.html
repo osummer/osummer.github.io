@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>group_by函数 - 学海无涯</title><meta name="Description" content="This is my cool site"><meta property="og:url" content="http://example.org/posts/group_by%E5%87%BD%E6%95%B0/">
+  <meta property="og:site_name" content="学海无涯">
+  <meta property="og:title" content="group_by函数">
+  <meta property="og:description" content="group_??函数 group_by → summarize group_by → group_map 列表输出 group_by → group_modify 表格输出 group_nest → rowwise → mutate() split → map_df 单个输出 比如分组输出某个相关系数 library(tidyverse) library(moderndive) #分组求相关系数 iris %&amp;gt;%group_by(Species) %&amp;gt;% moderndive::get_correlation(Sepal.Length~Sepal.Width) #summ">
+  <meta property="og:locale" content="zh-CN">
+  <meta property="og:type" content="article">
+  <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-06-17T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-06-17T00:00:00+00:00">
+    <meta property="article:tag" content="R">
+<meta name="twitter:card" content="summary"><meta name="twitter:title" content="group_by函数">
+<meta name="twitter:description" content="group_??函数 group_by → summarize group_by → group_map 列表输出 group_by → group_modify 表格输出 group_nest → rowwise → mutate() split → map_df 单个输出 比如分组输出某个相关系数 library(tidyverse) library(moderndive) #分组求相关系数 iris %&gt;%group_by(Species) %&gt;% moderndive::get_correlation(Sepal.Length~Sepal.Width) #summ">
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/group_by%E5%87%BD%E6%95%B0/" /><link rel="prev" href="http://example.org/posts/r-map/" /><link rel="next" href="http://example.org/posts/github%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "group_by函数",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/group_by%E5%87%BD%E6%95%B0\/"
+        },"genre": "posts","keywords": "R","wordcount":  298 ,
+        "url": "http:\/\/example.org\/posts\/group_by%E5%87%BD%E6%95%B0\/","datePublished": "2022-06-17T00:00:00+00:00","dateModified": "2022-06-17T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="学海无涯">学海无涯</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="学海无涯">学海无涯</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">group_by函数</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%8A%80%E8%83%BD/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>技能</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-06-17">2022-06-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;298 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#单个输出">单个输出</a></li>
+    <li><a href="#列表输出">列表输出</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><hr>
+<h1 id="group_函数">group_??函数</h1>
+<ul>
+<li>group_by → summarize</li>
+<li>group_by → group_map 列表输出</li>
+<li>group_by → group_modify 表格输出</li>
+<li>group_nest → rowwise → mutate()</li>
+<li>split → map_df</li>
+</ul>
+<h2 id="单个输出">单个输出</h2>
+<p>比如分组输出某个相关系数</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-R" data-lang="R"><span class="line"><span class="cl"><span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">library</span><span class="p">(</span><span class="n">moderndive</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#分组求相关系数</span>
+</span></span><span class="line"><span class="cl"><span class="n">iris</span> <span class="o">%&gt;%</span><span class="nf">group_by</span><span class="p">(</span><span class="n">Species</span><span class="p">)</span> <span class="o">%&gt;%</span>
+</span></span><span class="line"><span class="cl">  <span class="n">moderndive</span><span class="o">::</span><span class="nf">get_correlation</span><span class="p">(</span><span class="n">Sepal.Length</span><span class="o">~</span><span class="n">Sepal.Width</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#summarize只能输出1个返回值</span>
+</span></span><span class="line"><span class="cl"><span class="n">iris</span> <span class="o">%&gt;%</span><span class="nf">group_by</span><span class="p">(</span><span class="n">Species</span><span class="p">)</span> <span class="o">%&gt;%</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">summarise</span><span class="p">(</span><span class="n">cor_coeff</span><span class="o">=</span><span class="nf">cor</span><span class="p">(</span><span class="n">Sepal.Length</span><span class="p">,</span><span class="n">Sepal.Width</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># group_map函数可输出多个返回值，如果表格输出可用group_modify()</span>
+</span></span><span class="line"><span class="cl"><span class="n">iris</span> <span class="o">%&gt;%</span> <span class="nf">group_by</span><span class="p">(</span><span class="n">Species</span><span class="p">)</span> <span class="o">%&gt;%</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">group_map</span><span class="p">(</span><span class="o">~</span><span class="nf">cor</span><span class="p">(</span><span class="n">.x</span><span class="o">$</span><span class="n">Sepal.Length</span><span class="p">,</span><span class="n">.x</span><span class="o">$</span><span class="n">Sepal.Width</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#group_nest配合map()</span>
+</span></span><span class="line"><span class="cl"><span class="n">iris</span><span class="o">%&gt;%</span><span class="nf">group_nest</span><span class="p">(</span><span class="n">Species</span><span class="p">)</span><span class="o">%&gt;%</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">mutate</span><span class="p">(</span><span class="n">cor_coeff</span><span class="o">=</span><span class="nf">map_dbl</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="o">~</span><span class="nf">cor</span><span class="p">(</span><span class="n">.x</span><span class="o">$</span><span class="n">Sepal.Length</span><span class="p">,</span><span class="n">.x</span><span class="o">$</span><span class="n">Sepal.Width</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#group_nest配合rowwise()与mutate，但只能输出1个结果</span>
+</span></span><span class="line"><span class="cl"><span class="n">iris</span><span class="o">%&gt;%</span><span class="nf">group_nest</span><span class="p">(</span><span class="n">Species</span><span class="p">)</span><span class="o">%&gt;%</span><span class="nf">rowwise</span><span class="p">()</span> <span class="o">%&gt;%</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">mutate</span><span class="p">(</span><span class="n">cor_coeff</span><span class="o">=</span><span class="nf">cor</span><span class="p">(</span><span class="n">data</span><span class="o">$</span><span class="n">Sepal.Length</span><span class="p">,</span><span class="n">data</span><span class="o">$</span><span class="n">Sepal.Width</span><span class="p">))</span>
+</span></span></code></pre></div><h2 id="列表输出">列表输出</h2>
+<p>比如分组建模，求模型输出结果</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-R" data-lang="R"><span class="line"><span class="cl"><span class="c1">#求回归结果</span>
+</span></span><span class="line"><span class="cl"><span class="c1">##list输出</span>
+</span></span><span class="line"><span class="cl"><span class="n">iris</span> <span class="o">%&gt;%</span> <span class="nf">group_by</span><span class="p">(</span><span class="n">Species</span><span class="p">)</span> <span class="o">%&gt;%</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">group_map</span><span class="p">(</span><span class="o">~</span><span class="n">broom</span><span class="o">::</span><span class="nf">glance</span><span class="p">(</span><span class="nf">lm</span><span class="p">(</span><span class="n">Sepal.Length</span><span class="o">~</span><span class="n">Sepal.Width</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">.x</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">##group_modify输出</span>
+</span></span><span class="line"><span class="cl"><span class="n">iris</span> <span class="o">%&gt;%</span> <span class="nf">group_by</span><span class="p">(</span><span class="n">Species</span><span class="p">)</span> <span class="o">%&gt;%</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">group_modify</span><span class="p">(</span><span class="o">~</span><span class="n">broom</span><span class="o">::</span><span class="nf">glance</span><span class="p">(</span><span class="nf">lm</span><span class="p">(</span><span class="n">Sepal.Length</span><span class="o">~</span><span class="n">Sepal.Width</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">.x</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## map()</span>
+</span></span><span class="line"><span class="cl"><span class="n">iris</span><span class="o">%&gt;%</span><span class="nf">split</span><span class="p">(</span><span class="n">.$Species</span><span class="p">)</span><span class="o">%&gt;%</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">map_df</span><span class="p">(</span><span class="o">~</span><span class="n">broom</span><span class="o">::</span><span class="nf">glance</span><span class="p">(</span><span class="nf">lm</span><span class="p">(</span><span class="n">Sepal.Length</span><span class="o">~</span><span class="n">Sepal.Width</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">.x</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#map()</span>
+</span></span><span class="line"><span class="cl"><span class="n">iris</span><span class="o">%&gt;%</span> <span class="nf">group_split</span><span class="p">(</span><span class="n">Species</span><span class="p">)</span> <span class="o">%&gt;%</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">map_df</span><span class="p">(</span><span class="o">~</span><span class="n">broom</span><span class="o">::</span><span class="nf">glance</span><span class="p">(</span><span class="nf">lm</span><span class="p">(</span><span class="n">Sepal.Length</span><span class="o">~</span><span class="n">Sepal.Width</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">.x</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># nest与map</span>
+</span></span><span class="line"><span class="cl"><span class="n">iris</span><span class="o">%&gt;%</span><span class="nf">group_nest</span><span class="p">(</span><span class="n">Species</span><span class="p">)</span><span class="o">%&gt;%</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">mutate</span><span class="p">(</span><span class="n">lm_coeff</span><span class="o">=</span><span class="nf">map_df</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="o">~</span><span class="n">broom</span><span class="o">::</span><span class="nf">glance</span><span class="p">(</span><span class="nf">lm</span><span class="p">(</span><span class="n">Sepal.Length</span><span class="o">~</span><span class="n">Sepal.Width</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">.x</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># nest rowwise</span>
+</span></span><span class="line"><span class="cl"><span class="n">iris</span><span class="o">%&gt;%</span><span class="nf">group_nest</span><span class="p">(</span><span class="n">Species</span><span class="p">)</span><span class="o">%&gt;%</span><span class="nf">rowwise</span><span class="p">()</span> <span class="o">%&gt;%</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">mutate</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="nf">lm</span><span class="p">(</span><span class="n">Sepal.Length</span><span class="o">~</span><span class="n">Sepal.Width</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)))</span> <span class="o">%&gt;%</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">mutate</span><span class="p">(</span><span class="n">cor_coeff</span><span class="o">=</span><span class="n">broom</span><span class="o">::</span><span class="nf">glance</span><span class="p">(</span><span class="n">model</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">iris</span><span class="o">%&gt;%</span><span class="nf">nest_by</span><span class="p">(</span><span class="n">Species</span><span class="p">)</span> <span class="o">%&gt;%</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">mutate</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="nf">lm</span><span class="p">(</span><span class="n">Sepal.Length</span><span class="o">~</span><span class="n">Sepal.Width</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)))</span> <span class="o">%&gt;%</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">summarize</span><span class="p">(</span><span class="n">broom</span><span class="o">::</span><span class="nf">glance</span><span class="p">(</span><span class="n">model</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">iris</span><span class="o">%&gt;%</span><span class="nf">nest_by</span><span class="p">(</span><span class="n">Species</span><span class="p">)</span> <span class="o">%&gt;%</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">mutate</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="nf">lm</span><span class="p">(</span><span class="n">Sepal.Length</span><span class="o">~</span><span class="n">Sepal.Width</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)))</span> <span class="o">%&gt;%</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">mutate</span><span class="p">(</span><span class="n">aa</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="nf">coefficients</span><span class="p">(</span><span class="n">model</span><span class="p">)))</span> <span class="o">%&gt;%</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">select</span><span class="p">(</span><span class="n">Species</span><span class="p">,</span><span class="n">aa</span><span class="p">)</span> <span class="o">%&gt;%</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">unnest</span><span class="p">(</span><span class="n">aa</span><span class="p">)</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-06-17</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/r/">R</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/r-map/" class="prev" rel="prev" title="R-map"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>R-map</a>
+            <a href="/posts/github%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" class="next" rel="next" title="github基本操作">github基本操作<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

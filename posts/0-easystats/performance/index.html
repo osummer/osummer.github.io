@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>performance - 学海无涯</title><meta name="Description" content="This is my cool site"><meta property="og:url" content="http://example.org/posts/0-easystats/performance/">
+  <meta property="og:site_name" content="学海无涯">
+  <meta property="og:title" content="performance">
+  <meta property="og:description" content="简介 performance 提供了用于模型诊断与效果评价函数： check_model() model_performance() 示例 模型质量评价 # R2 model &amp;lt;- lm(mpg ~ wt &#43; cyl, data = mtcars) r2(model) # ICC # Like R2, the ICC provides information on the explained variance and can be interpreted as “the proportion of the variance explained">
+  <meta property="og:locale" content="zh-CN">
+  <meta property="og:type" content="article">
+  <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-10-22T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-10-22T00:00:00+00:00">
+    <meta property="article:tag" content="R">
+<meta name="twitter:card" content="summary"><meta name="twitter:title" content="performance">
+<meta name="twitter:description" content="简介 performance 提供了用于模型诊断与效果评价函数： check_model() model_performance() 示例 模型质量评价 # R2 model &lt;- lm(mpg ~ wt &#43; cyl, data = mtcars) r2(model) # ICC # Like R2, the ICC provides information on the explained variance and can be interpreted as “the proportion of the variance explained">
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/0-easystats/performance/" /><link rel="prev" href="http://example.org/posts/0-easystats/report/" /><link rel="next" href="http://example.org/posts/0-easystats/parameters/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "performance",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/0-easystats\/performance\/"
+        },"genre": "posts","keywords": "R","wordcount":  264 ,
+        "url": "http:\/\/example.org\/posts\/0-easystats\/performance\/","datePublished": "2022-10-22T00:00:00+00:00","dateModified": "2022-10-22T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="学海无涯">学海无涯</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="学海无涯">学海无涯</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">performance</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%8A%80%E8%83%BD/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>技能</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-10-22">2022-10-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;264 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#简介">简介</a></li>
+    <li><a href="#示例">示例</a>
+      <ul>
+        <li><a href="#模型质量评价">模型质量评价</a></li>
+        <li><a href="#模型诊断">模型诊断</a></li>
+        <li><a href="#模型比较">模型比较</a></li>
+        <li><a href="#模型检验">模型检验</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="简介">简介</h2>
+<p><a href="https://easystats.github.io/performance/" target="_blank" rel="noopener noreffer ">performance</a> 提供了用于模型诊断与效果评价函数：</p>
+<ul>
+<li>check_model()</li>
+<li>model_performance()</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20221022191035.png"
+        data-srcset="https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20221022191035.png, https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20221022191035.png 1.5x, https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20221022191035.png 2x"
+        data-sizes="auto"
+        alt="https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20221022191035.png"
+        title="https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20221022191035.png" /></p>
+<h2 id="示例">示例</h2>
+<h3 id="模型质量评价">模型质量评价</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># R2</span>
+</span></span><span class="line"><span class="cl"><span class="n">model</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">mpg</span> <span class="o">~</span> <span class="n">wt</span> <span class="o">+</span> <span class="n">cyl</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">mtcars</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">r2</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ICC</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Like R2, the ICC provides information on the explained variance and can be interpreted as “the proportion of the variance explained by the grouping structure in the population” (Hox 2010).</span>
+</span></span><span class="line"><span class="cl"><span class="nf">library</span><span class="p">(</span><span class="n">lme4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">model</span> <span class="o">&lt;-</span> <span class="nf">lmer</span><span class="p">(</span><span class="n">Reaction</span> <span class="o">~</span> <span class="n">Days</span> <span class="o">+</span> <span class="p">(</span><span class="m">1</span> <span class="o">+</span> <span class="n">Days</span> <span class="o">|</span> <span class="n">Subject</span><span class="p">),</span> <span class="n">data</span> <span class="o">=</span> <span class="n">sleepstudy</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">icc</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># performance</span>
+</span></span><span class="line"><span class="cl"><span class="nf">model_performance</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="模型诊断">模型诊断</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">library</span><span class="p">(</span><span class="n">glmmTMB</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">data</span><span class="p">(</span><span class="n">Salamanders</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">model</span> <span class="o">&lt;-</span> <span class="nf">glm</span><span class="p">(</span><span class="n">count</span> <span class="o">~</span> <span class="n">spp</span> <span class="o">+</span> <span class="n">mined</span><span class="p">,</span> <span class="n">family</span> <span class="o">=</span> <span class="n">poisson</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">Salamanders</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">check_overdispersion</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">check_zeroinflation</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">check_singularity</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">check_heteroscedasticity</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">check_collinearity</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">check_normality</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">check_heteroscedasticity</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">check_model</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="模型比较">模型比较</h3>
+<p>主要比较不同模型的质量，如R<!-- raw HTML omitted -->2<!-- raw HTML omitted -->、AIC、BIC等：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">compare_performance</span><span class="p">(</span><span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">,</span> <span class="n">m3</span><span class="p">,</span> <span class="n">m4</span><span class="p">,</span> <span class="n">rank</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">see</span><span class="o">::</span><span class="nf">plot</span><span class="p">(</span><span class="nf">compare_performance</span><span class="p">(</span><span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">,</span> <span class="n">m4</span><span class="p">,</span> <span class="n">rank</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">))</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20221022191738.png"
+        data-srcset="https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20221022191738.png, https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20221022191738.png 1.5x, https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20221022191738.png 2x"
+        data-sizes="auto"
+        alt="https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20221022191738.png"
+        title="https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20221022191738.png" /></p>
+<h3 id="模型检验">模型检验</h3>
+<p>主要检验不同变量组合的效果是否存在显著差异，通过p值或者BF：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">set.seed</span><span class="p">(</span><span class="m">123</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">data</span><span class="p">(</span><span class="n">iris</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">lm1</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">Sepal.Length</span> <span class="o">~</span> <span class="n">Species</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">iris</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">lm2</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">Sepal.Length</span> <span class="o">~</span> <span class="n">Species</span> <span class="o">+</span> <span class="n">Petal.Length</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">iris</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">lm3</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">Sepal.Length</span> <span class="o">~</span> <span class="n">Species</span> <span class="o">*</span> <span class="n">Sepal.Width</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">iris</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">lm4</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">Sepal.Length</span> <span class="o">~</span> <span class="n">Species</span> <span class="o">*</span> <span class="n">Sepal.Width</span> <span class="o">+</span> <span class="n">Petal.Length</span> <span class="o">+</span> <span class="n">Petal.Width</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">iris</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">test_performance</span><span class="p">(</span><span class="n">lm1</span><span class="p">,</span> <span class="n">lm2</span><span class="p">,</span> <span class="n">lm3</span><span class="p">,</span> <span class="n">lm4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">test_bf</span><span class="p">(</span><span class="n">lm1</span><span class="p">,</span> <span class="n">lm2</span><span class="p">,</span> <span class="n">lm3</span><span class="p">,</span> <span class="n">lm4</span><span class="p">)</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-10-22</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/r/">R</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/0-easystats/report/" class="prev" rel="prev" title="report"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>report</a>
+            <a href="/posts/0-easystats/parameters/" class="next" rel="next" title="parameters">parameters<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

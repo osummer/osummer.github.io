@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>effectsize - 学海无涯</title><meta name="Description" content="This is my cool site"><meta property="og:url" content="http://example.org/posts/0-easystats/effectsize/">
+  <meta property="og:site_name" content="学海无涯">
+  <meta property="og:title" content="effectsize">
+  <meta property="og:description" content="effectsize包主要处理效应值计算与转换： 简介 效应值大小解读可参考如下标准：效应值解读 示例 效应值计算 # 标准化差 cohens_d(mpg ~ am, data = mtcars) hedges_g(mpg ~ am, data = mtcars)">
+  <meta property="og:locale" content="zh-CN">
+  <meta property="og:type" content="article">
+  <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-10-22T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-10-22T00:00:00+00:00">
+    <meta property="article:tag" content="R">
+<meta name="twitter:card" content="summary"><meta name="twitter:title" content="effectsize">
+<meta name="twitter:description" content="effectsize包主要处理效应值计算与转换： 简介 效应值大小解读可参考如下标准：效应值解读 示例 效应值计算 # 标准化差 cohens_d(mpg ~ am, data = mtcars) hedges_g(mpg ~ am, data = mtcars)">
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/0-easystats/effectsize/" /><link rel="prev" href="http://example.org/posts/0-easystats/insight/" /><link rel="next" href="http://example.org/posts/0-easystats/correlation/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "effectsize",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/0-easystats\/effectsize\/"
+        },"genre": "posts","keywords": "R","wordcount":  148 ,
+        "url": "http:\/\/example.org\/posts\/0-easystats\/effectsize\/","datePublished": "2022-10-22T00:00:00+00:00","dateModified": "2022-10-22T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="学海无涯">学海无涯</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="学海无涯">学海无涯</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">effectsize</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%8A%80%E8%83%BD/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>技能</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-10-22">2022-10-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;148 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#简介">简介</a></li>
+    <li><a href="#示例">示例</a>
+      <ul>
+        <li><a href="#效应值计算">效应值计算</a></li>
+        <li><a href="#转换">转换</a></li>
+        <li><a href="#解读">解读</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><code>effectsize</code>包主要处理效应值计算与转换：</p>
+<h2 id="简介">简介</h2>
+<p>效应值大小解读可参考如下标准：<a href="https://easystats.github.io/effectsize/articles/interpret.html" target="_blank" rel="noopener noreffer ">效应值解读</a></p>
+<h2 id="示例">示例</h2>
+<h3 id="效应值计算">效应值计算</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># 标准化差</span>
+</span></span><span class="line"><span class="cl"><span class="nf">cohens_d</span><span class="p">(</span><span class="n">mpg</span> <span class="o">~</span> <span class="n">am</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">mtcars</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">hedges_g</span><span class="p">(</span><span class="n">mpg</span> <span class="o">~</span> <span class="n">am</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">mtcars</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">glass_delta</span><span class="p">(</span><span class="n">mpg</span> <span class="o">~</span> <span class="n">am</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">mtcars</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 列联表</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Dependence </span>
+</span></span><span class="line"><span class="cl"><span class="nf">phi</span><span class="p">(</span><span class="n">mtcars</span><span class="o">$</span><span class="n">am</span><span class="p">,</span> <span class="n">mtcars</span><span class="o">$</span><span class="n">vs</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">cramers_v</span><span class="p">(</span><span class="n">mtcars</span><span class="o">$</span><span class="n">am</span><span class="p">,</span> <span class="n">mtcars</span><span class="o">$</span><span class="n">cyl</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Goodness-of-fit</span>
+</span></span><span class="line"><span class="cl"><span class="nf">fei</span><span class="p">(</span><span class="nf">table</span><span class="p">(</span><span class="n">mtcars</span><span class="o">$</span><span class="n">cyl</span><span class="p">),</span> <span class="n">p</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">0.1</span><span class="p">,</span> <span class="m">0.3</span><span class="p">,</span> <span class="m">0.6</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ANOVA</span>
+</span></span><span class="line"><span class="cl"><span class="n">model</span> <span class="o">&lt;-</span> <span class="nf">aov</span><span class="p">(</span><span class="n">mpg</span> <span class="o">~</span> <span class="nf">factor</span><span class="p">(</span><span class="n">gear</span><span class="p">),</span> <span class="n">data</span> <span class="o">=</span> <span class="n">mtcars</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">eta_squared</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">omega_squared</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">epsilon_squared</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="转换">转换</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">d_to_r</span><span class="p">(</span><span class="n">d</span> <span class="o">=</span> <span class="m">0.2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">oddsratio_to_riskratio</span><span class="p">(</span><span class="m">2.6</span><span class="p">,</span> <span class="n">p0</span> <span class="o">=</span> <span class="m">0.4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">F_to_d</span><span class="p">(</span><span class="m">15</span><span class="p">,</span> <span class="n">df</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span> <span class="n">df_error</span> <span class="o">=</span> <span class="m">60</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">F_to_r</span><span class="p">(</span><span class="m">15</span><span class="p">,</span> <span class="n">df</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span> <span class="n">df_error</span> <span class="o">=</span> <span class="m">60</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">F_to_eta2</span><span class="p">(</span><span class="m">15</span><span class="p">,</span> <span class="n">df</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span> <span class="n">df_error</span> <span class="o">=</span> <span class="m">60</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="解读">解读</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">interpret_r</span><span class="p">(</span><span class="n">r</span> <span class="o">=</span> <span class="m">0.3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">interpret_cohens_d</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">0.02</span><span class="p">,</span> <span class="m">0.52</span><span class="p">,</span> <span class="m">0.86</span><span class="p">),</span> <span class="n">rules</span> <span class="o">=</span> <span class="s">&#34;cohen1988&#34;</span><span class="p">)</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-10-22</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/r/">R</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/0-easystats/insight/" class="prev" rel="prev" title="insight"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>insight</a>
+            <a href="/posts/0-easystats/correlation/" class="next" rel="next" title="correlation">correlation<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -1,17 +1,89 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>学海无涯</title>
-        <link>http://localhost:1313/</link>
+        <link>http://example.org/</link>
         <description>This is my cool site</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 02 Sep 2022 00:00:00 &#43;0000</lastBuildDate>
-            <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 19 Mar 2024 00:00:00 &#43;0000</lastBuildDate>
+            <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
         <item>
-    <title>copula熵</title>
-    <link>http://localhost:1313/posts/copula%E7%86%B5%E4%B8%8E%E4%BC%A0%E9%80%92%E7%86%B5/</link>
-    <pubDate>Fri, 02 Sep 2022 00:00:00 &#43;0000</pubDate>
+    <title>geom_col</title>
+    <link>http://example.org/posts/geom_col/</link>
+    <pubDate>Tue, 19 Mar 2024 00:00:00 &#43;0000</pubDate>
     <author>Author</author>
-    <guid>http://localhost:1313/posts/copula%E7%86%B5%E4%B8%8E%E4%BC%A0%E9%80%92%E7%86%B5/</guid>
-    <description><![CDATA[定义 用途]]></description>
+    <guid>http://example.org/posts/geom_col/</guid>
+    <description><![CDATA[iris %&gt;% mutate(ss=if_else(Sepal.Length&lt;6,&#34;Y&#34;,&#34;N&#34;)) %&gt;% summarise(mean=mean(Sepal.Length),sd=sd(Sepal.Length),.by=c(Species,ss)) %&gt;% ggplot(aes(x=Species,y=mean))+ geom_col(aes(fill=ss), # width=0.8, # 柱子组宽度，默认0.9 just=0.5, # 柱子对齐位置，默认0.5 居中刻度对齐 position=position_dodge2(preserve = &#34;single&#34;, # padding=0.1 # 同组柱子间距 ))+ geom_errorbar(aes(ymin=mean,ymax=mean+sd), # width=0.8, position=position_dodge2(preserve = &#34;single&#34;, padding=0.5 ))+ geom_text(aes(y=mean+sd,label=round(mean+sd,2), hjust=0.5, # 左对齐 vjust=-0.5),]]></description>
+</item>
+<item>
+    <title>GPT审稿</title>
+    <link>http://example.org/posts/gpt%E5%AE%A1%E7%A8%BF/</link>
+    <pubDate>Sat, 27 Jan 2024 00:00:00 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>http://example.org/posts/gpt%E5%AE%A1%E7%A8%BF/</guid>
+    <description><![CDATA[略读 提问 第一步：请你按以下三个问题总结这篇文章的内容，第1个问题：这篇文章的研究问题是什么？ 第2个问题：这篇文章的研究结论是什么？ 第3个问题]]></description>
+</item>
+<item>
+    <title>中国传统建筑</title>
+    <link>http://example.org/posts/%E4%B8%AD%E5%9B%BD%E4%BC%A0%E7%BB%9F%E5%BB%BA%E7%AD%91/</link>
+    <pubDate>Mon, 22 Jan 2024 00:00:00 &#43;0000</pubDate>
+    <author>陈文捷</author>
+    <guid>http://example.org/posts/%E4%B8%AD%E5%9B%BD%E4%BC%A0%E7%BB%9F%E5%BB%BA%E7%AD%91/</guid>
+    <description><![CDATA[序章 建筑主要结构 台基：抬高柱脚 柱：支撑屋架 枋：连接柱，形成框架结构 梁：承压不落地柱，减少柱子数量 檩：与建筑正面平行，支撑椽 椽：沿进深方向铺设]]></description>
+</item>
+<item>
+    <title>青铜器</title>
+    <link>http://example.org/posts/%E9%9D%92%E9%93%9C%E5%99%A8/</link>
+    <pubDate>Fri, 25 Aug 2023 00:00:00 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>http://example.org/posts/%E9%9D%92%E9%93%9C%E5%99%A8/</guid>
+    <description><![CDATA[基本知识 铜是人类最早认识和利用的金属，自然界中存在的天然纯铜呈紫红色，又称&quot;红铜&quot;。此外，自然界还存在不少其它铜矿石，比]]></description>
+</item>
+<item>
+    <title>绿茶加工</title>
+    <link>http://example.org/posts/%E7%BB%BF%E8%8C%B6%E5%8A%A0%E5%B7%A5/</link>
+    <pubDate>Thu, 03 Aug 2023 00:00:00 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>http://example.org/posts/%E7%BB%BF%E8%8C%B6%E5%8A%A0%E5%B7%A5/</guid>
+    <description><![CDATA[六大茶类及分类基础 绿茶分类及品质特点 绿茶加工基本工序及原理 绿茶初制加工技术 绿茶精制加工技术 茶叶品质瑕疵及加工技术]]></description>
+</item>
+<item>
+    <title>绿茶审评技术要领</title>
+    <link>http://example.org/posts/%E7%BB%BF%E8%8C%B6%E5%AE%A1%E8%AF%84%E6%8A%80%E6%9C%AF%E8%A6%81%E9%A2%86/</link>
+    <pubDate>Thu, 03 Aug 2023 00:00:00 &#43;0000</pubDate>
+    <author>刘栩</author>
+    <guid>http://example.org/posts/%E7%BB%BF%E8%8C%B6%E5%AE%A1%E8%AF%84%E6%8A%80%E6%9C%AF%E8%A6%81%E9%A2%86/</guid>
+    <description><![CDATA[绿茶花色等级]]></description>
+</item>
+<item>
+    <title>主要名茶及品质</title>
+    <link>http://example.org/posts/%E4%B8%BB%E8%A6%81%E5%90%8D%E8%8C%B6%E5%8F%8A%E5%93%81%E8%B4%A8%E7%89%B9%E5%BE%81/</link>
+    <pubDate>Mon, 31 Jul 2023 00:00:00 &#43;0000</pubDate>
+    <author>刘栩</author>
+    <guid>http://example.org/posts/%E4%B8%BB%E8%A6%81%E5%90%8D%E8%8C%B6%E5%8F%8A%E5%93%81%E8%B4%A8%E7%89%B9%E5%BE%81/</guid>
+    <description><![CDATA[六大茶类 再加工茶（花茶、紧压茶等） 茶叶分类 茶汤及叶底颜色 茶多酚氧化程度 不同工艺的结果 绿茶 绿茶的形态表现最丰富 西湖龙井 西湖龙井 600 吨 黄山毛峰 南京]]></description>
+</item>
+<item>
+    <title>绿茶的主要适制品种</title>
+    <link>http://example.org/posts/%E7%BB%BF%E8%8C%B6%E7%9A%84%E4%B8%BB%E8%A6%81%E9%80%82%E5%88%B6%E5%93%81%E7%A7%8D%E5%8F%8A%E6%A0%BD%E5%9F%B9/</link>
+    <pubDate>Mon, 31 Jul 2023 00:00:00 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>http://example.org/posts/%E7%BB%BF%E8%8C%B6%E7%9A%84%E4%B8%BB%E8%A6%81%E9%80%82%E5%88%B6%E5%93%81%E7%A7%8D%E5%8F%8A%E6%A0%BD%E5%9F%B9/</guid>
+    <description><![CDATA[品种的概念与属性 特异性，区别其它群体 一致性，个体间相似性 稳定性，遗传稳定性，能够通过繁殖保持其重要特性 品种的类型 有性系品种，种子繁衍，个体间]]></description>
+</item>
+<item>
+    <title>PCA分析</title>
+    <link>http://example.org/posts/pca%E5%88%86%E6%9E%90/</link>
+    <pubDate>Sat, 17 Jun 2023 00:00:00 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>http://example.org/posts/pca%E5%88%86%E6%9E%90/</guid>
+    <description><![CDATA[1 基本信息 1.1 常用的包及函数 stats 默认加载包，提供prcomp与princomp函数进行PCA计算 psych 心理学研究包，提供principal FactoMineR 多元分析]]></description>
+</item>
+<item>
+    <title>R包开发简单流程</title>
+    <link>http://example.org/posts/r%E5%8C%85%E5%BC%80%E5%8F%91/</link>
+    <pubDate>Thu, 13 Apr 2023 00:00:00 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>http://example.org/posts/r%E5%8C%85%E5%BC%80%E5%8F%91/</guid>
+    <description><![CDATA[需要的相关包 devtools 编译相关 usethis 相关设置 roxygen2 自动化文档生成 R包文件架构 主要流程 创建工程project create_package 修改desciption use_package use_data use_??_license use_description 创建R源文件 usethis::use_r 在]]></description>
 </item>
 </channel>
 </rss>

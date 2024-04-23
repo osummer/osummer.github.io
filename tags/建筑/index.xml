@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>建筑 - Tag - 学海无涯</title>
+        <link>http://example.org/tags/%E5%BB%BA%E7%AD%91/</link>
+        <description>建筑 - Tag - 学海无涯</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 22 Jan 2024 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://example.org/tags/%E5%BB%BA%E7%AD%91/" rel="self" type="application/rss+xml" /><item>
+    <title>中国传统建筑</title>
+    <link>http://example.org/posts/%E4%B8%AD%E5%9B%BD%E4%BC%A0%E7%BB%9F%E5%BB%BA%E7%AD%91/</link>
+    <pubDate>Mon, 22 Jan 2024 00:00:00 &#43;0000</pubDate>
+    <author>陈文捷</author>
+    <guid>http://example.org/posts/%E4%B8%AD%E5%9B%BD%E4%BC%A0%E7%BB%9F%E5%BB%BA%E7%AD%91/</guid>
+    <description><![CDATA[序章 建筑主要结构 台基：抬高柱脚 柱：支撑屋架 枋：连接柱，形成框架结构 梁：承压不落地柱，减少柱子数量 檩：与建筑正面平行，支撑椽 椽：沿进深方向铺设]]></description>
+</item>
+</channel>
+</rss>

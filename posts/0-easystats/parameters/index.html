@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>parameters - 学海无涯</title><meta name="Description" content="This is my cool site"><meta property="og:url" content="http://example.org/posts/0-easystats/parameters/">
+  <meta property="og:site_name" content="学海无涯">
+  <meta property="og:title" content="parameters">
+  <meta property="og:description" content="简介 parameters包主要用于不同模型的参数分析。主要函数： parameters() model_parameters() select_parameters() reduce_parameters() 主要功能 - [参数汇总](https://easystats.gith">
+  <meta property="og:locale" content="zh-CN">
+  <meta property="og:type" content="article">
+  <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-10-22T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-10-22T00:00:00+00:00">
+    <meta property="article:tag" content="R">
+<meta name="twitter:card" content="summary"><meta name="twitter:title" content="parameters">
+<meta name="twitter:description" content="简介 parameters包主要用于不同模型的参数分析。主要函数： parameters() model_parameters() select_parameters() reduce_parameters() 主要功能 - [参数汇总](https://easystats.gith">
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/0-easystats/parameters/" /><link rel="prev" href="http://example.org/posts/0-easystats/performance/" /><link rel="next" href="http://example.org/posts/0-easystats/modelbased/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "parameters",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/0-easystats\/parameters\/"
+        },"genre": "posts","keywords": "R","wordcount":  1029 ,
+        "url": "http:\/\/example.org\/posts\/0-easystats\/parameters\/","datePublished": "2022-10-22T00:00:00+00:00","dateModified": "2022-10-22T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="学海无涯">学海无涯</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="学海无涯">学海无涯</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">parameters</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%8A%80%E8%83%BD/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>技能</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-10-22">2022-10-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1029 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#简介">简介</a>
+      <ul>
+        <li><a href="#主要功能">主要功能</a></li>
+        <li><a href="#支持模型">支持模型</a></li>
+      </ul>
+    </li>
+    <li><a href="#示例">示例</a>
+      <ul>
+        <li><a href="#参数提取model_parameters">参数提取<code>model_parameters</code></a></li>
+        <li><a href="#参数筛选">参数筛选</a></li>
+        <li><a href="#降维">降维</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="简介">简介</h2>
+<p><a href="https://easystats.github.io/parameters/" target="_blank" rel="noopener noreffer ">parameters包</a>主要用于不同模型的参数分析。主要函数：</p>
+<ul>
+<li>parameters()</li>
+<li>model_parameters()</li>
+<li>select_parameters()</li>
+<li>reduce_parameters()</li>
+</ul>
+<h3 id="主要功能">主要功能</h3>
+<pre tabindex="0"><code class="language-ad-input" data-lang="ad-input">- [参数汇总](https://easystats.github.io/parameters/articles/model_parameters.html)
+- [标准化参数](https://easystats.github.io/parameters/articles/model_parameters_standardized.html)
+- [稳健估计](https://easystats.github.io/parameters/articles/model_parameters_robust.html)
+- [数据缺失处理](https://easystats.github.io/parameters/articles/model_parameters_mice.html)
+- [降维](https://easystats.github.io/parameters/articles/parameters_reduction.html)
+- [结构方程](https://easystats.github.io/parameters/articles/efa_cfa.html)
+- [参数筛选](https://easystats.github.io/parameters/articles/parameters_selection.html)
+- [面板数据分析](https://easystats.github.io/parameters/articles/demean.html)
+</code></pre><h3 id="支持模型">支持模型</h3>
+<p>目前支持的模型有：
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20221022162745.png"
+        data-srcset="https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20221022162745.png, https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20221022162745.png 1.5x, https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20221022162745.png 2x"
+        data-sizes="auto"
+        alt="https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20221022162745.png"
+        title="https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20221022162745.png" /></p>
+<h2 id="示例">示例</h2>
+<h3 id="参数提取model_parameters">参数提取<code>model_parameters</code></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># 相关分析</span>
+</span></span><span class="line"><span class="cl"><span class="nf">cor.test</span><span class="p">(</span><span class="n">iris</span><span class="o">$</span><span class="n">Sepal.Length</span><span class="p">,</span> <span class="n">iris</span><span class="o">$</span><span class="n">Sepal.Width</span><span class="p">)</span> <span class="o">|&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">model_parameters</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Bayes相关</span>
+</span></span><span class="line"><span class="cl"><span class="n">BayesFactor</span><span class="o">::</span><span class="nf">correlationBF</span><span class="p">(</span><span class="n">iris</span><span class="o">$</span><span class="n">Sepal.Length</span><span class="p">,</span> <span class="n">iris</span><span class="o">$</span><span class="n">Sepal.Width</span><span class="p">)</span> <span class="o">|&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">model_parameters</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># t检验</span>
+</span></span><span class="line"><span class="cl"><span class="nf">t.test</span><span class="p">(</span><span class="n">mpg</span> <span class="o">~</span> <span class="n">vs</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">mtcars</span><span class="p">)</span> <span class="o">|&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">model_parameters</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="c1"># Bayes检验</span>
+</span></span><span class="line"><span class="cl"><span class="n">BayesFactor</span><span class="o">::</span><span class="nf">ttestBF</span><span class="p">(</span><span class="n">formula</span> <span class="o">=</span> <span class="n">mpg</span> <span class="o">~</span> <span class="n">vs</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">mtcars</span><span class="p">)</span> <span class="o">|&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">model_parameters</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ANOVA</span>
+</span></span><span class="line"><span class="cl"><span class="nf">aov</span><span class="p">(</span><span class="n">Sepal.Length</span> <span class="o">~</span> <span class="n">Species</span> <span class="o">*</span> <span class="n">Sepal.Width</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">iris</span><span class="p">)</span> <span class="o">|&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">model_parameters</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">omega_squared</span> <span class="o">=</span> <span class="s">&#34;partial&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">eta_squared</span> <span class="o">=</span> <span class="s">&#34;partial&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ci</span> <span class="o">=</span> <span class="m">.8</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">aov</span><span class="p">(</span><span class="n">mpg</span> <span class="o">~</span> <span class="n">am</span> <span class="o">+</span> <span class="nf">Error</span><span class="p">(</span><span class="n">gear</span><span class="p">),</span> <span class="n">data</span> <span class="o">=</span> <span class="n">mtcars</span><span class="p">)</span> <span class="o">|&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">model_parameters</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 一般回归</span>
+</span></span><span class="line"><span class="cl"><span class="n">model</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">Sepal.Width</span> <span class="o">~</span> <span class="n">Petal.Length</span> <span class="o">*</span> <span class="n">Species</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">iris</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## regular model parameters</span>
+</span></span><span class="line"><span class="cl"><span class="nf">model_parameters</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## standardized parameters</span>
+</span></span><span class="line"><span class="cl"><span class="nf">model_parameters</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">standardize</span> <span class="o">=</span> <span class="s">&#34;refit&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## heteroscedasticity-consitent SE and CI</span>
+</span></span><span class="line"><span class="cl"><span class="nf">model_parameters</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">vcov</span> <span class="o">=</span> <span class="s">&#34;HC3&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># GLM</span>
+</span></span><span class="line"><span class="cl"><span class="nf">glm</span><span class="p">(</span><span class="n">vs</span> <span class="o">~</span> <span class="nf">poly</span><span class="p">(</span><span class="n">mpg</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">cyl</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">mtcars</span><span class="p">,</span> <span class="n">family</span> <span class="o">=</span> <span class="nf">binomial</span><span class="p">())</span> <span class="o">|&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">parameters</span><span class="p">(</span><span class="n">exponentiate</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> <span class="n">summary</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> <span class="n">ci_method</span> <span class="o">=</span> <span class="s">&#34;wald&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 混合模型</span>
+</span></span><span class="line"><span class="cl"><span class="n">model</span> <span class="o">&lt;-</span> <span class="nf">lmer</span><span class="p">(</span><span class="n">Sepal.Width</span> <span class="o">~</span> <span class="n">Petal.Length</span> <span class="o">+</span> <span class="p">(</span><span class="m">1</span> <span class="o">|</span> <span class="n">Species</span><span class="p">),</span> <span class="n">data</span> <span class="o">=</span> <span class="n">iris</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## model parameters with CI, df and p-values based on Kenward-Roger approximation</span>
+</span></span><span class="line"><span class="cl"><span class="nf">model_parameters</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">ci_method</span> <span class="o">=</span> <span class="s">&#34;kenward&#34;</span><span class="p">,</span> <span class="n">effects</span> <span class="o">=</span> <span class="s">&#34;fixed&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 结构方程模型</span>
+</span></span><span class="line"><span class="cl"><span class="nf">library</span><span class="p">(</span><span class="n">psych</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">model</span> <span class="o">&lt;-</span> <span class="n">psych</span><span class="o">::</span><span class="nf">fa</span><span class="p">(</span><span class="n">attitude</span><span class="p">,</span> <span class="n">nfactors</span> <span class="o">=</span> <span class="m">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">model_parameters</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># PCA</span>
+</span></span><span class="line"><span class="cl"><span class="n">psych</span><span class="o">::</span><span class="nf">pca</span><span class="p">(</span><span class="n">mtcars</span><span class="p">,</span> <span class="n">nfactors</span> <span class="o">=</span> <span class="m">3</span><span class="p">)</span> <span class="o">|&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">parameters</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># lavva</span>
+</span></span><span class="line"><span class="cl"><span class="n">model</span> <span class="o">&lt;-</span> <span class="n">lavaan</span><span class="o">::</span><span class="nf">cfa</span><span class="p">(</span><span class="s">&#34; visual  =~ x1 + x2 + x3
+</span></span></span><span class="line"><span class="cl"><span class="s">                       textual =~ x4 + x5 + x6
+</span></span></span><span class="line"><span class="cl"><span class="s">                       speed   =~ x7 + x8 + x9 &#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">data</span> <span class="o">=</span> <span class="n">HolzingerSwineford1939</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="nf">model_parameters</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="参数筛选">参数筛选</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">lm</span><span class="p">(</span><span class="n">disp</span> <span class="o">~</span> <span class="n">.,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">mtcars</span><span class="p">)</span> <span class="o">|&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">select_parameters</span><span class="p">()</span> <span class="o">|&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">model_parameters</span><span class="p">()</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20221022163749.png"
+        data-srcset="https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20221022163749.png, https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20221022163749.png 1.5x, https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20221022163749.png 2x"
+        data-sizes="auto"
+        alt="https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20221022163749.png"
+        title="https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20221022163749.png" /></p>
+<h3 id="降维">降维</h3>
+<p>不同于筛选，降维是用有限的几个隐变量替代输入变量，隐变量与输入变量高度相关，PCA就是降维方法的一种：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">data</span><span class="p">(</span><span class="s">&#34;attitude&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">model</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">rating</span> <span class="o">~</span> <span class="n">.,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">attitude</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">parameters</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">newmodel</span> <span class="o">&lt;-</span> <span class="nf">reduce_parameters</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">parameters</span><span class="p">(</span><span class="n">newmodel</span><span class="p">)</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-10-22</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/r/">R</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/0-easystats/performance/" class="prev" rel="prev" title="performance"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>performance</a>
+            <a href="/posts/0-easystats/modelbased/" class="next" rel="next" title="modelbased">modelbased<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

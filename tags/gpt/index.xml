@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>GPT - Tag - 学海无涯</title>
+        <link>http://example.org/tags/gpt/</link>
+        <description>GPT - Tag - 学海无涯</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 27 Jan 2024 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://example.org/tags/gpt/" rel="self" type="application/rss+xml" /><item>
+    <title>GPT审稿</title>
+    <link>http://example.org/posts/gpt%E5%AE%A1%E7%A8%BF/</link>
+    <pubDate>Sat, 27 Jan 2024 00:00:00 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>http://example.org/posts/gpt%E5%AE%A1%E7%A8%BF/</guid>
+    <description><![CDATA[略读 提问 第一步：请你按以下三个问题总结这篇文章的内容，第1个问题：这篇文章的研究问题是什么？ 第2个问题：这篇文章的研究结论是什么？ 第3个问题]]></description>
+</item>
+</channel>
+</rss>

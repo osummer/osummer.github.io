@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>report - 学海无涯</title><meta name="Description" content="This is my cool site"><meta property="og:url" content="http://example.org/posts/0-easystats/report/">
+  <meta property="og:site_name" content="学海无涯">
+  <meta property="og:title" content="report">
+  <meta property="og:description" content="report 很有意思地根据统计结果输出符合APA标准格式的统计报告，如： model &amp;lt;- lm(Sepal.Length ~ Species, data = iris) report::report(model) # We fitted a linear model (estimated using OLS) to predict Sepal.Length with # Species (formula: Sepal.Length ~ Species). The model explains a statistically # significant and substantial proportion of">
+  <meta property="og:locale" content="zh-CN">
+  <meta property="og:type" content="article">
+  <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-10-22T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-10-22T00:00:00+00:00">
+    <meta property="article:tag" content="R">
+<meta name="twitter:card" content="summary"><meta name="twitter:title" content="report">
+<meta name="twitter:description" content="report 很有意思地根据统计结果输出符合APA标准格式的统计报告，如： model &lt;- lm(Sepal.Length ~ Species, data = iris) report::report(model) # We fitted a linear model (estimated using OLS) to predict Sepal.Length with # Species (formula: Sepal.Length ~ Species). The model explains a statistically # significant and substantial proportion of">
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/0-easystats/report/" /><link rel="prev" href="http://example.org/posts/0-easystats/see/" /><link rel="next" href="http://example.org/posts/0-easystats/performance/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "report",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/0-easystats\/report\/"
+        },"genre": "posts","keywords": "R","wordcount":  240 ,
+        "url": "http:\/\/example.org\/posts\/0-easystats\/report\/","datePublished": "2022-10-22T00:00:00+00:00","dateModified": "2022-10-22T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="学海无涯">学海无涯</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="学海无涯">学海无涯</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">report</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%8A%80%E8%83%BD/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>技能</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-10-22">2022-10-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;240 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><p><a href="https://easystats.github.io/report/" target="_blank" rel="noopener noreffer "><code>report</code></a> 很有意思地根据统计结果输出符合APA标准格式的统计报告，如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">model</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">Sepal.Length</span> <span class="o">~</span> <span class="n">Species</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">iris</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">report</span><span class="o">::</span><span class="nf">report</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># We fitted a linear model (estimated using OLS) to predict Sepal.Length with</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Species (formula: Sepal.Length ~ Species). The model explains a statistically</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># significant and substantial proportion of variance (R2 = 0.62, F(2, 147) =</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 119.26, p &lt; .001, adj. R2 = 0.61). The model&#39;s intercept, corresponding to</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Species = setosa, is at 5.01 (95% CI [4.86, 5.15], t(147) = 68.76, p &lt; .001).</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Within this model:</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># </span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   - The effect of Species [versicolor] is statistically significant and positive</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># (beta = 0.93, 95% CI [0.73, 1.13], t(147) = 9.03, p &lt; .001; Std. beta = 1.12,</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 95% CI [0.88, 1.37])</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   - The effect of Species [virginica] is statistically significant and positive</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># (beta = 1.58, 95% CI [1.38, 1.79], t(147) = 15.37, p &lt; .001; Std. beta = 1.91,</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 95% CI [1.66, 2.16])</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Standardized parameters were obtained by fitting the model on a standardized</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># version of the dataset. 95% Confidence Intervals (CIs) and p-values were</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># computed using a Wald t-distribution approximation.</span>
+</span></span></code></pre></div><p>支持很多模型：
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20221022220412.png"
+        data-srcset="https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20221022220412.png, https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20221022220412.png 1.5x, https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20221022220412.png 2x"
+        data-sizes="auto"
+        alt="https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20221022220412.png"
+        title="https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20221022220412.png" /></p>
+<p>也可以单独输出相应的结果：</p>
+<ul>
+<li>report_model()</li>
+<li>report_performance()</li>
+<li>report_statistics()</li>
+<li>report_table()</li>
+<li>cite_packages()</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-10-22</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/r/">R</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/0-easystats/see/" class="prev" rel="prev" title="see"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>see</a>
+            <a href="/posts/0-easystats/performance/" class="next" rel="next" title="performance">performance<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

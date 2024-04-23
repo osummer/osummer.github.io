@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>windows命令行与批处理 - 学海无涯</title><meta name="Description" content="This is my cool site"><meta property="og:url" content="http://example.org/posts/windows%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8E%E6%89%B9%E5%A4%84%E7%90%86/">
+  <meta property="og:site_name" content="学海无涯">
+  <meta property="og:title" content="windows命令行与批处理">
+  <meta property="og:description" content="命令行 cmd与PowerShell cmd是power shell的子集。 说明 不区分大小写 按上下键可以查看历史命令 Tab键可以自动补全 使用/?或">
+  <meta property="og:locale" content="zh-CN">
+  <meta property="og:type" content="article">
+  <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-06-17T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-06-17T00:00:00+00:00">
+    <meta property="article:tag" content="编程">
+<meta name="twitter:card" content="summary"><meta name="twitter:title" content="windows命令行与批处理">
+<meta name="twitter:description" content="命令行 cmd与PowerShell cmd是power shell的子集。 说明 不区分大小写 按上下键可以查看历史命令 Tab键可以自动补全 使用/?或">
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/windows%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8E%E6%89%B9%E5%A4%84%E7%90%86/" /><link rel="prev" href="http://example.org/posts/lavaan%E5%AD%A6%E4%B9%A0/" /><link rel="next" href="http://example.org/posts/rmarkdown%E4%B8%AD%E6%96%87pdf/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "windows命令行与批处理",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/windows%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8E%E6%89%B9%E5%A4%84%E7%90%86\/"
+        },"genre": "posts","keywords": "编程","wordcount":  1209 ,
+        "url": "http:\/\/example.org\/posts\/windows%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8E%E6%89%B9%E5%A4%84%E7%90%86\/","datePublished": "2022-06-17T00:00:00+00:00","dateModified": "2022-06-17T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="学海无涯">学海无涯</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="学海无涯">学海无涯</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">windows命令行与批处理</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%8A%80%E8%83%BD/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>技能</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-06-17">2022-06-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1209 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#cmd与powershell">cmd与PowerShell</a></li>
+    <li><a href="#说明">说明</a></li>
+    <li><a href="#基本命令">基本命令</a></li>
+    <li><a href="#常用命令">常用命令</a>
+      <ul>
+        <li><a href="#多命令">多命令</a></li>
+        <li><a href="#重定向">重定向</a></li>
+        <li><a href="#管道">管道</a></li>
+      </ul>
+    </li>
+    <li><a href="#文件操作命令">文件操作命令</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#基本结构">基本结构</a></li>
+    <li><a href="#运行方式">运行方式</a></li>
+    <li><a href="#变量">变量</a>
+      <ul>
+        <li><a href="#预定义的变量">预定义的变量</a></li>
+      </ul>
+    </li>
+    <li><a href="#调用">调用</a></li>
+    <li><a href="#条件">条件</a></li>
+    <li><a href="#跳转">跳转</a></li>
+    <li><a href="#循环">循环</a></li>
+    <li><a href="#通配符">通配符</a></li>
+    <li><a href="#例子">例子</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="命令行">命令行</h1>
+<h2 id="cmd与powershell">cmd与PowerShell</h2>
+<p>cmd是power shell的子集。</p>
+<h2 id="说明">说明</h2>
+<ul>
+<li>不区分大小写</li>
+<li>按上下键可以查看历史命令</li>
+<li>Tab键可以自动补全</li>
+<li>使用<code>/?</code>或<code>/help</code>可以查看命令用法，用法中的<code>[]</code>代表可选</li>
+<li>命令基本格式<code>命令 参数列表 </code></li>
+</ul>
+<h2 id="基本命令">基本命令</h2>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>echo</code></td>
+<td>显示</td>
+<td></td>
+</tr>
+<tr>
+<td><code>pause</code></td>
+<td>暂停</td>
+<td><code>pause &gt; nul</code></td>
+</tr>
+<tr>
+<td><code>cls</code></td>
+<td>清屏</td>
+<td></td>
+</tr>
+<tr>
+<td><code>exit</code></td>
+<td>退出</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="常用命令">常用命令</h2>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td>显示文件内容</td>
+<td><code>type 1.txt</code></td>
+</tr>
+<tr>
+<td><code>find</code></td>
+<td>查找字符串</td>
+<td><code>find &quot;abc&quot; 2.txt</code></td>
+</tr>
+<tr>
+<td><code>fc</code></td>
+<td>比较文件内容</td>
+<td><code>fc 1.txt 2.txt</code></td>
+</tr>
+<tr>
+<td><code>date</code></td>
+<td>显示/修改日期</td>
+<td><code>date /T</code></td>
+</tr>
+<tr>
+<td><code>time</code></td>
+<td>显示/修改时间</td>
+<td><code>time /T</code></td>
+</tr>
+<tr>
+<td><code>ping</code></td>
+<td>网络连接测试</td>
+<td><code>ping www.baidu.com</code></td>
+</tr>
+<tr>
+<td><code>ipconfig</code></td>
+<td>TCP/IP信息</td>
+<td></td>
+</tr>
+<tr>
+<td><code>set /a</code></td>
+<td>计算表达式</td>
+<td><code>set /a 6%4</code></td>
+</tr>
+<tr>
+<td><code>shutdown</code></td>
+<td>关机</td>
+<td><code>shutdown /s /t 60</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="多命令">多命令</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="p">&amp;</span>  顺序执行多条命令，不管命令是否执行成功
+</span></span><span class="line"><span class="cl"><span class="o">&amp;&amp;</span> 顺序执行多条命令，前面的命令错误则不执行后面的命令
+</span></span><span class="line"><span class="cl"><span class="o">||</span> 顺序执行多条命令，碰到执行正确的命令后将不执行后面的命令
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">abc <span class="p">&amp;</span> dir <span class="p">&amp;</span> bcd
+</span></span><span class="line"><span class="cl">abc <span class="o">&amp;&amp;</span> dir <span class="o">&amp;&amp;</span> bcd
+</span></span><span class="line"><span class="cl">abc <span class="o">||</span> dir <span class="o">||</span> bcd
+</span></span></code></pre></div><h3 id="重定向">重定向</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">&gt;  输出重定向
+</span></span><span class="line"><span class="cl">&gt;&gt; 追加重定向
+</span></span><span class="line"><span class="cl">&lt;  输入重定向
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">date /t &gt; 1.txt
+</span></span><span class="line"><span class="cl"><span class="nb">time</span> /t &gt;&gt; 1.txt
+</span></span><span class="line"><span class="cl">find <span class="s2">&#34;/&#34;</span> &lt; 1.txt
+</span></span></code></pre></div><h3 id="管道">管道</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="p">|</span> 前一个命令的输出作为后一个命令的输入
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">dir <span class="p">|</span> find <span class="s2">&#34;txt&#34;</span>
+</span></span></code></pre></div><h2 id="文件操作命令">文件操作命令</h2>
+<p><strong>路径分隔符</strong>：<code>\</code></p>
+<p><strong>当前目录</strong>：<code>.</code></p>
+<p><strong>上一级目录</strong>：<code>..</code></p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dir</code></td>
+<td>显示文件夹内容</td>
+<td><code>dir /A</code></td>
+</tr>
+<tr>
+<td><code>tree</code></td>
+<td>显示文件夹树形结构</td>
+<td><code>tree /F</code></td>
+</tr>
+<tr>
+<td><code>盘符:</code></td>
+<td>进入指定磁盘</td>
+<td><code>c:</code> <code>d:</code></td>
+</tr>
+<tr>
+<td><code>cd</code></td>
+<td>切换目录</td>
+<td><code>cd test</code> <code>cd ..</code></td>
+</tr>
+<tr>
+<td><code>mkdir</code>或<code>md</code></td>
+<td>创建目录</td>
+<td><code>mkdir test</code></td>
+</tr>
+<tr>
+<td><code>rmdir</code>或<code>rd</code></td>
+<td>删除目录</td>
+<td><code>rmdir test</code></td>
+</tr>
+<tr>
+<td><code>del</code></td>
+<td>删除文件</td>
+<td><code>del 1.txt</code> <code>del /q/a/f *.txt</code></td>
+</tr>
+<tr>
+<td><code>rename</code>或<code>ren</code></td>
+<td>重命名</td>
+<td><code>rename a.txt b.txt</code></td>
+</tr>
+<tr>
+<td><code>copy</code></td>
+<td>复制文件</td>
+<td><code>copy a\1.txt b\1.txt</code></td>
+</tr>
+<tr>
+<td><code>move</code></td>
+<td>移动文件/重命名</td>
+<td><code>move a\1.txt 2.txt</code></td>
+</tr>
+</tbody>
+</table>
+<h1 id="批处理">批处理</h1>
+<h2 id="基本结构">基本结构</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">@echo off		<span class="c1"># 关闭回显</span>
+</span></span><span class="line"><span class="cl">......
+</span></span><span class="line"><span class="cl">pause			<span class="c1"># 暂停。或 pause &gt; nul</span>
+</span></span></code></pre></div><h2 id="运行方式">运行方式</h2>
+<ul>
+<li>双击运行</li>
+<li>在cmd中运行（可以传参）</li>
+</ul>
+<h2 id="变量">变量</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 设置变量</span>
+</span></span><span class="line"><span class="cl"><span class="nb">set</span> <span class="nv">变量名</span><span class="o">=</span>变量值
+</span></span><span class="line"><span class="cl"><span class="nb">set</span> /a <span class="nv">变量名</span><span class="o">=</span>表达式
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 取消变量</span>
+</span></span><span class="line"><span class="cl"><span class="nb">set</span> <span class="nv">变量名</span><span class="o">=</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 打印变量</span>
+</span></span><span class="line"><span class="cl"><span class="nb">set</span> 变量名
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 列出变量</span>
+</span></span><span class="line"><span class="cl"><span class="nb">set</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 引用变量</span>
+</span></span><span class="line"><span class="cl">%变量名%
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 输入变量值</span>
+</span></span><span class="line"><span class="cl"><span class="nb">set</span> /p <span class="nv">变量名</span><span class="o">=</span>提示文字
+</span></span></code></pre></div><h3 id="预定义的变量">预定义的变量</h3>
+<table>
+<thead>
+<tr>
+<th>变量名</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>%cd%</code></td>
+<td>当前目录</td>
+</tr>
+<tr>
+<td><code>%date%</code></td>
+<td>当前日期</td>
+</tr>
+<tr>
+<td><code>%time%</code></td>
+<td>当前时间</td>
+</tr>
+<tr>
+<td><code>%random%</code></td>
+<td>0~32767之间的随机数</td>
+</tr>
+<tr>
+<td><code>%path%</code></td>
+<td>环境变量</td>
+</tr>
+<tr>
+<td><code>%errorlevel%</code></td>
+<td>上一个命令的返回值，0表示执行成功</td>
+</tr>
+<tr>
+<td><code>%0</code>、<code>%1</code>、<code>%2</code>……</td>
+<td>参数。<code>%0</code>表示命令名</td>
+</tr>
+</tbody>
+</table>
+<h2 id="调用">调用</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">call 可执行文件 <span class="o">[</span>参数列表<span class="o">]</span>
+</span></span></code></pre></div><h2 id="条件">条件</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span>not<span class="o">]</span> 条件 <span class="o">(</span>
+</span></span><span class="line"><span class="cl">	语句块
+</span></span><span class="line"><span class="cl"><span class="o">)</span> <span class="k">else</span> <span class="o">(</span>
+</span></span><span class="line"><span class="cl">	语句块
+</span></span><span class="line"><span class="cl"><span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 条件：</span>
+</span></span><span class="line"><span class="cl">errorlevel number	<span class="c1"># 上一个程序的返回值大于等于number则为true</span>
+</span></span><span class="line"><span class="cl"><span class="nv">string1</span><span class="o">==</span>string2	<span class="c1"># 两个字符串匹配则为true</span>
+</span></span><span class="line"><span class="cl">exist filename		<span class="c1"># 文件名存在则为true</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>/I<span class="o">]</span> string1 compare-op string2		<span class="c1"># 比较数值或字符串</span>
+</span></span><span class="line"><span class="cl">	<span class="c1"># /I	忽略大小写</span>
+</span></span><span class="line"><span class="cl">	<span class="c1"># compare-op包括：</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">#	equ	等于</span>
+</span></span><span class="line"><span class="cl">	<span class="c1"># 	neq	不等于</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">#	lss	小于</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">#	leq	小于等于</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">#	gtr	大于</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">#	geq	大于等于</span>
+</span></span><span class="line"><span class="cl">defined variable	<span class="c1"># 如果定义了该变量则为true</span>
+</span></span></code></pre></div><h2 id="跳转">跳转</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">goto label		<span class="c1"># 跳转到标签所在行</span>
+</span></span><span class="line"><span class="cl">:label			<span class="c1"># 标签以冒号开头</span>
+</span></span></code></pre></div><h2 id="循环">循环</h2>
+<p><strong>基本语法</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="k">for</span> %%i in <span class="o">(</span><span class="nb">set</span><span class="o">)</span> <span class="k">do</span> <span class="o">(</span>
+</span></span><span class="line"><span class="cl">	语句块
+</span></span><span class="line"><span class="cl"><span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 循环变量用 %% 指定，只能是单字母</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># set表示文件集合（也可以是空文件），元素之间以逗号或空格分隔，支持通配符</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> %%i in <span class="o">(</span>a,b,c<span class="o">)</span> <span class="k">do</span> <span class="o">(</span><span class="nb">echo</span> %%i<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> %%i in <span class="o">(</span>*.*<span class="o">)</span> <span class="k">do</span> <span class="o">(</span><span class="nb">echo</span> %%i<span class="o">)</span>
+</span></span></code></pre></div><p><strong>扩展语法</strong></p>
+<ul>
+<li>
+<p>只遍历文件夹</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="k">for</span> /d %%i in <span class="o">(</span><span class="nb">set</span><span class="o">)</span> <span class="k">do</span>
+</span></span></code></pre></div></li>
+<li>
+<p>遍历指定文件夹下的所有文件，不指定则表示当前目录。如果set为<code>.</code>表示枚举目录树</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="k">for</span> /r <span class="o">[[</span>drive:<span class="o">]</span>path<span class="o">]</span> %%i in <span class="o">(</span><span class="nb">set</span><span class="o">)</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> /r %%i in <span class="o">(</span>*<span class="o">)</span> <span class="k">do</span> <span class="o">(</span><span class="nb">echo</span> %%i<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> /r d:<span class="se">\u</span>p %%i in <span class="o">(</span>.<span class="o">)</span> <span class="k">do</span> <span class="o">(</span><span class="nb">echo</span> %%i<span class="o">)</span>
+</span></span></code></pre></div></li>
+<li>
+<p>遍历数字序列</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="k">for</span> /l %%i in <span class="o">(</span>start,step,end<span class="o">)</span> <span class="k">do</span>
+</span></span></code></pre></div></li>
+<li>
+<p>遍历文件内容</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="k">for</span> /f <span class="o">[</span><span class="s2">&#34;options&#34;</span><span class="o">]</span> %%i in <span class="o">(</span><span class="nb">set</span><span class="o">)</span> <span class="k">do</span>
+</span></span></code></pre></div></li>
+</ul>
+<h2 id="通配符">通配符</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">?		<span class="c1"># 单个字符</span>
+</span></span><span class="line"><span class="cl">*		<span class="c1"># 任意字符</span>
+</span></span></code></pre></div><h2 id="例子">例子</h2>
+<p>按顺序为文件夹中的文件命名。</p>
+<p><a href="https://blog.csdn.net/Dandelion_gong/article/details/78067501" target="_blank" rel="noopener noreffer ">批处理中for循环的自增自减问题_Dandelion_gong的博客-CSDN博客_bat for 自增</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">@echo off
+</span></span><span class="line"><span class="cl">setlocal enabledelayedexpansion
+</span></span><span class="line"><span class="cl"><span class="nb">set</span> <span class="nv">cnt</span><span class="o">=</span><span class="m">0</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> %%i in <span class="o">(</span>%1<span class="o">)</span> <span class="k">do</span> <span class="o">(</span>
+</span></span><span class="line"><span class="cl">    rename %%i !cnt!.txt
+</span></span><span class="line"><span class="cl">    <span class="nb">set</span> /a <span class="nv">cnt</span><span class="o">=</span>!cnt! + <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="o">)</span>
+</span></span><span class="line"><span class="cl">pause
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-06-17</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E7%BC%96%E7%A8%8B/">编程</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/lavaan%E5%AD%A6%E4%B9%A0/" class="prev" rel="prev" title="Lavaan学习"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Lavaan学习</a>
+            <a href="/posts/rmarkdown%E4%B8%AD%E6%96%87pdf/" class="next" rel="next" title="R语言中markdown生成中文pdf">R语言中markdown生成中文pdf<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

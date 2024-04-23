@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Lavaan学习 - 学海无涯</title><meta name="Description" content="This is my cool site"><meta property="og:url" content="http://example.org/posts/lavaan%E5%AD%A6%E4%B9%A0/">
+  <meta property="og:site_name" content="学海无涯">
+  <meta property="og:title" content="Lavaan学习">
+  <meta property="og:description" content="模型语法 方程表示 在lavaan中，模型是用一个回归方程组来表示。 myModel &amp;lt;- &amp;#39; # 主要回归方程 y1 &#43; y2 ~ f1 &#43; f2 &#43; x1 &#43; x2 f1 ~ f2 &#43; f3 f2 ~ f3 &#43; x1 &#43; x2 # 定义潜变">
+  <meta property="og:locale" content="zh-CN">
+  <meta property="og:type" content="article">
+  <meta property="article:section" content="posts">
+    <meta property="article:tag" content="统计">
+<meta name="twitter:card" content="summary"><meta name="twitter:title" content="Lavaan学习">
+<meta name="twitter:description" content="模型语法 方程表示 在lavaan中，模型是用一个回归方程组来表示。 myModel &lt;- &#39; # 主要回归方程 y1 &#43; y2 ~ f1 &#43; f2 &#43; x1 &#43; x2 f1 ~ f2 &#43; f3 f2 ~ f3 &#43; x1 &#43; x2 # 定义潜变">
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/lavaan%E5%AD%A6%E4%B9%A0/" /><link rel="next" href="http://example.org/posts/windows%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8E%E6%89%B9%E5%A4%84%E7%90%86/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Lavaan学习",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/lavaan%E5%AD%A6%E4%B9%A0\/"
+        },"genre": "posts","keywords": "统计","wordcount":  347 ,
+        "url": "http:\/\/example.org\/posts\/lavaan%E5%AD%A6%E4%B9%A0\/","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="学海无涯">学海无涯</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="学海无涯">学海无涯</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Lavaan学习</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%8A%80%E8%83%BD/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>技能</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;347 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#方程表示">方程表示</a></li>
+    <li><a href="#如何定义潜变量">如何定义潜变量</a></li>
+    <li><a href="#方差与协方差">方差与协方差</a></li>
+    <li><a href="#截距">截距</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="模型语法">模型语法</h1>
+<h2 id="方程表示">方程表示</h2>
+<p>在lavaan中，模型是用一个回归方程组来表示。</p>
+<pre tabindex="0"><code>myModel &lt;- &#39; # 主要回归方程
+             y1 + y2 ~ f1 + f2 + x1 + x2
+                  f1 ~ f2 + f3
+                  f2 ~ f3 + x1 + x2
+             
+             # 定义潜变量
+             f1 =~ y1 + y2 + y3
+             f2 =~ y4 + y5 + y6
+             f3 =~ y7 + y8 + y9 + y10
+
+             # 方差和协方差
+             y1 ~~ y1
+             y1 ~~ y2
+             f1 ~~ f2
+          
+             # 截距项
+             y1 ~ 1
+             f1 ~ 1
+</code></pre><p>如果模型很长，可以将模型(单引号之间的内容)储存入myModel.lav的txt文档中，用以下命令读取：</p>
+<pre tabindex="0"><code>myModel &lt;- readLines(&#34;/mydirectory/myModel.lav&#34;)  # 这里需要绝对路径
+</code></pre><p>注意自变量可以是<strong>潜变量</strong>：
+<code>y ~ f1 + f2 + x1 + x2</code>
+<code>f1 ~ f2 + f3</code>
+<code>f2 ~ f3 + x1 + x2</code>
+上面<code>f</code>开头的f1、f2就是潜变量：</p>
+<h2 id="如何定义潜变量">如何定义潜变量</h2>
+<p>在lavaan中潜变量通过<code>=~</code>（measured by）来定义：
+<code>f1 =~ y1 + y2 + y3</code>
+<code>f2 =~ y4 + y5 + y6</code>
+<code>f3 =~ y7 + y8 + y9 + y10`` </code></p>
+<h2 id="方差与协方差">方差与协方差</h2>
+<p>用<code>~~</code>表示变量之间的协方差或者方差：
+<code>y1 ~~ y1 # 方差</code>
+<code>y1 ~~ y2 # 协方差</code>
+<code>f1 ~~ f2 # 协方差</code></p>
+<h2 id="截距">截距</h2>
+<p><code>y1 ~ 1</code>
+<code>f1 ~ 1</code></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 0001-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E7%BB%9F%E8%AE%A1/">统计</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+            <a href="/posts/windows%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8E%E6%89%B9%E5%A4%84%E7%90%86/" class="next" rel="next" title="windows命令行与批处理">windows命令行与批处理<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

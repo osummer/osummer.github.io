@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>github基本操作 - 学海无涯</title><meta name="Description" content="This is my cool site"><meta property="og:url" content="http://example.org/posts/github%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/">
+  <meta property="og:site_name" content="学海无涯">
+  <meta property="og:title" content="github基本操作">
+  <meta property="og:description" content="github使用指南 1. 新建账户与仓库 在github.com中 osummer 账户下新建 easyANOVA 仓库 2. ssh公钥建立 首先在本地创建ssh key，在cmd中执行创建">
+  <meta property="og:locale" content="zh-CN">
+  <meta property="og:type" content="article">
+  <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-06-17T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-06-17T00:00:00+00:00">
+    <meta property="article:tag" content="Git">
+<meta name="twitter:card" content="summary"><meta name="twitter:title" content="github基本操作">
+<meta name="twitter:description" content="github使用指南 1. 新建账户与仓库 在github.com中 osummer 账户下新建 easyANOVA 仓库 2. ssh公钥建立 首先在本地创建ssh key，在cmd中执行创建">
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/github%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" /><link rel="prev" href="http://example.org/posts/group_by%E5%87%BD%E6%95%B0/" /><link rel="next" href="http://example.org/posts/0-easystats/easystats/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "github基本操作",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/github%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C\/"
+        },"genre": "posts","keywords": "git","wordcount":  774 ,
+        "url": "http:\/\/example.org\/posts\/github%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C\/","datePublished": "2022-06-17T00:00:00+00:00","dateModified": "2022-06-17T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="学海无涯">学海无涯</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="学海无涯">学海无涯</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">github基本操作</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%8A%80%E8%83%BD/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>技能</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-06-17">2022-06-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;774 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-新建账户与仓库">1. 新建账户与仓库</a></li>
+    <li><a href="#2-ssh公钥建立">2. ssh公钥建立</a></li>
+    <li><a href="#3-ssh公钥上传">3. ssh公钥上传</a></li>
+    <li><a href="#4-本地仓库初始化与提交">4. 本地仓库初始化与提交</a></li>
+    <li><a href="#5-检出仓库">5. 检出仓库</a></li>
+    <li><a href="#6-git工作流">6. git工作流</a>
+      <ul>
+        <li><a href="#1提出更改-git-add">（1）提出更改 (git add)</a></li>
+        <li><a href="#2提交到head-git-commit">（2）提交到head (git commit)</a></li>
+        <li><a href="#3提交到远程git-push">（3）提交到远程（git push）</a></li>
+      </ul>
+    </li>
+    <li><a href="#7-faq">7. FAQ</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><hr>
+<h1 id="github使用指南"><strong>github使用指南</strong></h1>
+<h2 id="1-新建账户与仓库">1. 新建账户与仓库</h2>
+<blockquote>
+<p>在github.com中 <strong>osummer</strong> 账户下新建 <strong>easyANOVA</strong> 仓库</p>
+</blockquote>
+<h2 id="2-ssh公钥建立">2. ssh公钥建立</h2>
+<p>首先在本地创建ssh key，在cmd中执行创建ssh key ^224dc9</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="err">$</span> <span class="nx">ssh</span><span class="o">-</span><span class="nx">keygen</span> <span class="o">-</span><span class="nx">t</span> <span class="nx">rsa</span> <span class="o">-</span><span class="nx">C</span> <span class="s">&#34;your_email@youremail.com&#34;</span>
+</span></span></code></pre></div><p><code>your_email@youremail.com</code>改为你在github上注册的邮箱，之后会要求确认路径和输入密码，我们这使用默认的一路回车就行。成功的话会在<code>~/</code>下生成<code>.ssh</code>文件夹，进去，打开<code>id_rsa.pub</code>，复制里面的<code>key</code>。</p>
+<h2 id="3-ssh公钥上传">3. ssh公钥上传</h2>
+<p>回到github上，进入 Account Settings（账户配置），左边选择SSH Keys，Add SSH Key,title随便填，粘贴在你电脑上生成的key。<br>
+验证是否成功：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="err">$</span> <span class="nx">ssh</span> <span class="o">-</span><span class="nx">T</span> <span class="nx">git</span><span class="err">@</span><span class="nx">github</span><span class="p">.</span><span class="nx">com</span>
+</span></span></code></pre></div><h2 id="4-本地仓库初始化与提交">4. 本地仓库初始化与提交</h2>
+<p>设置信息</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="err">$</span> <span class="nx">git</span> <span class="nx">config</span> <span class="o">--</span><span class="nx">global</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span> <span class="s">&#34;your name&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="nx">git</span> <span class="nx">config</span> <span class="o">--</span><span class="nx">global</span> <span class="nx">user</span><span class="p">.</span><span class="nx">email</span> <span class="s">&#34;your_email@youremail.com&#34;</span>
+</span></span></code></pre></div><blockquote>
+<p>进入要上传的仓库，右键git bash，添加远程地址：</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="err">$</span> <span class="nx">git</span> <span class="nx">remote</span> <span class="nx">add</span> <span class="nx">origin</span> <span class="nx">git</span><span class="err">@</span><span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="p">:</span><span class="nx">yourName</span><span class="o">/</span><span class="nx">yourRepo</span><span class="p">.</span><span class="nx">git</span>
+</span></span></code></pre></div><blockquote>
+<p>或者重新创建本地仓库：</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">echo</span> <span class="s">&#34;# easyANOVA&#34;</span> <span class="o">&gt;&gt;</span> <span class="nx">README</span><span class="p">.</span><span class="nx">md</span>
+</span></span><span class="line"><span class="cl"><span class="nx">git</span> <span class="nx">init</span>
+</span></span><span class="line"><span class="cl"><span class="nx">git</span> <span class="nx">add</span> <span class="nx">README</span><span class="p">.</span><span class="nx">md</span>
+</span></span><span class="line"><span class="cl"><span class="nx">git</span> <span class="nx">commit</span> <span class="o">-</span><span class="nx">m</span> <span class="s">&#34;first commit&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">git</span> <span class="nx">branch</span> <span class="o">-</span><span class="nx">M</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl"><span class="nx">git</span> <span class="nx">remote</span> <span class="nx">add</span> <span class="nx">origin</span> <span class="nx">https</span><span class="p">:</span><span class="c1">//github.com/osummer/easyANOVA.git
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">git</span> <span class="nx">push</span> <span class="o">-</span><span class="nx">u</span> <span class="nx">origin</span> <span class="nx">main</span>
+</span></span></code></pre></div><h2 id="5-检出仓库">5. 检出仓库</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="err">#</span> <span class="nx">本地仓库</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="nx">git</span> <span class="nx">clone</span> <span class="o">/</span><span class="nx">path</span><span class="o">/</span><span class="nx">to</span><span class="o">/</span><span class="nx">repository</span> 
+</span></span><span class="line"><span class="cl"><span class="err">#</span> <span class="nx">如果是远程仓库</span><span class="err">，</span><span class="nx">则为</span><span class="err">：</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="nx">git</span> <span class="nx">clone</span> <span class="nx">username</span><span class="err">@</span><span class="nx">host</span><span class="p">:</span><span class="o">/</span><span class="nx">path</span><span class="o">/</span><span class="nx">to</span><span class="o">/</span><span class="nx">repository</span>
+</span></span></code></pre></div><h2 id="6-git工作流">6. git工作流</h2>
+<p>你的本地仓库由 git 维护的三棵&quot;树&quot;组成。第一个是你的 <code>工作目录</code>，它持有实际文件；第二个是 <code>暂存区（Index）</code>，它像个缓存区域，临时保存你的改动；最后是 <code>HEAD</code>，它指向你最后一次提交的结果。</p>
+<h3 id="1提出更改-git-add">（1）提出更改 (git add)</h3>
+<p>提出更改是把待提交内容添加到暂存区，代码为：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">git</span> <span class="nx">add</span> <span class="p">&lt;</span><span class="nx">filename</span><span class="p">&gt;</span> <span class="err">#</span><span class="nx">单个文件</span>
+</span></span><span class="line"><span class="cl"><span class="nx">git</span> <span class="nx">add</span> <span class="o">*</span> <span class="err">#</span><span class="nx">或者所有内容</span>
+</span></span></code></pre></div><h3 id="2提交到head-git-commit">（2）提交到head (git commit)</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">git</span> <span class="nx">commit</span> <span class="o">-</span><span class="nx">m</span> <span class="s">&#34;代码提交信息&#34;</span>
+</span></span></code></pre></div><p>实际提交了改动，但还未到远程仓库。</p>
+<h3 id="3提交到远程git-push">（3）提交到远程（git push）</h3>
+<p>现在，改动现在已经在本地仓库的 HEAD 中了。将这些改动提交到远端仓库：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">git</span> <span class="nx">push</span> <span class="nx">origin</span> <span class="nx">master</span>
+</span></span></code></pre></div><h2 id="7-faq">7. FAQ</h2>
+<p>出现ssh登录错误，比如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="err">$</span> <span class="nx">ssh</span> <span class="o">-</span><span class="nx">T</span> <span class="nx">git</span><span class="err">@</span><span class="nx">github</span><span class="p">.</span><span class="nx">com</span>
+</span></span><span class="line"><span class="cl"><span class="nx">kex_exchange_identification</span><span class="p">:</span> <span class="nx">read</span><span class="p">:</span> <span class="nx">Connection</span> <span class="nx">reset</span> <span class="nx">by</span> <span class="nx">peer</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Connection</span> <span class="nx">reset</span> <span class="nx">by</span> <span class="mf">20.205.243.166</span> <span class="nx">port</span> <span class="mi">22</span>
+</span></span></code></pre></div><p>解决方法：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">git</span> <span class="nx">remote</span> <span class="nx">set</span><span class="o">-</span><span class="nx">url</span> <span class="nx">origin</span> <span class="nx">HTTPS</span><span class="o">-</span><span class="nx">url</span>
+</span></span><span class="line"><span class="cl"><span class="err">#</span><span class="nx">https</span><span class="o">-</span><span class="nx">url为仓库的地址</span><span class="err">“</span><span class="nx">https</span><span class="p">:</span><span class="c1">//github.com/osummer/easyANOVA.git”
+</span></span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-06-17</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/git/">Git</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/group_by%E5%87%BD%E6%95%B0/" class="prev" rel="prev" title="group_by函数"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>group_by函数</a>
+            <a href="/posts/0-easystats/easystats/" class="next" rel="next" title="easystats">easystats<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

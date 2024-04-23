@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>PCA分析 - 学海无涯</title><meta name="Description" content="This is my cool site"><meta property="og:url" content="http://example.org/posts/pca%E5%88%86%E6%9E%90/">
+  <meta property="og:site_name" content="学海无涯">
+  <meta property="og:title" content="PCA分析">
+  <meta property="og:description" content="1 基本信息 1.1 常用的包及函数 stats 默认加载包，提供prcomp与princomp函数进行PCA计算 psych 心理学研究包，提供principal FactoMineR 多元分析">
+  <meta property="og:locale" content="zh-CN">
+  <meta property="og:type" content="article">
+  <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-06-17T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-06-17T00:00:00+00:00">
+    <meta property="article:tag" content="R">
+<meta name="twitter:card" content="summary"><meta name="twitter:title" content="PCA分析">
+<meta name="twitter:description" content="1 基本信息 1.1 常用的包及函数 stats 默认加载包，提供prcomp与princomp函数进行PCA计算 psych 心理学研究包，提供principal FactoMineR 多元分析">
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/pca%E5%88%86%E6%9E%90/" /><link rel="prev" href="http://example.org/posts/r%E5%8C%85%E5%BC%80%E5%8F%91/" /><link rel="next" href="http://example.org/posts/%E7%BB%BF%E8%8C%B6%E7%9A%84%E4%B8%BB%E8%A6%81%E9%80%82%E5%88%B6%E5%93%81%E7%A7%8D%E5%8F%8A%E6%A0%BD%E5%9F%B9/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "PCA分析",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/pca%E5%88%86%E6%9E%90\/"
+        },"genre": "posts","keywords": "R","wordcount":  4148 ,
+        "url": "http:\/\/example.org\/posts\/pca%E5%88%86%E6%9E%90\/","datePublished": "2023-06-17T00:00:00+00:00","dateModified": "2023-06-17T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="学海无涯">学海无涯</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="学海无涯">学海无涯</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">PCA分析</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%8A%80%E8%83%BD/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>技能</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-06-17">2023-06-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4148 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#11-常用的包及函数">1.1 常用的包及函数</a></li>
+    <li><a href="#12-pca中常见概念">1.2 PCA中常见概念</a>
+      <ul>
+        <li><a href="#121-特征值eigen-value-eigen">1.2.1 特征值(eigen value, eigen)</a></li>
+        <li><a href="#122-特征值平方根square-root-of-eigen-value-sdev">1.2.2 特征值平方根(square root of eigen value, sdev)</a></li>
+        <li><a href="#123-特征向量eigen-vector">1.2.3 特征向量(eigen vector)</a></li>
+        <li><a href="#124-载荷loading">1.2.4 载荷(loading)</a></li>
+        <li><a href="#125-因子得分系数weight">1.2.5 因子得分系数(weight)</a></li>
+        <li><a href="#126-得分score">1.2.6 得分(score)</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#21-原始推导">2.1 原始推导</a>
+      <ul>
+        <li><a href="#211-数据准备">2.1.1 数据准备</a></li>
+        <li><a href="#3111-特征值分解">3.11.1 特征值分解</a></li>
+        <li><a href="#3201-特征值">3.20.1 特征值</a></li>
+        <li><a href="#3241-特征向量">3.24.1 特征向量</a></li>
+        <li><a href="#3251-得分矩阵">3.25.1 得分矩阵</a></li>
+        <li><a href="#3361-载荷矩阵">3.36.1 载荷矩阵</a></li>
+      </ul>
+    </li>
+    <li><a href="#355-使用princomp函数">3.55 使用<code>princomp</code>函数</a></li>
+    <li><a href="#380-使用-prcomp函数">3.80 使用 <code>prcomp</code>函数</a></li>
+    <li><a href="#397-使用psychprincipal函数">3.97 使用<code>psych::principal</code>函数</a></li>
+    <li><a href="#51-使用factominerpca函数">5.1 使用<code>FactoMineR::PCA</code>函数</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="1-基本信息">1 基本信息</h1>
+<h2 id="11-常用的包及函数">1.1 常用的包及函数</h2>
+<ul>
+<li><code>stats</code> 默认加载包，提供<code>prcomp</code>与<code>princomp</code>函数进行PCA计算</li>
+<li><code>psych</code> 心理学研究包，提供<code>principal</code></li>
+<li><code>FactoMineR</code> 多元分析包，提供<code>PCA</code>函数进行PCA计算</li>
+</ul>
+<h2 id="12-pca中常见概念">1.2 PCA中常见概念</h2>
+<p>不同包中函数计算特征值并无差异，但由于对具体概念的理解不一致，导致同一参数的数值有一定区别，因此要对概念加以区分。</p>
+<h3 id="121-特征值eigen-value-eigen">1.2.1 特征值(eigen value, eigen)</h3>
+<p>特征值指的是相关矩阵或者协方差矩阵的特征值。</p>
+<p>特征值等于各主成分的方差，其相对比例可理解为方差解释度或贡献度。</p>
+<h3 id="122-特征值平方根square-root-of-eigen-value-sdev">1.2.2 特征值平方根(square root of eigen value, sdev)</h3>
+<p>特征值的平方根表示的是主成分得分的标准偏差（standard deviation）,即<code>prcomp</code> 结果中的<code>sdev</code>。</p>
+<h3 id="123-特征向量eigen-vector">1.2.3 特征向量(eigen vector)</h3>
+<p>特征向量是主成分对于原始变量的线性转换系数矩阵（主成分得分系数）。</p>
+<p>标准化后的原始变量与特征向量的矩阵积为主成分得分。</p>
+<p>特征向量是单位向量（unit-length），其列平方和等于1。</p>
+<p>从列上看，同一PC的特征向量的平方数等于<code>FactoMineR</code>包中<code>PCA</code>函数计算结果中的<code>contribution</code>,理解为各变量对其主成分方差的贡献。等于。</p>
+<h3 id="124-载荷loading">1.2.4 载荷(loading)</h3>
+<p>一般定义为原始变量与主成分得分之间的相关系数，等于特征向量乘以特征值的平方根。</p>
+<p>特征矩阵可以认为是单位标准化（unit-scaled,列平方和为1）的载荷。</p>
+<p>从列上看，各变量对同一主成分的载荷的平方和等于其特征值（主成分的方差），理解为各变量对该主成分的贡献。</p>
+<p>从行上看，同一变量对各主成分的载荷的平方（<code>FactoMineR</code>包中<code>PCA</code>函数计算结果中的<code>cos2</code>），理解为各主成分对该变量方差的解释度，其和值为1（变量的方差）。</p>
+<h3 id="125-因子得分系数weight">1.2.5 因子得分系数(weight)</h3>
+<p>线性转换系数矩阵，经常与<code>特征向量矩阵</code>混淆。因子得分系数数值上等于<code>特征向量</code>除以特征值的平方根，因此相当于标准化的特征向量。</p>
+<h3 id="126-得分score">1.2.6 得分(score)</h3>
+<p>得分可分为主成分得分与因子得分，因子得分数值上等于主成分得分除以特征值的平方根，相当于标准化的主成分得分。</p>
+<p>主成分得分为原始向量经过特征矩阵线性转换后的投影值。主成分得分矩阵的协方差为对角矩阵，且<strong>对角元素为特征值</strong>，非对角元素接近0。</p>
+<p>因子得分为原始向量经因子得分系数权重(weight)转换后的投影值。因子得分矩阵的协方差为对角矩阵，<strong>对角元素为1</strong>，非对角元素接近0。</p>
+<h1 id="2-pca操作">2 PCA操作</h1>
+<h2 id="21-原始推导">2.1 原始推导</h2>
+<h3 id="211-数据准备">2.1.1 数据准备</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># 3 手动推导 --------------------------------------------------------------------</span>
+</span></span><span class="line"><span class="cl"><span class="n">dt</span><span class="o">=</span><span class="nf">scale</span><span class="p">(</span><span class="n">iris[</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="n">]</span><span class="p">)</span> <span class="c1">#z-score标准化</span>
+</span></span><span class="line"><span class="cl"><span class="nf">head</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 3.1 Sepal.Length Sepal.Width Petal.Length Petal.Width
+## 3.2 [1,]   -0.8976739  1.01560199    -1.335752   -1.311052
+## 3.3 [2,]   -1.1392005 -0.13153881    -1.335752   -1.311052
+## 3.4 [3,]   -1.3807271  0.32731751    -1.392399   -1.311052
+## 3.5 [4,]   -1.5014904  0.09788935    -1.279104   -1.311052
+## 3.6 [5,]   -1.0184372  1.24503015    -1.335752   -1.311052
+## 3.7 [6,]   -0.5353840  1.93331463    -1.165809   -1.048667
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">rm1</span><span class="o">=</span><span class="nf">cor</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span> <span class="c1"># 相关矩阵</span>
+</span></span><span class="line"><span class="cl"><span class="n">rm1</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 3.8 Sepal.Length Sepal.Width Petal.Length Petal.Width
+## Sepal.Length    1.0000000  -0.1175698    0.8717538   0.8179411
+## 3.9 Sepal.Width    -0.1175698   1.0000000   -0.4284401  -0.3661259
+## 3.10 Petal.Length    0.8717538  -0.4284401    1.0000000   0.9628654
+## 3.11 Petal.Width     0.8179411  -0.3661259    0.9628654   1.0000000
+</code></pre><h3 id="3111-特征值分解">3.11.1 特征值分解</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">rs1</span><span class="o">=</span><span class="nf">eigen</span><span class="p">(</span><span class="n">rm1</span><span class="p">)</span> <span class="c1"># 特征值分解</span>
+</span></span><span class="line"><span class="cl"><span class="n">rs1</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 3.12 eigen() decomposition
+## 3.13 $values
+## 3.14 [1] 2.91849782 0.91403047 0.14675688 0.02071484
+## 3.15 
+## 3.16 $vectors
+## 3.17 [,1]        [,2]       [,3]       [,4]
+## [1,]  0.5210659 -0.37741762  0.7195664  0.2612863
+## 3.18 [2,] -0.2693474 -0.92329566 -0.2443818 -0.1235096
+## 3.19 [3,]  0.5804131 -0.02449161 -0.1421264 -0.8014492
+## 3.20 [4,]  0.5648565 -0.06694199 -0.6342727  0.5235971
+</code></pre><h3 id="3201-特征值">3.20.1 特征值</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">val</span><span class="o">=</span><span class="n">rs1</span><span class="o">$</span><span class="n">value</span> <span class="c1"># 特征值，即各PC的方差</span>
+</span></span><span class="line"><span class="cl"><span class="n">val</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 3.21 [1] 2.91849782 0.91403047 0.14675688 0.02071484
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">val_sd</span><span class="o">=</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="c1"># 各PC的方差标准差</span>
+</span></span><span class="line"><span class="cl"><span class="n">val_sd</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 3.22 [1] 1.7083611 0.9560494 0.3830886 0.1439265
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">val</span><span class="o">/</span><span class="nf">sum</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="c1"># 各PC的方差解释度</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 3.23 [1] 0.729624454 0.228507618 0.036689219 0.005178709
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">val</span><span class="o">/</span><span class="nf">sum</span><span class="p">(</span><span class="n">val</span><span class="p">)</span><span class="o">|&gt;</span><span class="nf">cumsum</span><span class="p">()</span> <span class="c1"># 累计解释度</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 3.24 [1] 0.729624454 0.228507618 0.036689219 0.005178709
+</code></pre><h3 id="3241-特征向量">3.24.1 特征向量</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">U</span><span class="o">=</span><span class="n">rs1</span><span class="o">$</span><span class="n">vectors</span> <span class="c1"># 特征向量</span>
+</span></span><span class="line"><span class="cl"><span class="nf">apply</span><span class="p">(</span><span class="n">U^2</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="n">sum</span><span class="p">)</span> <span class="c1"># 各PC单位特征向量，列平方和（模）为1</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 3.25 [1] 1 1 1 1
+</code></pre><h3 id="3251-得分矩阵">3.25.1 得分矩阵</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">PC</span><span class="o">=</span><span class="n">dt</span> <span class="o">%*%</span> <span class="n">U</span>  <span class="c1"># 得分矩阵</span>
+</span></span><span class="line"><span class="cl"><span class="nf">colnames</span><span class="p">(</span><span class="n">PC</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#34;PC1&#34;</span><span class="p">,</span><span class="s">&#34;PC2&#34;</span><span class="p">,</span><span class="s">&#34;PC3&#34;</span><span class="p">,</span><span class="s">&#34;PC4&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">head</span><span class="p">(</span><span class="n">PC</span><span class="p">)</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 3.26 PC1        PC2         PC3          PC4
+## [1,] -2.257141 -0.4784238  0.12727962  0.024087508
+## 3.27 [2,] -2.074013  0.6718827  0.23382552  0.102662845
+## 3.28 [3,] -2.356335  0.3407664 -0.04405390  0.028282305
+## 3.29 [4,] -2.291707  0.5953999 -0.09098530 -0.065735340
+## 3.30 [5,] -2.381863 -0.6446757 -0.01568565 -0.035802870
+## 3.31 [6,] -2.068701 -1.4842053 -0.02687825  0.006586116
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">cov</span><span class="p">(</span><span class="n">PC</span><span class="p">)</span> <span class="c1"># 得分矩阵协方差为对角矩阵，且对角元素为特征值，非对角元素接近0。</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 3.32 PC1          PC2           PC3           PC4
+## PC1 2.918498e+00 1.002833e-15  5.273639e-16  2.443472e-16
+## 3.33 PC2 1.002833e-15 9.140305e-01  1.249926e-16  8.745985e-18
+## 3.34 PC3 5.273639e-16 1.249926e-16  1.467569e-01 -9.267896e-17
+## 3.35 PC4 2.443472e-16 8.745985e-18 -9.267896e-17  2.071484e-02
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">apply</span><span class="p">(</span><span class="n">PC</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="n">var</span><span class="p">)</span> <span class="c1"># 主成分得分的方差等于特征值</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 3.36 PC1        PC2        PC3        PC4 
+## 2.91849782 0.91403047 0.14675688 0.02071484
+</code></pre><h3 id="3361-载荷矩阵">3.36.1 载荷矩阵</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">loadings</span><span class="o">=</span> <span class="n">U</span> <span class="o">%*%</span> <span class="nf">diag</span><span class="p">(</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">val</span><span class="p">))</span> <span class="c1"># 载荷loading=特征向量*sqrt(val)</span>
+</span></span><span class="line"><span class="cl"><span class="n">loadings</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 3.37 [,1]        [,2]        [,3]        [,4]
+## [1,]  0.8901688 -0.36082989  0.27565767  0.03760602
+## 3.38 [2,] -0.4601427 -0.88271627 -0.09361987 -0.01777631
+## 3.39 [3,]  0.9915552 -0.02341519 -0.05444699 -0.11534978
+## 3.40 [4,]  0.9649790 -0.06399985 -0.24298265  0.07535950
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">cor</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span><span class="n">PC</span><span class="p">)</span> <span class="c1"># 载荷数值上等于各变量与PC的相关系数</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 3.41 PC1         PC2         PC3         PC4
+## Sepal.Length  0.8901688 -0.36082989  0.27565767  0.03760602
+## 3.42 Sepal.Width  -0.4601427 -0.88271627 -0.09361987 -0.01777631
+## 3.43 Petal.Length  0.9915552 -0.02341519 -0.05444699 -0.11534978
+## 3.44 Petal.Width   0.9649790 -0.06399985 -0.24298265  0.07535950
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">loadings</span> <span class="o">%*%</span> <span class="nf">t</span><span class="p">(</span><span class="n">loadings</span><span class="p">)</span> <span class="c1"># 再现相关矩阵cor(dt)</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 3.45 [,1]       [,2]       [,3]       [,4]
+## [1,]  1.0000000 -0.1175698  0.8717538  0.8179411
+## 3.46 [2,] -0.1175698  1.0000000 -0.4284401 -0.3661259
+## 3.47 [3,]  0.8717538 -0.4284401  1.0000000  0.9628654
+## 3.48 [4,]  0.8179411 -0.3661259  0.9628654  1.0000000
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">loadings^2</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 3.49 [,1]        [,2]        [,3]         [,4]
+## [1,] 0.7924004 0.130198208 0.075987149 0.0014142127
+## 3.50 [2,] 0.2117313 0.779188012 0.008764681 0.0003159971
+## 3.51 [3,] 0.9831817 0.000548271 0.002964475 0.0133055723
+## 3.52 [4,] 0.9311844 0.004095980 0.059040571 0.0056790544
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">loadings^2</span><span class="o">|&gt;</span><span class="nf">colSums</span><span class="p">()</span> <span class="c1"># 载荷平方的列和=特征值</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 3.53 [1] 2.91849782 0.91403047 0.14675688 0.02071484
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">loadings^2</span><span class="o">|&gt;</span><span class="nf">rowSums</span><span class="p">()</span> <span class="c1"># 载荷平方的行和=1，理解为各PC对变量的解释度</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 3.54 [1] 1 1 1 1
+</code></pre><h2 id="355-使用princomp函数">3.55 使用<code>princomp</code>函数</h2>
+<p><code>princomp</code>&rsquo;` 使用特征值分解方法，只能在记录数比变量多的情况下使用,一般不推荐。</p>
+<p>在<code>princomp</code>输出中，<code>loading</code>为特征向量矩阵，需要格外注意！！！</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">pca1</span><span class="o">=</span><span class="nf">princomp</span><span class="p">(</span><span class="n">iris[</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="n">]</span><span class="p">,</span><span class="n">cor</span><span class="o">=</span><span class="bp">T</span><span class="p">,</span><span class="n">scores</span><span class="o">=</span><span class="bp">T</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="nf">summary</span><span class="p">(</span><span class="n">pca1</span><span class="p">)</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 3.56 Importance of components:
+## 3.57 Comp.1    Comp.2     Comp.3      Comp.4
+## Standard deviation     1.7083611 0.9560494 0.38308860 0.143926497
+## 3.58 Proportion of Variance 0.7296245 0.2285076 0.03668922 0.005178709
+## 3.59 Cumulative Proportion  0.7296245 0.9581321 0.99482129 1.000000000
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">pca1</span><span class="o">$</span><span class="n">sdev</span> <span class="c1"># 主成分标准偏差</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 3.60 Comp.1    Comp.2    Comp.3    Comp.4 
+## 3.61 0.9560494 0.3830886 0.1439265
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">pca1</span><span class="o">$</span><span class="n">sdev^2</span> <span class="c1"># 特征值</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 3.62 Comp.1     Comp.2     Comp.3     Comp.4 
+## 3.63 0.91403047 0.14675688 0.02071484
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">pca1</span><span class="o">$</span><span class="n">loadings</span> <span class="c1"># 特征向量</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 3.64 
+## 3.65 Loadings:
+## 3.66 Comp.1 Comp.2 Comp.3 Comp.4
+## Sepal.Length  0.521  0.377  0.720  0.261
+## 3.67 Sepal.Width  -0.269  0.923 -0.244 -0.124
+## 3.68 Petal.Length  0.580        -0.142 -0.801
+## 3.69 Petal.Width   0.565        -0.634  0.524
+## 3.70 
+## 3.71 Comp.1 Comp.2 Comp.3 Comp.4
+## SS loadings      1.00   1.00   1.00   1.00
+## 3.72 Proportion Var   0.25   0.25   0.25   0.25
+## 3.73 Cumulative Var   0.25   0.50   0.75   1.00
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">head</span><span class="p">(</span><span class="n">pca1</span><span class="o">$</span><span class="n">scores</span><span class="p">)</span> <span class="c1"># PC得分矩阵</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 3.74 Comp.1     Comp.2      Comp.3      Comp.4
+## [1,] -2.264703  0.4800266  0.12770602  0.02416820
+## 3.75 [2,] -2.080961 -0.6741336  0.23460885  0.10300677
+## 3.76 [3,] -2.364229 -0.3419080 -0.04420148  0.02837705
+## 3.77 [4,] -2.299384 -0.5973945 -0.09129011 -0.06595556
+## 3.78 [5,] -2.389842  0.6468354 -0.01573820 -0.03592281
+## 3.79 [6,] -2.075631  1.4891775 -0.02696829  0.00660818
+</code></pre><h2 id="380-使用-prcomp函数">3.80 使用 <code>prcomp</code>函数</h2>
+<p><code>prcomp</code>使用奇异值分解(SVD)方法，一般推荐。</p>
+<p><code>prcomp</code>的输出结果中用<code>rotation</code>表示特征向量矩阵；用<code>x</code>表示PC得分矩阵。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">pca2</span><span class="o">=</span><span class="nf">prcomp</span><span class="p">(</span><span class="n">iris[</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="n">]</span><span class="p">,</span><span class="n">scale.</span> <span class="o">=</span> <span class="bp">T</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">pca2</span> <span class="o">|&gt;</span> <span class="nf">summary</span><span class="p">()</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 3.81 Importance of components:
+## 3.82 PC1    PC2     PC3     PC4
+## Standard deviation     1.7084 0.9560 0.38309 0.14393
+## 3.83 Proportion of Variance 0.7296 0.2285 0.03669 0.00518
+## 3.84 Cumulative Proportion  0.7296 0.9581 0.99482 1.00000
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">pca2</span><span class="o">$</span><span class="n">sdev</span> <span class="c1"># 主成分标准偏差</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 3.85 [1] 1.7083611 0.9560494 0.3830886 0.1439265
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">pca2</span><span class="o">$</span><span class="n">sdev^2</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 3.86 [1] 2.91849782 0.91403047 0.14675688 0.02071484
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">pca2</span><span class="o">$</span><span class="n">rotation</span> <span class="c1">#特征向量</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 3.87 PC1         PC2        PC3        PC4
+## Sepal.Length  0.5210659 -0.37741762  0.7195664  0.2612863
+## 3.88 Sepal.Width  -0.2693474 -0.92329566 -0.2443818 -0.1235096
+## 3.89 Petal.Length  0.5804131 -0.02449161 -0.1421264 -0.8014492
+## 3.90 Petal.Width   0.5648565 -0.06694199 -0.6342727  0.5235971
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">head</span><span class="p">(</span><span class="n">pca2</span><span class="o">$</span><span class="n">x</span><span class="p">)</span> <span class="c1"># 得分矩阵</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 3.91 PC1        PC2         PC3          PC4
+## [1,] -2.257141 -0.4784238  0.12727962  0.024087508
+## 3.92 [2,] -2.074013  0.6718827  0.23382552  0.102662845
+## 3.93 [3,] -2.356335  0.3407664 -0.04405390  0.028282305
+## 3.94 [4,] -2.291707  0.5953999 -0.09098530 -0.065735340
+## 3.95 [5,] -2.381863 -0.6446757 -0.01568565 -0.035802870
+## 3.96 [6,] -2.068701 -1.4842053 -0.02687825  0.006586116
+</code></pre><h2 id="397-使用psychprincipal函数">3.97 使用<code>psych::principal</code>函数</h2>
+<p>在<code>psych::principal</code>输出中：</p>
+<ul>
+<li>value 特征值</li>
+<li>loadings 载荷</li>
+<li>weight 因子系数</li>
+<li>scores 因子得分</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1">## 3.98 determine the  number of PCs</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#fp=fa.parallel(dt,fa=&#34;pc&#34;,n.iter=100)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 4 extract PCs</span>
+</span></span><span class="line"><span class="cl"><span class="n">pca3</span><span class="o">=</span><span class="n">psych</span><span class="o">::</span><span class="nf">principal</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span><span class="n">nfactors</span> <span class="o">=</span> <span class="m">4</span><span class="p">,</span><span class="n">rotate</span><span class="o">=</span><span class="s">&#34;none&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#principal(dt,nfactors = 2,rotate=&#34;varimax&#34;,score=T)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">pca3</span><span class="o">$</span><span class="n">values</span> <span class="c1"># 特征值</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 4.1 [1] 2.91849782 0.91403047 0.14675688 0.02071484
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">pca3</span><span class="o">$</span><span class="n">loadings</span> <span class="c1"># 因子载荷，即特征向量*sqrt(特征值)</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 4.2 
+## 4.3 Loadings:
+## 4.4 PC1    PC2    PC3    PC4   
+## Sepal.Length  0.890  0.361 -0.276       
+## 4.5 Sepal.Width  -0.460  0.883              
+## 4.6 Petal.Length  0.992                0.115
+## 4.7 Petal.Width   0.965         0.243       
+## 4.8 
+## 4.9 PC1   PC2   PC3   PC4
+## SS loadings    2.918 0.914 0.147 0.021
+## 4.10 Proportion Var 0.730 0.229 0.037 0.005
+## 4.11 Cumulative Var 0.730 0.958 0.995 1.000
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">pca3</span><span class="o">$</span><span class="n">weights</span> <span class="c1"># 因子得分系数，即特征向量/sqrt(特征值)</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 4.12 PC1        PC2        PC3        PC4
+## Sepal.Length  0.3050092 0.39476790 -1.8783288 -1.8154147
+## 4.13 Sepal.Width  -0.1576642 0.96574053  0.6379250  0.8581437
+## 4.14 Petal.Length  0.3397485 0.02561751  0.3710013  5.5684621
+## 4.15 Petal.Width   0.3306423 0.07001938  1.6556816 -3.6379482
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">head</span><span class="p">(</span><span class="n">pca3</span><span class="o">$</span><span class="n">scores</span><span class="p">)</span> <span class="c1"># 因子得分=原始数据 %*% 因子得分系数矩</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 4.16 PC1        PC2         PC3         PC4
+## [1,] -1.321232  0.5004175 -0.33224592 -0.16735979
+## 4.17 [2,] -1.214037 -0.7027698 -0.61036929 -0.71330052
+## 4.18 [3,] -1.379296 -0.3564318  0.11499664 -0.19650520
+## 4.19 [4,] -1.341465 -0.6227710  0.23750458  0.45672855
+## 4.20 [5,] -1.394238  0.6743121  0.04094522  0.24875802
+## 4.21 [6,] -1.210927  1.5524358  0.07016197 -0.04576028
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">dt</span> <span class="o">%*%</span> <span class="n">pca3</span><span class="o">$</span><span class="n">weights</span> <span class="o">|&gt;</span> <span class="nf">head</span><span class="p">()</span> <span class="c1"># 因子得分</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 4.22 PC1        PC2         PC3         PC4
+## [1,] -1.321232  0.5004175 -0.33224592 -0.16735979
+## 4.23 [2,] -1.214037 -0.7027698 -0.61036929 -0.71330052
+## 4.24 [3,] -1.379296 -0.3564318  0.11499664 -0.19650520
+## 4.25 [4,] -1.341465 -0.6227710  0.23750458  0.45672855
+## 4.26 [5,] -1.394238  0.6743121  0.04094522  0.24875802
+## 4.27 [6,] -1.210927  1.5524358  0.07016197 -0.04576028
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">cov</span><span class="p">(</span><span class="n">pca3</span><span class="o">$</span><span class="n">scores</span><span class="p">)</span> <span class="c1"># 对角元素为1，而PC得分的协方差为特征值</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 4.28 PC1           PC2           PC3           PC4
+## PC1  1.000000e+00  2.195696e-16 -2.320877e-16  1.311770e-15
+## 4.29 PC2  2.195696e-16  1.000000e+00  7.315978e-16 -3.200948e-16
+## 4.30 PC3 -2.320877e-16  7.315978e-16  1.000000e+00  3.156702e-17
+## 4.31 PC4  1.311770e-15 -3.200948e-16  3.156702e-17  1.000000e+00
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">apply</span><span class="p">(</span><span class="n">pca3</span><span class="o">$</span><span class="n">scores</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="n">var</span><span class="p">)</span> <span class="c1"># 方差为1，而PC得分的方差为特征值</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 4.32 PC1 PC2 PC3 PC4 
+## 4.33 1   1   1   1
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># 5 可见因子得分是经特征值标准化后的主成分得分。</span>
+</span></span></code></pre></div><h2 id="51-使用factominerpca函数">5.1 使用<code>FactoMineR::PCA</code>函数</h2>
+<p>在<code>FactoMineR::PCA</code>中输出的结果也与<code>psych</code>中较为一致，且输出的图为相关图。</p>
+<p>需要注意的是<code>FactoMineR::PCA</code>包作者认为<code>loading</code>就是转换矩阵（特征向量，与princomp、prcomp函数中的loading是一个意思），但是他也认为更值得关注的是<code>相关性</code>（cor），即我们之前提到的<code>loading</code>。</p>
+<p>除特征值外，<code>PCA</code>函数分<code>var</code>(变量)与<code>ind</code>（样本）两部分输出。其中均包含：</p>
+<ul>
+<li>coord 在PC上的投影坐标，<code>var</code>中为变量与PC的相关系数；<code>ind</code>中为PC得分。</li>
+<li>cos2 <code>coord</code>数值平方占行和的比例，表示PC对<code>var</code>或<code>ind</code>的代表性</li>
+<li>contrib <code>coord</code>数值平方占列和的比例，表示<code>var</code>或<code>ind</code>对PC的贡献</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">pacman</span><span class="o">::</span><span class="nf">p_load</span><span class="p">(</span><span class="n">FactoMineR</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">res.pca</span> <span class="o">&lt;-</span> <span class="nf">PCA</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span><span class="n">graph</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#summary(res.pca)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">plot</span><span class="p">(</span><span class="n">res.pca</span><span class="p">,</span><span class="n">choix</span><span class="o">=</span><span class="s">&#34;var&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">dimdesc</span><span class="p">(</span><span class="n">res.pca</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">)</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 5.2 $Dim.1
+## 5.3 
+## 5.4 Link between the variable and the continuous variables (R-square)
+## 5.5 =================================================================================
+## 5.6 correlation       p.value
+## Petal.Length   0.9915552 3.369916e-133
+## 5.7 Petal.Width    0.9649790  6.609632e-88
+## 5.8 Sepal.Length   0.8901688  2.190813e-52
+## 5.9 Sepal.Width   -0.4601427  3.139724e-09
+## 5.10 
+## 5.11 $Dim.2
+## 5.12 
+## 5.13 Link between the variable and the continuous variables (R-square)
+## 5.14 =================================================================================
+## 5.15 correlation      p.value
+## Sepal.Width    0.8827163 2.123801e-50
+## 5.16 Sepal.Length   0.3608299 5.731933e-06
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1">#特征根</span>
+</span></span><span class="line"><span class="cl"><span class="n">res.pca</span><span class="o">$</span><span class="n">eig</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 5.17 eigenvalue percentage of variance cumulative percentage of variance
+## comp 1 2.91849782             72.9624454                          72.96245
+## 5.18 comp 2 0.91403047             22.8507618                          95.81321
+## 5.19 comp 3 0.14675688              3.6689219                          99.48213
+## 5.20 comp 4 0.02071484              0.5178709                         100.00000
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">res.pca</span><span class="o">$</span><span class="n">eig</span><span class="o">|&gt;</span><span class="nf">sqrt</span><span class="p">()</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 5.21 eigenvalue percentage of variance cumulative percentage of variance
+## comp 1  1.7083611              8.5418057                          8.541806
+## 5.22 comp 2  0.9560494              4.7802470                          9.788422
+## 5.23 comp 3  0.3830886              1.9154430                          9.974073
+## 5.24 comp 4  0.1439265              0.7196325                         10.000000
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1">#变量分析</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 6 res.pca$var</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 7 相关图中的坐标</span>
+</span></span><span class="line"><span class="cl"><span class="n">res.pca</span><span class="o">$</span><span class="n">var</span><span class="o">$</span><span class="n">coord</span> 
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20230617151458.png"
+        data-srcset="https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20230617151458.png, https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20230617151458.png 1.5x, https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20230617151458.png 2x"
+        data-sizes="auto"
+        alt="https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20230617151458.png"
+        title="image.png" /></p>
+<pre tabindex="0"><code>## 7.1 Dim.1      Dim.2       Dim.3       Dim.4
+## Sepal.Length  0.8901688 0.36082989 -0.27565767 -0.03760602
+## 7.2 Sepal.Width  -0.4601427 0.88271627  0.09361987  0.01777631
+## 7.3 Petal.Length  0.9915552 0.02341519  0.05444699  0.11534978
+## 7.4 Petal.Width   0.9649790 0.06399985  0.24298265 -0.07535950
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># 8 prcomp中的loading*sqrt(eigenvalue)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">mapply</span><span class="p">(</span><span class="n">`*`</span><span class="p">,</span><span class="nf">as.data.frame</span><span class="p">(</span><span class="n">pca2</span><span class="o">$</span><span class="n">rotation</span><span class="p">),</span><span class="n">pca2</span><span class="o">$</span><span class="n">sdev</span><span class="p">)</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 8.1 PC1         PC2         PC3         PC4
+## [1,]  0.8901688 -0.36082989  0.27565767  0.03760602
+## 8.2 [2,] -0.4601427 -0.88271627 -0.09361987 -0.01777631
+## 8.3 [3,]  0.9915552 -0.02341519 -0.05444699 -0.11534978
+## 8.4 [4,]  0.9649790 -0.06399985 -0.24298265  0.07535950
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># 9 变量与主成分得分的相关系数,数值与coord相同</span>
+</span></span><span class="line"><span class="cl"><span class="n">res.pca</span><span class="o">$</span><span class="n">var</span><span class="o">$</span><span class="n">cor</span> 
+</span></span></code></pre></div><pre tabindex="0"><code>## 9.1 Dim.1      Dim.2       Dim.3       Dim.4
+## Sepal.Length  0.8901688 0.36082989 -0.27565767 -0.03760602
+## 9.2 Sepal.Width  -0.4601427 0.88271627  0.09361987  0.01777631
+## 9.3 Petal.Length  0.9915552 0.02341519  0.05444699  0.11534978
+## 9.4 Petal.Width   0.9649790 0.06399985  0.24298265 -0.07535950
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1">#各主成分对特定变量的解释度（代表性）</span>
+</span></span><span class="line"><span class="cl"><span class="n">res.pca</span><span class="o">$</span><span class="n">var</span><span class="o">$</span><span class="n">cos2</span> 
+</span></span></code></pre></div><pre tabindex="0"><code>## 9.5 Dim.1       Dim.2       Dim.3        Dim.4
+## Sepal.Length 0.7924004 0.130198208 0.075987149 0.0014142127
+## 9.6 Sepal.Width  0.2117313 0.779188012 0.008764681 0.0003159971
+## 9.7 Petal.Length 0.9831817 0.000548271 0.002964475 0.0133055723
+## 9.8 Petal.Width  0.9311844 0.004095980 0.059040571 0.0056790544
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1">#数值上等于cor的平方</span>
+</span></span><span class="line"><span class="cl"><span class="n">res.pca</span><span class="o">$</span><span class="n">var</span><span class="o">$</span><span class="n">cor^2</span> 
+</span></span></code></pre></div><pre tabindex="0"><code>## 9.9 Dim.1       Dim.2       Dim.3        Dim.4
+## Sepal.Length 0.7924004 0.130198208 0.075987149 0.0014142127
+## 9.10 Sepal.Width  0.2117313 0.779188012 0.008764681 0.0003159971
+## 9.11 Petal.Length 0.9831817 0.000548271 0.002964475 0.0133055723
+## 9.12 Petal.Width  0.9311844 0.004095980 0.059040571 0.0056790544
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1">#cos2行和=1</span>
+</span></span><span class="line"><span class="cl"><span class="n">res.pca</span><span class="o">$</span><span class="n">var</span><span class="o">$</span><span class="n">cos2</span> <span class="o">|&gt;</span> <span class="nf">rowSums</span><span class="p">()</span> <span class="c1"># loading的行和</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 9.13 Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
+## 9.14 1            1            1            1
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1">#每个变量对某一主成分的贡献</span>
+</span></span><span class="line"><span class="cl"><span class="n">res.pca</span><span class="o">$</span><span class="n">var</span><span class="o">$</span><span class="n">contrib</span> 
+</span></span></code></pre></div><pre tabindex="0"><code>## 9.15 Dim.1       Dim.2     Dim.3     Dim.4
+## Sepal.Length 27.150969 14.24440565 51.777574  6.827052
+## 9.16 Sepal.Width   7.254804 85.24748749  5.972245  1.525463
+## 9.17 Petal.Length 33.687936  0.05998389  2.019990 64.232089
+## 9.18 Petal.Width  31.906291  0.44812296 40.230191 27.415396
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># 10 此处contrib数值=原始转换矩阵的平方数</span>
+</span></span><span class="line"><span class="cl"><span class="n">pca2</span><span class="o">$</span><span class="n">rotation^2</span><span class="o">*</span><span class="m">100</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 10.1 PC1         PC2       PC3       PC4
+## Sepal.Length 27.150969 14.24440565 51.777574  6.827052
+## 10.2 Sepal.Width   7.254804 85.24748749  5.972245  1.525463
+## 10.3 Petal.Length 33.687936  0.05998389  2.019990 64.232089
+## 10.4 Petal.Width  31.906291  0.44812296 40.230191 27.415396
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># 11 数值上等于cor平方占特征值的比例</span>
+</span></span><span class="line"><span class="cl"><span class="nf">mapply</span><span class="p">(</span><span class="n">`/`</span><span class="p">,</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="n">res.pca</span><span class="o">$</span><span class="n">var</span><span class="o">$</span><span class="n">cor^2</span><span class="p">),</span><span class="n">res.pca</span><span class="o">$</span><span class="n">eig[</span><span class="p">,</span><span class="m">1</span><span class="n">]</span><span class="p">)</span><span class="o">*</span><span class="m">100</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 11.1 Dim.1       Dim.2     Dim.3     Dim.4
+## [1,] 27.150969 14.24440565 51.777574  6.827052
+## 11.2 [2,]  7.254804 85.24748749  5.972245  1.525463
+## 11.3 [3,] 33.687936  0.05998389  2.019990 64.232089
+## 11.4 [4,] 31.906291  0.44812296 40.230191 27.415396
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1">#列之和=100</span>
+</span></span><span class="line"><span class="cl"><span class="nf">apply</span><span class="p">(</span><span class="n">res.pca</span><span class="o">$</span><span class="n">var</span><span class="o">$</span><span class="n">contrib</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="n">sum</span><span class="p">)</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 11.5 Dim.1 Dim.2 Dim.3 Dim.4 
+## 11.6 100   100   100   100
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1">#样本分析</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#res.pca$ind</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">plot</span><span class="p">(</span><span class="n">res.pca</span><span class="p">,</span><span class="n">choix</span><span class="o">=</span><span class="s">&#34;ind&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20230617151527.png"
+        data-srcset="https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20230617151527.png, https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20230617151527.png 1.5x, https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20230617151527.png 2x"
+        data-sizes="auto"
+        alt="https://nk-file.oss-cn-hangzhou.aliyuncs.com/picture/20230617151527.png"
+        title="image.png" /></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">head</span><span class="p">(</span><span class="n">res.pca</span><span class="o">$</span><span class="n">ind</span><span class="o">$</span><span class="n">coord</span><span class="p">)</span> <span class="c1"># 主成分得分</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 11.7 Dim.1      Dim.2       Dim.3       Dim.4
+## 11.8 -2.264703  0.4800266 -0.12770602 -0.02416820
+## 11.9 -2.080961 -0.6741336 -0.23460885 -0.10300677
+## 11.10 -2.364229 -0.3419080  0.04420148 -0.02837705
+## 11.11 -2.299384 -0.5973945  0.09129011  0.06595556
+## 11.12 -2.389842  0.6468354  0.01573820  0.03592281
+## 11.13 -2.075631  1.4891775  0.02696829 -0.00660818
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">pca2</span><span class="o">$</span><span class="n">x</span><span class="o">|&gt;</span><span class="nf">head</span><span class="p">()</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 11.14 PC1        PC2         PC3          PC4
+## [1,] -2.257141 -0.4784238  0.12727962  0.024087508
+## 11.15 [2,] -2.074013  0.6718827  0.23382552  0.102662845
+## 11.16 [3,] -2.356335  0.3407664 -0.04405390  0.028282305
+## 11.17 [4,] -2.291707  0.5953999 -0.09098530 -0.065735340
+## 11.18 [5,] -2.381863 -0.6446757 -0.01568565 -0.035802870
+## 11.19 [6,] -2.068701 -1.4842053 -0.02687825  0.006586116
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1">#某一主成分对样本的代表性，</span>
+</span></span><span class="line"><span class="cl"><span class="n">res.pca</span><span class="o">$</span><span class="n">ind</span><span class="o">$</span><span class="n">cos2</span> <span class="o">|&gt;</span> <span class="nf">head</span><span class="p">()</span> 
+</span></span></code></pre></div><pre tabindex="0"><code>## 11.20 Dim.1      Dim.2        Dim.3        Dim.4
+## 11.21 0.9539975 0.04286032 0.0030335249 1.086460e-04
+## 11.22 0.8927725 0.09369248 0.0113475382 2.187482e-03
+## 11.23 0.9790410 0.02047578 0.0003422122 1.410446e-04
+## 11.24 0.9346682 0.06308947 0.0014732682 7.690193e-04
+## 11.25 0.9315095 0.06823959 0.0000403979 2.104697e-04
+## 11.26 0.6600989 0.33978301 0.0001114335 6.690714e-06
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1">#行上看，cos2数值表示的是样本得分平方数在所有主成分上之和的比例</span>
+</span></span><span class="line"><span class="cl"><span class="p">((</span><span class="n">res.pca</span><span class="o">$</span><span class="n">ind</span><span class="o">$</span><span class="n">coord^2</span><span class="p">)</span><span class="o">/</span><span class="nf">rowSums</span><span class="p">(</span><span class="n">res.pca</span><span class="o">$</span><span class="n">ind</span><span class="o">$</span><span class="n">coord^2</span><span class="p">)</span> <span class="p">)</span> <span class="o">|&gt;</span> <span class="nf">head</span><span class="p">()</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 11.27 Dim.1      Dim.2        Dim.3        Dim.4
+## 11.28 0.9539975 0.04286032 0.0030335249 1.086460e-04
+## 11.29 0.8927725 0.09369248 0.0113475382 2.187482e-03
+## 11.30 0.9790410 0.02047578 0.0003422122 1.410446e-04
+## 11.31 0.9346682 0.06308947 0.0014732682 7.690193e-04
+## 11.32 0.9315095 0.06823959 0.0000403979 2.104697e-04
+## 11.33 0.6600989 0.33978301 0.0001114335 6.690714e-06
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1">#对某个记录而言，所有成分(行)的cos2之和=1</span>
+</span></span><span class="line"><span class="cl"><span class="nf">apply</span><span class="p">(</span><span class="n">res.pca</span><span class="o">$</span><span class="n">ind</span><span class="o">$</span><span class="n">cos2</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="n">sum</span><span class="p">)</span><span class="o">|&gt;</span><span class="nf">head</span><span class="p">()</span> 
+</span></span></code></pre></div><pre tabindex="0"><code>## 11.34 2 3 4 5 6 
+## 11.35 1 1 1 1 1
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># 12 contrib表示的样本占主成分得分的比例</span>
+</span></span><span class="line"><span class="cl"><span class="n">res.pca</span><span class="o">$</span><span class="n">ind</span><span class="o">$</span><span class="n">contrib</span> <span class="o">|&gt;</span> <span class="nf">head</span><span class="p">()</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 12.1 Dim.1      Dim.2       Dim.3       Dim.4
+## 12.2 1.1715796 0.16806554 0.074085470 0.018798188
+## 12.3 0.9891845 0.33146674 0.250034006 0.341474919
+## 12.4 1.2768164 0.08526419 0.008875320 0.025915633
+## 12.5 1.2077372 0.26029781 0.037858004 0.140000650
+## 12.6 1.3046313 0.30516562 0.001125175 0.041530572
+## 12.7 0.9841236 1.61748779 0.003303827 0.001405371
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># 13 列上看，数值上contribtion为每个PC上，得分平方占列和的比例</span>
+</span></span><span class="line"><span class="cl"><span class="nf">mapply</span><span class="p">(</span><span class="n">`/`</span><span class="p">,</span><span class="nf">as.data.frame</span><span class="p">(</span><span class="n">res.pca</span><span class="o">$</span><span class="n">ind</span><span class="o">$</span><span class="n">coord^2</span><span class="p">)</span><span class="o">*</span><span class="m">100</span><span class="p">,</span><span class="nf">colSums</span><span class="p">(</span><span class="n">res.pca</span><span class="o">$</span><span class="n">ind</span><span class="o">$</span><span class="n">coord^2</span><span class="p">))</span> <span class="o">|&gt;</span> <span class="nf">head</span><span class="p">()</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 13.1 Dim.1      Dim.2       Dim.3       Dim.4
+## [1,] 1.1715796 0.16806554 0.074085470 0.018798188
+## 13.2 [2,] 0.9891845 0.33146674 0.250034006 0.341474919
+## 13.3 [3,] 1.2768164 0.08526419 0.008875320 0.025915633
+## 13.4 [4,] 1.2077372 0.26029781 0.037858004 0.140000650
+## 13.5 [5,] 1.3046313 0.30516562 0.001125175 0.041530572
+## 13.6 [6,] 0.9841236 1.61748779 0.003303827 0.001405371
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1">#对某个PC而言，所有变量(列)的贡献之和=100</span>
+</span></span><span class="line"><span class="cl"><span class="nf">apply</span><span class="p">(</span><span class="n">res.pca</span><span class="o">$</span><span class="n">ind</span><span class="o">$</span><span class="n">contrib</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="n">sum</span><span class="p">)</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 13.7 Dim.1 Dim.2 Dim.3 Dim.4 
+## 13.8 100   100   100   100
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">res.pca</span><span class="o">$</span><span class="n">ind</span><span class="o">$</span><span class="n">dist</span> <span class="o">|&gt;</span> <span class="nf">head</span><span class="p">()</span> <span class="c1"># 样本点到原点的距离</span>
+</span></span></code></pre></div><pre tabindex="0"><code>## 13.9 1        2        3        4        5        6 
+## 2.318663 2.202387 2.389401 2.378389 2.476142 2.554734
+</code></pre></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-06-17</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/r/">R</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/r%E5%8C%85%E5%BC%80%E5%8F%91/" class="prev" rel="prev" title="R包开发简单流程"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>R包开发简单流程</a>
+            <a href="/posts/%E7%BB%BF%E8%8C%B6%E7%9A%84%E4%B8%BB%E8%A6%81%E9%80%82%E5%88%B6%E5%93%81%E7%A7%8D%E5%8F%8A%E6%A0%BD%E5%9F%B9/" class="next" rel="next" title="绿茶的主要适制品种">绿茶的主要适制品种<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
