@@ -19,7 +19,7 @@ theme = "simple-frame"
   home = "right"
   list = "right"
   single = "right"
-  widgets = ["search", "categories", "taglist", "recent", "archives"]
+  widgets = ["search", "categories", "taglist", "recent"]
 
 [Params.widgets]
   recent_num = 5
