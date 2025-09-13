@@ -4,7 +4,7 @@ title = "Osummer的空间"
 theme = "simple-frame"
 
 [permalinks]
-  posts = "/posts/:slug/"
+  posts = "/post/:slug/"
   search = "/search/"
 
 [Params]
